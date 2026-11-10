@@ -1,0 +1,108 @@
+% tikz_augmentation_dose.tex -- figure fig:dose of supplement.tex:
+% augmentation_dose.png redrawn with the same data, panels and encodings
+% (make_figures.py, dose_figure).
+% Written by artifact/eswa_study/revision/tikz_limitations.py; do not edit by hand.
+% Data: results/rigor_dose_summary.csv
+% Needs pgfplots (compat 1.18, groupplots) and the oi* colors of the paper preamble.
+% Width 0.94\linewidth; default color black (also inside a colored quote).
+\begin{tikzpicture}[black]
+  \definecolor{adGrid}{HTML}{CBD3D8}%
+  % F1 by training exposure: mean and SD over the five reference partitions;
+  % x = 0..4: canonical_only_1x, canonical_repeated_6x, entity_short_2x,
+  %   length_well_known_3x, full_factorial_6x
+  % (a) linked_rewrites
+  \pgfplotstableread[row sep=\\]{
+    x word     word_sd  minilm   minilm_sd \\
+    0 0.968637 0.008063 0.944057 0.011579 \\
+    1 0.971474 0.007796 0.948246 0.013145 \\
+    2 0.972412 0.008459 0.952798 0.010241 \\
+    3 0.974082 0.008496 0.956790 0.008615 \\
+    4 0.977239 0.008069 0.959106 0.009177 \\
+  }\adLinked
+  % (b) external_openai
+  \pgfplotstableread[row sep=\\]{
+    x word     word_sd  minilm   minilm_sd \\
+    0 0.922164 0.003889 0.822602 0.016873 \\
+    1 0.929845 0.002414 0.803119 0.025089 \\
+    2 0.930444 0.004663 0.848347 0.014719 \\
+    3 0.944491 0.003811 0.859325 0.009659 \\
+    4 0.945018 0.004786 0.859662 0.005923 \\
+  }\adExternal
+  % axis boxes: 0.94\linewidth minus 82.18pt, the width of the tick labels, axis
+  % labels and panel gap in the paper's fonts (picture = 0.94\linewidth)
+  \pgfmathsetlengthmacro\adAxisWidth{(0.94\linewidth-82.18pt)/2}%
+  \begin{groupplot}[
+      group style={group size=2 by 1, horizontal sep=45pt},
+      width=\adAxisWidth, height=128pt,
+      scale only axis,
+      axis lines*=left, tick align=outside, tick pos=left,
+      major tick length=3pt, minor tick length=1.8pt,
+      every tick/.style={black, line width=0.5pt},
+      axis line style={line width=0.6pt},
+      tick label style={font=\scriptsize},
+      label style={font=\footnotesize},
+      title style={font=\footnotesize\bfseries, at={(0,1)}, anchor=south west,
+        inner xsep=0pt},
+      legend style={font=\scriptsize, draw=none, fill=none},
+      legend cell align=left,
+      grid style={draw=adGrid, line width=0.6pt, dash pattern=on 0.6pt off 0.99pt},
+      xmin=-0.200000, xmax=4.200000, xtick={0,1,2,3,4},
+      xticklabels={
+        {Canonical\\1x},
+        {Canonical\\6x},
+        {Entity\\2x},
+        {Length\\3x},
+        {Full\\6x}},
+      xticklabel style={align=center}, xtick style={draw=none},
+      ymajorgrids, ylabel={F1},
+      legend image code/.code={%
+        \draw[#1, mark=none] (0pt,0pt) -- (14.0pt,0pt);
+        \draw[#1, mark=none, solid, line width=1.7pt] (7.0pt,-3.2pt) -- (7.0pt,3.2pt);
+        \draw[#1, mark=none, solid, line width=0.8pt]
+          (4.8pt,-3.2pt) -- (9.2pt,-3.2pt)
+          (4.8pt,3.2pt) -- (9.2pt,3.2pt);
+        \draw[#1] plot coordinates {(7.0pt,0pt)};},
+    ]
+    \nextgroupplot[
+      title={(a) Linked rewrites},
+      ymin=0.925, ymax=0.988, ytick={0.930,0.940,0.950,0.960,0.970,0.980},
+      yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+      legend style={at={(1,0)}, anchor=south east, xshift=-2pt, yshift=2pt, row sep=-0.6pt},
+    ]
+    \addplot[oiBlue, line width=1.7pt, mark=*, mark size=2.1pt,
+        mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=1.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.2pt, rotate=90}]
+      table[x=x, y=word, y error=word_sd] {\adLinked};
+    \addlegendentry{Word TF--IDF}
+    \addplot[oiGreen, line width=1.7pt, mark=*, mark size=2.1pt,
+        mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=1.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.2pt, rotate=90}]
+      table[x=x, y=minilm, y error=minilm_sd] {\adLinked};
+    \addlegendentry{MiniLM}
+
+    \nextgroupplot[
+      title={(b) Generator-disjoint corpus},
+      ymin=0.776, ymax=0.96, ytick={0.800,0.825,0.850,0.875,0.900,0.925,0.950},
+      yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=3},
+    ]
+    \addplot[oiBlue, line width=1.7pt, mark=*, mark size=2.1pt,
+        mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=1.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.2pt, rotate=90}]
+      table[x=x, y=word, y error=word_sd] {\adExternal};
+    \addplot[oiGreen, line width=1.7pt, mark=*, mark size=2.1pt,
+        mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=1.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.2pt, rotate=90}]
+      table[x=x, y=minilm, y error=minilm_sd] {\adExternal};
+  \end{groupplot}
+  \node[anchor=north, inner sep=0pt, font=\footnotesize]
+    at ([yshift=-3pt]$(group c1r1.outer south west)!0.5!(group c2r1.outer south east)$)
+    {Training exposure (variants per source group)};
+\end{tikzpicture}

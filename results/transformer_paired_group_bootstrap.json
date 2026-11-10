@@ -1,0 +1,8 @@
+{
+  "DistilBERT, linked-augmented minus DistilBERT, clean-only": {
+    "delta": 0.025706503234593114,
+    "ci_low": 0.004442691029985027,
+    "ci_high": 0.047562732364062194,
+    "p_two_sided": 0.0172
+  }
+}

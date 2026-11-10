@@ -1,0 +1,265 @@
+% tikz_evaluation_ladder.tex -- figure fig:ladder (evaluation_ladder) in pgfplots.
+% Written by artifact/eswa_study/revision/tikz_ladder_era.py from the data code of
+% figure_evaluation_ladder() in make_r4_revised_figures.py; regenerate, do not edit.
+% One tikzpicture, 0.96\linewidth wide:
+% laid out for that width, but never narrower than in the paper (501.12pt), and
+% scaled to the line by \resizebox (factor 1.0000 in the paper; in a narrower
+% line, such as a quote of the response letter, it shrinks as the PNG did).
+% Needs pgfplots (compat 1.18), graphicx and the colors oiBlue, oiGreen,
+% oiVermillion of the preamble.
+% Marks: means across partitions (open: clean-only, filled: augmented); whiskers:
+% 2.5th-97.5th percentiles across partitions; crosses: L2 dedup. means (no interval).
+\resizebox{0.96\linewidth}{!}{%
+\begin{tikzpicture}[color=black, font=\scriptsize]
+  \definecolor{lgGrid}{HTML}{CBD3D8}%
+  \definecolor{lgSep}{HTML}{E1E6E9}%
+  \definecolor{lgShade}{HTML}{F1F4F6}%
+  \definecolor{lgNote}{HTML}{56636B}%
+  \definecolor{lgKey}{HTML}{52616B}%
+  \definecolor{lgInk}{HTML}{1B1B1B}%
+  % filled x (matplotlib marker "X"): a plus of arm width 1/2, turned by 45 degrees
+  \pgfdeclareplotmark{lgX}{%
+    \pgfpathmoveto{\pgfqpoint{-.5\pgfplotmarksize}{-\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{0pt}{-.5\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{.5\pgfplotmarksize}{-\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{\pgfplotmarksize}{-.5\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{.5\pgfplotmarksize}{0pt}}%
+    \pgfpathlineto{\pgfqpoint{\pgfplotmarksize}{.5\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{.5\pgfplotmarksize}{\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{0pt}{.5\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{-.5\pgfplotmarksize}{\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{-\pgfplotmarksize}{.5\pgfplotmarksize}}%
+    \pgfpathlineto{\pgfqpoint{-.5\pgfplotmarksize}{0pt}}%
+    \pgfpathlineto{\pgfqpoint{-\pgfplotmarksize}{-.5\pgfplotmarksize}}%
+    \pgfpathclose\pgfusepathqfillstroke}%
+  % ---- data --------------------------------------------------------------------
+  % x: level position (L1 0, L2 1, L2 dedup. 2, L3 3 in (a); L1 0, L2 1, L3 2,
+  % Nazario 2015-2022 3, 2023-2025 4 in (b)) plus the model's offset; mean, low,
+  % high: mean and 2.5th/97.5th percentiles across partitions; up = high - mean,
+  % down = mean - low (whisker lengths).
+  % (a) Word TF-IDF, clean-only: F1 at L1, L2, L3 (partitions: L1 100, L2 100, L3 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.2625 0.962075 0.948007 0.976981 0.014906 0.014067 \\
+     0.7375 0.921238 0.910660 0.929641 0.008403 0.010578 \\
+     2.7375 0.064209 0.054172 0.080910 0.016701 0.010037 \\
+  }\lgFwc%
+  % (a) Word TF-IDF, augmented: F1 at L1, L2, L3 (partitions: L1 100, L2 100, L3 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.1575 0.972789 0.959578 0.986363 0.013574 0.013211 \\
+     0.8425 0.946358 0.936341 0.954393 0.008035 0.010017 \\
+     2.8425 0.121030 0.107901 0.134423 0.013393 0.013130 \\
+  }\lgFwa%
+  % (a) MiniLM, clean-only: F1 at L1, L2, L3 (partitions: L1 100, L2 100, L3 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.0525 0.939078 0.924140 0.959431 0.020353 0.014938 \\
+     0.9475 0.812223 0.787446 0.833643 0.021420 0.024776 \\
+     2.9475 0.207522 0.178936 0.231286 0.023764 0.028586 \\
+  }\lgFmc%
+  % (a) MiniLM, augmented: F1 at L1, L2, L3 (partitions: L1 100, L2 100, L3 20)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.0525 0.954703 0.940889 0.970390 0.015687 0.013814 \\
+    1.0525 0.856061 0.835124 0.871215 0.015154 0.020938 \\
+    3.0525 0.255027 0.203190 0.282435 0.027408 0.051837 \\
+  }\lgFma%
+  % (a) DistilBERT, clean-only: F1 at L1, L2, L3 (partitions: L1 20, L2 20, L3 15)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.1575 0.911861 0.866077 0.935331 0.023471 0.045784 \\
+    1.1575 0.841247 0.757618 0.869527 0.028279 0.083629 \\
+    3.1575 0.176231 0.051318 0.361620 0.185389 0.124912 \\
+  }\lgFdc%
+  % (a) DistilBERT, augmented: F1 at L1, L2, L3 (partitions: L1 20, L2 20, L3 15)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.2625 0.961749 0.933370 0.976187 0.014438 0.028379 \\
+    1.2625 0.855852 0.787323 0.896316 0.040463 0.068529 \\
+    3.2625 0.252917 0.074927 0.437920 0.185004 0.177990 \\
+  }\lgFda%
+  % (b) Word TF-IDF, clean-only: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.3000 0.950373 0.930373 0.972081 0.021708 0.020000 \\
+     0.7000 0.922083 0.902836 0.939423 0.017340 0.019247 \\
+     1.7000 0.033266 0.027890 0.042257 0.008991 0.005377 \\
+     2.7000 0.655310 0.626334 0.685635 0.030324 0.028976 \\
+     3.7000 0.455970 0.425296 0.485669 0.029699 0.030673 \\
+  }\lgRwc%
+  % (b) Word TF-IDF, augmented: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.1800 0.969876 0.950248 0.985155 0.015280 0.019627 \\
+     0.8200 0.979633 0.966472 0.989332 0.009699 0.013161 \\
+     1.8200 0.064836 0.057317 0.072614 0.007778 0.007519 \\
+     2.8200 0.830120 0.807884 0.861397 0.031277 0.022236 \\
+     3.8200 0.662913 0.592612 0.717887 0.054975 0.070301 \\
+  }\lgRwa%
+  % (b) MiniLM, clean-only: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 20)
+  \pgfplotstableread[row sep=\\]{
+          x     mean      low     high       up     down \\
+    -0.0600 0.925590 0.895994 0.955776 0.030186 0.029596 \\
+     0.9400 0.762939 0.730258 0.801403 0.038464 0.032681 \\
+     1.9400 0.123505 0.103777 0.140665 0.017160 0.019728 \\
+     2.9400 0.917947 0.903431 0.932571 0.014624 0.014515 \\
+     3.9400 0.855885 0.831245 0.877117 0.021232 0.024640 \\
+  }\lgRmc%
+  % (b) MiniLM, augmented: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 20)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.0600 0.959317 0.934565 0.981429 0.022112 0.024752 \\
+    1.0600 0.861122 0.839635 0.882257 0.021134 0.021488 \\
+    2.0600 0.160257 0.123055 0.182635 0.022378 0.037202 \\
+    3.0600 0.948448 0.942266 0.954820 0.006373 0.006182 \\
+    4.0600 0.873539 0.851524 0.891787 0.018247 0.022015 \\
+  }\lgRma%
+  % (b) DistilBERT, clean-only: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 5)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.1800 0.936149 0.910807 0.958137 0.021988 0.025342 \\
+    1.1800 0.883569 0.819621 0.915462 0.031893 0.063948 \\
+    2.1800 0.137961 0.086551 0.226526 0.088565 0.051410 \\
+    3.1800 0.845752 0.761765 0.923094 0.077342 0.083987 \\
+    4.1800 0.768840 0.652329 0.887468 0.118628 0.116511 \\
+  }\lgRdc%
+  % (b) DistilBERT, augmented: recall at L1, L2, L3, Nazario 2015-2022, 2023-2025 (partitions: 5)
+  \pgfplotstableread[row sep=\\]{
+         x     mean      low     high       up     down \\
+    0.3000 0.985590 0.976149 0.991180 0.005590 0.009441 \\
+    1.3000 0.946468 0.907872 0.986718 0.040250 0.038595 \\
+    2.3000 0.205330 0.103502 0.425922 0.220592 0.101828 \\
+    3.3000 0.945425 0.884532 0.992810 0.047386 0.060893 \\
+    4.3000 0.885013 0.777223 0.949873 0.064860 0.107790 \\
+  }\lgRda%
+  % ---- geometry ------------------------------------------------------------------
+  \pgfmathsetlengthmacro\lgW{max(0.96\linewidth,501.12pt)}%
+  \pgfmathsetlengthmacro\lgL{35.3pt}% (a): y label and tick labels left of the axis
+  \pgfmathsetlengthmacro\lgG{42pt}%   between the panels: (b) y label and tick labels
+  \pgfmathsetlengthmacro\lgAW{(\lgW-\lgL-\lgG)/2.06}%
+  \pgfmathsetlengthmacro\lgBW{1.06*\lgAW}%
+  \pgfmathsetlengthmacro\lgTH{0.168*\lgW}%  upper part of (a)
+  \pgfmathsetlengthmacro\lgBH{\lgTH/1.3}%   lower part of (a)
+  \pgfmathsetlengthmacro\lgGap{0.0105*\lgW}%
+  \pgfmathsetlengthmacro\lgFullH{\lgTH+\lgGap+\lgBH}%
+  \pgfmathsetmacro\lgYlab{(1-(\lgGap+\lgBH)/\lgTH)/2}% middle of (a), in the upper part
+  \def\lgKeyY{2.2pt}%
+  \pgfplotsset{
+    lg axis/.style={
+      set layers, scale only axis, anchor=south west, clip=true, clip mode=individual,
+      axis y line*=left, xmin=-0.5,
+      axis line style={black, line width=0.7pt},
+      tick style={black, line width=0.8pt}, tick align=outside, major tick length=3.5pt,
+      major x tick style={draw=none},
+      ymajorgrids, major grid style={lgGrid, draw opacity=0.6, line width=0.5pt},
+      tick label style={font=\scriptsize, black},
+      x tick label style={align=center},
+      label style={font=\footnotesize, black},
+      title style={font=\footnotesize\bfseries, black, at={(0,1)}, anchor=south west,
+        inner xsep=0pt, yshift=1pt},
+    },
+    lg bars/.style={error bars/.cd, y dir=both, y explicit,
+      error bar style={line width=0.9pt},
+      error mark options={rotate=90, mark size=1.6pt, line width=0.8pt}},
+    lg clean/.style={only marks, mark=*, mark size=2pt,
+      mark options={line width=1.1pt, fill=white}},
+    lg aug/.style={only marks, mark=*, mark size=2pt, mark options={line width=1.1pt}},
+    lg dedup clean/.style={only marks, mark=lgX, mark size=2.6pt,
+      mark options={line width=1pt, fill=white}},
+    lg dedup aug/.style={only marks, mark=lgX, mark size=2.6pt,
+      mark options={line width=1pt}},
+  }%
+  % ---- (a) lower part, 0 to 0.48 (both parts draw all marks; each clips to its range)
+  \begin{axis}[lg axis, name=lgBot, at={(0,0)}, width=\lgAW, height=\lgBH,
+      xmax=3.5, ymin=0, ymax=0.48, axis x line*=bottom,
+      ytick={0,0.1,0.2,0.3,0.4}, yticklabels={0.0,0.1,0.2,0.3,0.4},
+      xtick={0,1,2,3}, xticklabels={{L1\\linked\\rewrites\\$K = 100\,/\,20$},
+        {L2\\gen.-\\disjoint\\$K = 100\,/\,20$},
+        {L2\\dedup.\\(cos.\ 0.90)\\$K = 5\,/$\,--},
+        {L3\\human\\(2000s)\\$K = 20\,/\,15$}}]
+    \begin{pgfonlayer}{axis background}
+      \draw[lgSep, line width=0.7pt] (axis cs:0.5,0) -- (axis cs:0.5,0.48)
+        (axis cs:1.5,0) -- (axis cs:1.5,0.48) (axis cs:2.5,0) -- (axis cs:2.5,0.48);
+    \end{pgfonlayer}
+    \addplot[oiBlue, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFwc};
+    \addplot[oiBlue, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFwa};
+    \addplot[oiGreen, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFmc};
+    \addplot[oiGreen, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFma};
+    \addplot[oiVermillion, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFdc};
+    \addplot[oiVermillion, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFda};
+    \addplot[oiBlue, lg dedup clean] coordinates {(1.7375,0.840313)}; % L2 dedup. F1 of Word TF-IDF, clean-only: mean of 5 partitions
+    \addplot[oiBlue, lg dedup aug] coordinates {(1.8425,0.883207)}; % L2 dedup. F1 of Word TF-IDF, augmented: mean of 5 partitions
+    \addplot[oiGreen, lg dedup clean] coordinates {(1.9475,0.780004)}; % L2 dedup. F1 of MiniLM, clean-only: mean of 5 partitions
+    \addplot[oiGreen, lg dedup aug] coordinates {(2.0525,0.781496)}; % L2 dedup. F1 of MiniLM, augmented: mean of 5 partitions
+    \node[anchor=north west, align=left, text=lgNote, inner sep=0pt]
+      at (rel axis cs:0.015,0.95)
+      {$K$ = partitions: lightweight\,/\,DistilBERT\\vertical axis broken between 0.48 and 0.74};
+  \end{axis}
+  % ---- (a) upper part, 0.74 to 1
+  \begin{axis}[lg axis, name=lgTop, at={(0,\lgBH+\lgGap)}, width=\lgAW, height=\lgTH,
+      xmax=3.5, ymin=0.74, ymax=1, axis x line=none,
+      ytick={0.75,0.8,0.85,0.9,0.95,1}, yticklabels={0.75,0.80,0.85,0.90,0.95,1.00},
+      ylabel={F1 at threshold 0.5}, ylabel style={at={(ticklabel cs:\lgYlab)}},
+      title={(a) F1 at threshold 0.5}]
+    \begin{pgfonlayer}{axis background}
+      \draw[lgSep, line width=0.7pt] (axis cs:0.5,0.74) -- (axis cs:0.5,1)
+        (axis cs:1.5,0.74) -- (axis cs:1.5,1) (axis cs:2.5,0.74) -- (axis cs:2.5,1);
+    \end{pgfonlayer}
+    \addplot[oiBlue, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFwc};
+    \addplot[oiBlue, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFwa};
+    \addplot[oiGreen, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFmc};
+    \addplot[oiGreen, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFma};
+    \addplot[oiVermillion, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFdc};
+    \addplot[oiVermillion, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgFda};
+    \addplot[oiBlue, lg dedup clean] coordinates {(1.7375,0.840313)}; % L2 dedup. F1 of Word TF-IDF, clean-only: mean of 5 partitions
+    \addplot[oiBlue, lg dedup aug] coordinates {(1.8425,0.883207)}; % L2 dedup. F1 of Word TF-IDF, augmented: mean of 5 partitions
+    \addplot[oiGreen, lg dedup clean] coordinates {(1.9475,0.780004)}; % L2 dedup. F1 of MiniLM, clean-only: mean of 5 partitions
+    \addplot[oiGreen, lg dedup aug] coordinates {(2.0525,0.781496)}; % L2 dedup. F1 of MiniLM, augmented: mean of 5 partitions
+  \end{axis}
+  % break marks on the left spine
+  \draw[lgInk, line width=0.8pt] ([shift={(-3.5pt,-1.925pt)}]lgTop.south west) -- ++(7pt,3.85pt);
+  \draw[lgInk, line width=0.8pt] ([shift={(-3.5pt,-1.925pt)}]lgBot.north west) -- ++(7pt,3.85pt);
+  % ---- (b) recall at threshold 0.5 -------------------------------------------------
+  \begin{axis}[lg axis, name=lgB, at={(\lgAW+\lgG,0)}, width=\lgBW, height=\lgFullH,
+      xmax=4.5, ymin=0, ymax=1.02, axis x line*=bottom,
+      ytick={0,0.2,0.4,0.6,0.8,1}, yticklabels={0.0,0.2,0.4,0.6,0.8,1.0},
+      xtick={0,1,2,3,4}, xticklabels={{L1\\linked\\rewrites},
+        {L2\\gen.-\\disjoint},
+        {L3\\human\\(2000s)},
+        {Nazario\\2015--2022},
+        {Nazario\\2023--2025}},
+      ylabel={Recall at threshold 0.5}, title={(b) Recall at threshold 0.5}]
+    \begin{pgfonlayer}{axis background}
+      \draw[lgSep, line width=0.7pt] (axis cs:0.5,0) -- (axis cs:0.5,1.02)
+        (axis cs:1.5,0) -- (axis cs:1.5,1.02) (axis cs:2.5,0) -- (axis cs:2.5,1.02)
+        (axis cs:3.5,0) -- (axis cs:3.5,1.02);
+      \fill[lgShade] (axis cs:2.5,0) rectangle (axis cs:4.5,1.02);
+    \end{pgfonlayer}
+    \addplot[oiBlue, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRwc};
+    \addplot[oiBlue, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRwa};
+    \addplot[oiGreen, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRmc};
+    \addplot[oiGreen, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRma};
+    \addplot[oiVermillion, lg clean, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRdc};
+    \addplot[oiVermillion, lg aug, lg bars] table[x=x, y=mean, y error plus=up, y error minus=down] {\lgRda};
+    \node[anchor=south, align=center, font=\scriptsize\itshape, text=lgNote, inner sep=0pt]
+      at (axis cs:3.5,0.035) {era-matched real phishing\\(all messages are phishing)};
+    \node[anchor=south west, align=left, text=lgNote, inner sep=0pt]
+      at (rel axis cs:0.015,0.36) {$K = 20$ partitions (lightweight)\\$K = 5$ (DistilBERT)};
+  \end{axis}
+  % ---- shared legend ---------------------------------------------------------------
+  \matrix[anchor=north, column sep=11pt, row sep=3.2pt, inner sep=0pt,
+      ampersand replacement=\&,
+      lg key/.style={anchor=base west, inner sep=0pt, text=black}]
+    at ([yshift=-7pt]current bounding box.south) {
+      \draw[oiBlue, line width=1.1pt, fill=white] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {Word TF--IDF, clean-only};
+      \& \draw[oiGreen, line width=1.1pt, fill=white] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {MiniLM, clean-only};
+      \& \draw[oiVermillion, line width=1.1pt, fill=white] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {DistilBERT, clean-only};
+      \& \path plot[mark=lgX, mark size=2.6pt, mark options={draw=lgKey, fill=lgKey, line width=1pt}] coordinates {(-5.6pt,\lgKeyY)}; \node[lg key] {L2 dedup.: mean of 5 partitions, no interval}; \\
+      \draw[oiBlue, line width=1.1pt, fill=oiBlue] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {Word TF--IDF, augmented};
+      \& \draw[oiGreen, line width=1.1pt, fill=oiGreen] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {MiniLM, augmented};
+      \& \draw[oiVermillion, line width=1.1pt, fill=oiVermillion] (-5.6pt,\lgKeyY) circle (2.3pt); \node[lg key] {DistilBERT, augmented};
+      \& \draw[lgKey, line width=0.9pt] (-5.6pt,\lgKeyY-3.4pt) -- (-5.6pt,\lgKeyY+3.4pt); \draw[lgKey, line width=0.8pt] (-7.2pt,\lgKeyY-3.4pt) -- (-4pt,\lgKeyY-3.4pt) (-7.2pt,\lgKeyY+3.4pt) -- (-4pt,\lgKeyY+3.4pt); \node[lg key] {2.5th--97.5th percentile across partitions}; \\
+  };
+\end{tikzpicture}%
+}%

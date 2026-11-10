@@ -1,0 +1,21 @@
+{
+  "nazario_messages": 3017,
+  "nazario_by_year": {
+    "2015": 262,
+    "2016": 390,
+    "2017": 271,
+    "2018": 251,
+    "2019": 210,
+    "2020": 145,
+    "2021": 94,
+    "2022": 213,
+    "2023": 381,
+    "2024": 356,
+    "2025": 444
+  },
+  "nazario_pre_llm": 1836,
+  "nazario_llm_era": 1181,
+  "nazario_html_only_share": 0.4872389791183295,
+  "nazario_median_body_chars": 451.0,
+  "sa_body_only_empty": 2
+}

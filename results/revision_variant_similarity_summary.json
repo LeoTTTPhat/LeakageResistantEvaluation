@@ -1,0 +1,11 @@
+{
+  "n_groups": 2156,
+  "minilm_within_group_mean": 0.6274259408766573,
+  "minilm_within_group_median": 0.638251543045044,
+  "minilm_nearest_other_group_mean": 0.7334024292764173,
+  "minilm_mean_other_group_mean": 0.24056668015255667,
+  "tfidf_within_group_mean": 0.3346081466891888,
+  "tfidf_nearest_other_group_mean": 0.4168770229632316,
+  "jaccard_within_group_mean": 0.24488726460525095,
+  "fraction_groups_within_above_nearest_other": 0.2764378478664193
+}

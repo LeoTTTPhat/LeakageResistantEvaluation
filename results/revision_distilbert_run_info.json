@@ -1,0 +1,17 @@
+{
+  "model": "distilbert-base-uncased",
+  "seeds": [
+    29,
+    42,
+    71
+  ],
+  "max_lengths": [
+    160,
+    320
+  ],
+  "epochs": 2,
+  "batch_size": 32,
+  "checkpoints_per_epoch": 10,
+  "device": "mps",
+  "wall_clock_seconds": 3180.608820915222
+}

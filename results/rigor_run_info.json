@@ -1,0 +1,44 @@
+{
+  "wall_clock_seconds": 285.2047710418701,
+  "python": "3.11.4",
+  "seeds": [
+    17,
+    29,
+    42,
+    71,
+    113
+  ],
+  "families": [
+    "Word LR",
+    "MiniLM LR"
+  ],
+  "rewrite_variants": [
+    {
+      "entity_type": "fabricated",
+      "length_type": "short"
+    },
+    {
+      "entity_type": "fabricated",
+      "length_type": "medium"
+    },
+    {
+      "entity_type": "fabricated",
+      "length_type": "long"
+    },
+    {
+      "entity_type": "well_known",
+      "length_type": "medium"
+    },
+    {
+      "entity_type": "well_known",
+      "length_type": "long"
+    }
+  ],
+  "cue_mask_features_per_seed": 20,
+  "embedding_cache": {
+    "cache_hit": true,
+    "cache_path": "cache/minilm-32682fdfa3e2746a.npy",
+    "rows": 22910,
+    "seconds": 0.2657769999932498
+  }
+}

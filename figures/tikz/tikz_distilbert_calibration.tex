@@ -1,0 +1,90 @@
+% tikz_distilbert_calibration.tex -- written by artifact/eswa_study/revision/tikz_revision.py;
+% edit and rerun the script, not this file. Supplement, \label{fig:calibration}.
+% DistilBERT at the pre-registered checkpoint (length 160, epoch 1), pooled over seeds 29, 42, 71: (a) reliability, generator-disjoint corpus, 15 equal-width bins; (b)-(c) predicted-probability densities, 25 bins over each dataset's own range (n = 4860 linked, 11238 generator-disjoint predictions per training regime).
+% Data: results/revision_distilbert_probabilities.csv, as in make_revision_figures.figure_calibration().
+% Width 0.96\linewidth (as the PNG in the figure* float); no external files.
+\begin{tikzpicture}[color=black]
+\definecolor{calGray}{HTML}{888888}% diagonal, matplotlib #888888
+\pgfplotsset{revision panel/.style={
+  scale only axis,
+  axis x line*=bottom, axis y line*=left,
+  axis line style={line width=0.7pt},
+  tick align=outside, major tick length=3.5pt, minor tick length=2pt,
+  tick style={black, line width=0.8pt}, minor tick style={line width=0.6pt},
+  tick label style={font=\scriptsize},
+  label style={font=\footnotesize},
+  title style={font=\footnotesize\bfseries\boldmath, at={(0,1)},
+    anchor=south west, inner xsep=0pt},
+  legend style={font=\scriptsize, draw=none, fill=none},
+  legend cell align=left,
+  legend image code/.code={\draw[mark repeat=2, mark phase=2, ##1]
+    plot coordinates {(0pt,0pt) (7.5pt,0pt) (15pt,0pt)};},
+  scaled ticks=false,
+},
+revision area legend/.style={% matplotlib's legend key for a histogram outline
+  legend image code/.code={\draw[##1] (0pt,-2.6pt) rectangle (15pt,2.6pt);}},
+}%
+\pgfmathsetlengthmacro\calW{(0.96\linewidth-127.3pt)/3}% axis width
+\pgfmathsetlengthmacro\calH{max(0.89*\calW,100pt)}% axis height
+\begin{groupplot}[
+  group style={group size=3 by 1, horizontal sep=45pt},
+  revision panel, width=\calW, height=\calH, title style={text width=\calW, align=flush left},
+  xticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+]
+\nextgroupplot[title={(a) Reliability, \mbox{gen.-disjoint}},
+  xlabel={Mean predicted probability}, ylabel={Observed frequency},
+  xmin=-0.05, xmax=1.05, ymin=-0.05, ymax=1.05,
+  xtick={0,0.25,0.5,0.75,1}, ytick={0,0.2,0.4,0.6,0.8,1}, yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+  legend style={at={(0.03,0.97)}, anchor=north west}]
+\addplot[forget plot, calGray, line width=0.8pt, dash pattern=on 2.96pt off 1.28pt] coordinates {(0,0) (1,1)};
+\addplot[oiVermillion, opacity=0.65, line width=1.3pt, dash pattern=on 1.3pt off 2.145pt, mark=*, mark size=1.5pt, mark options={solid, line width=1pt}]
+  coordinates {(0.0488367,0.0474383) (0.0968584,0.135992) (0.164177,0.229481) (0.233011,0.373602) (0.299076,0.458333) (0.366649,0.414791)
+    (0.433418,0.453947) (0.499849,0.449664) (0.566839,0.557047) (0.634161,0.615646) (0.700282,0.661808) (0.76779,0.72314)
+    (0.836816,0.813278) (0.907363,0.89404) (0.96022,0.950163)};
+\addlegendentry{Clean}
+\addplot[oiVermillion, line width=1.3pt, line join=round, mark=square*, mark size=1.5pt, mark options={solid, line width=1pt}]
+  coordinates {(0.0230268,0.111976) (0.0978162,0.315686) (0.166835,0.408824) (0.231777,0.41048) (0.298942,0.497462) (0.36403,0.486631)
+    (0.432884,0.507246) (0.497092,0.587097) (0.564293,0.58642) (0.631802,0.6) (0.700713,0.58) (0.767858,0.615)
+    (0.835726,0.607273) (0.903595,0.683486) (0.988808,0.878446)};
+\addlegendentry{Augmented}
+\nextgroupplot[title={(b) Confidence, linked},
+  xlabel={Predicted probability}, ylabel={Density},
+  xmin=-0.047917, xmax=1.04743, ymin=0, ymax=12.7957,
+  xtick={0,0.25,0.5,0.75,1}, ytick={0,2,4,6,8,10,12}, yticklabel style={/pgf/number format/.cd, fixed, precision=0},
+  legend style={at={(0.5,0.97)}, anchor=north}]
+% linked_rewrites, clean-only: n = 4860; counts per bin 1553 345 178 111 59 49 47 28 27 26 33 19 16 25 22 23 28 21 27 30 43 50 81 162 1857
+\addplot[oiVermillion, opacity=0.65, line width=1.3pt, dash pattern=on 1.3pt off 2.145pt, const plot, revision area legend]
+  coordinates {(0.0170135,0) (0.0170135,8.316) (0.0554391,1.84741) (0.0938646,0.953154) (0.13229,0.594383) (0.170716,0.315933)
+    (0.209141,0.262385) (0.247567,0.251676) (0.285993,0.149934) (0.324418,0.14458) (0.362844,0.139225) (0.401269,0.176708)
+    (0.439695,0.101741) (0.478121,0.0856768) (0.516546,0.13387) (0.554972,0.117806) (0.593397,0.12316) (0.631823,0.149934)
+    (0.670248,0.112451) (0.708674,0.14458) (0.7471,0.160644) (0.785525,0.230256) (0.823951,0.26774) (0.862376,0.433739)
+    (0.900802,0.867478) (0.939228,9.94386) (0.977653,9.94386) (0.977653,0)};
+\addlegendentry{Clean}
+% linked_rewrites, linked-augmented: n = 4860; counts per bin 2113 75 47 20 22 15 11 10 14 7 9 7 12 9 10 11 10 4 15 10 10 9 20 31 2359
+\addplot[oiVermillion, line width=1.3pt, const plot, revision area legend]
+  coordinates {(0.00187142,0) (0.00187142,10.9155) (0.0417022,0.387442) (0.0815329,0.242797) (0.121364,0.103318) (0.161194,0.11365)
+    (0.201025,0.0774883) (0.240856,0.0568248) (0.280687,0.0516589) (0.320517,0.0723225) (0.360348,0.0361612) (0.400179,0.046493)
+    (0.44001,0.0361612) (0.479841,0.0619907) (0.519671,0.046493) (0.559502,0.0516589) (0.599333,0.0568248) (0.639164,0.0516589)
+    (0.678994,0.0206636) (0.718825,0.0774883) (0.758656,0.0516589) (0.798487,0.0516589) (0.838317,0.046493) (0.878148,0.103318)
+    (0.917979,0.160143) (0.95781,12.1863) (0.99764,12.1863) (0.99764,0)};
+\addlegendentry{Augmented}
+\nextgroupplot[title={(c) Confidence, \mbox{gen.-disjoint}},
+  xlabel={Predicted probability}, ylabel={Density},
+  xmin=-0.0472808, xmax=1.04726, ymin=0, ymax=14.2938,
+  xtick={0,0.25,0.5,0.75,1}, ytick={0,2.5,5,7.5,10,12.5}, yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1}]
+% external_openai, clean-only: n = 11238; counts per bin 453 634 467 358 287 253 257 245 182 178 171 178 170 165 175 150 196 185 232 269 316 460 572 1258 3427
+\addplot[oiVermillion, opacity=0.65, line width=1.3pt, dash pattern=on 1.3pt off 2.145pt, const plot, revision area legend]
+  coordinates {(0.0231399,0) (0.0231399,1.05665) (0.0612882,1.47885) (0.0994366,1.08931) (0.137585,0.83506) (0.175733,0.669448)
+    (0.213882,0.59014) (0.25203,0.599471) (0.290179,0.57148) (0.328327,0.424528) (0.366475,0.415198) (0.404624,0.39887)
+    (0.442772,0.415198) (0.48092,0.396537) (0.519069,0.384874) (0.557217,0.4082) (0.595366,0.349886) (0.633514,0.457184)
+    (0.671662,0.431526) (0.709811,0.541156) (0.747959,0.627462) (0.786108,0.737092) (0.824256,1.07298) (0.862404,1.33423)
+    (0.900553,2.93437) (0.938701,7.99372) (0.97685,7.99372) (0.97685,0)};
+% external_openai, linked-augmented: n = 11238; counts per bin 1361 450 296 212 208 142 125 121 122 97 83 97 79 103 91 98 96 116 118 120 146 203 246 419 6089
+\addplot[oiVermillion, line width=1.3pt, const plot, revision area legend]
+  coordinates {(0.0024708,0) (0.0024708,3.04279) (0.0422721,1.00607) (0.0820734,0.661767) (0.121875,0.473969) (0.161676,0.465026)
+    (0.201477,0.317469) (0.241279,0.279463) (0.28108,0.27052) (0.320881,0.272755) (0.360683,0.216863) (0.400484,0.185563)
+    (0.440285,0.216863) (0.480086,0.17662) (0.519888,0.230277) (0.559689,0.203449) (0.59949,0.219099) (0.639292,0.214627)
+    (0.679093,0.259341) (0.718894,0.263813) (0.758696,0.268284) (0.798497,0.326412) (0.838298,0.453847) (0.8781,0.549982)
+    (0.917901,0.936759) (0.957702,13.6132) (0.997503,13.6132) (0.997503,0)};
+\end{groupplot}
+\end{tikzpicture}%

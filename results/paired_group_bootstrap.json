@@ -1,0 +1,20 @@
+{
+  "Word LR, linked-augmented minus Word LR, clean-only": {
+    "delta": 0.008368556317835174,
+    "ci_low": 0.0020395774635558585,
+    "ci_high": 0.01635875314743608,
+    "p_two_sided": 0.0016
+  },
+  "MiniLM LR, linked-augmented minus MiniLM LR, clean-only": {
+    "delta": 0.017838600411054117,
+    "ci_low": 0.007924140034875215,
+    "ci_high": 0.029824294147296208,
+    "p_two_sided": 0.0
+  },
+  "Char+word LR, linked-augmented minus Word LR, linked-augmented": {
+    "delta": -0.000588049984248662,
+    "ci_low": -0.0029449675644342642,
+    "ci_high": 0.0013663497841738725,
+    "p_two_sided": 0.7792
+  }
+}

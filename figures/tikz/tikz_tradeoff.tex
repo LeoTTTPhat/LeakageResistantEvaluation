@@ -1,0 +1,102 @@
+% tikz_tradeoff.tex -- Figure 6 (fig:tradeoff), drawn with pgfplots.
+% Written by artifact/eswa_study/revision/tikz_inference.py from the per-partition
+% metrics files (results/revision_r3_multisplit_metrics.csv,
+% revision_r4_multisplit100_metrics.csv and the three DistilBERT metrics files;
+% the data and layout of figure_tradeoff() in make_r4_revised_figures.py);
+% do not edit by hand. Width \linewidth (one-column figure float); on a line
+% narrower than the paper's column the same layout is scaled to the line.
+% Needs pgfplots (compat=1.18), the arrows.meta library and the preamble's oi* colors.
+\begingroup\leavevmode
+\pgfmathsetlengthmacro{\trFrame}{max(\linewidth,252.00pt)}% layout width
+\setbox0=\hbox{\color{black}%
+\begin{tikzpicture}[font=\scriptsize]
+% grays of make_r4_revised_figures.py, local to this picture
+\definecolor{trGrid}{HTML}{CBD3D8}%    dotted grid
+\definecolor{trRegion}{HTML}{7E9AAB}%  "preferable" region
+\definecolor{trRegionText}{HTML}{4F6675}
+\definecolor{trKey}{HTML}{52616B}%     legend keys
+% The PNG shades the region with alpha 0.30 (1 - d)^0.85, d the elliptical
+% distance from the lower-right corner (semi-axes 0.62 and 0.50 of the axis box);
+% these stops are that profile over white at d = 0, 0.25, 0.5, 0.75, 0.9 and 1.
+\pgfdeclareradialshading{trPreferable}{\pgfpoint{0bp}{0bp}}{color(0bp)=(trRegion!30.00!white); color(6.25bp)=(trRegion!23.49!white); color(12.5bp)=(trRegion!16.64!white); color(18.75bp)=(trRegion!9.23!white); color(22.5bp)=(trRegion!4.24!white); color(25bp)=(trRegion!0.00!white); color(50bp)=(white)}
+\pgfmathsetlengthmacro{\trW}{\trFrame-43.14pt}% width of the axis box
+\pgfmathsetlengthmacro{\trH}{0.90587*\trW}% height of the axis box
+% means and SDs across partitions (row 1 clean-only, row 2 augmented)
+% Word TF-IDF: K = 100 partitions
+\pgfplotstableread[row sep=\\]{
+  training f1 f1sd fpr fprsd\\
+  clean 0.9212381 0.005080496 0.03592486 0.002396459\\
+  augmented 0.9463579 0.004573606 0.05277457 0.003884049\\
+}\trWord
+% MiniLM: K = 100 partitions
+\pgfplotstableread[row sep=\\]{
+  training f1 f1sd fpr fprsd\\
+  clean 0.8122225 0.01239889 0.05291908 0.004583091\\
+  augmented 0.8560614 0.009182073 0.06532755 0.006161406\\
+}\trMini
+% DistilBERT: K = 20 partitions
+\pgfplotstableread[row sep=\\]{
+  training f1 f1sd fpr fprsd\\
+  clean 0.8412473 0.03088119 0.06421002 0.03548584\\
+  augmented 0.8558524 0.03230013 0.102842 0.05681805\\
+}\trBert
+\begin{axis}[name=tr, scale only axis, width=\trW, height=\trH, set layers,
+  axis x line*=bottom, axis y line*=left, axis line style={line width=0.7pt},
+  tick align=outside, major tick length=3pt, every tick/.append style={line width=0.7pt, black},
+  tick label style={font=\scriptsize}, label style={font=\footnotesize},
+  xmin=0.79, xmax=0.962, ymin=0, ymax=0.172,
+  xtick={0.8,0.82,0.84,0.86,0.88,0.9,0.92,0.94,0.96}, ytick={0,0.02,0.04,0.06,0.08,0.1,0.12,0.14,0.16},
+  scaled ticks=false,
+  xticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+  yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+  grid=major, major grid style={line width=0.5pt, draw=trGrid, dash pattern=on 0.5pt off 0.825pt},
+  xlabel={Generator-disjoint (L2) F1 at threshold 0.5},
+  ylabel={Spam hard-negative FPR at threshold 0.5},
+  legend style={name=trLegend, draw=none, fill=none, font=\scriptsize, inner sep=0pt,
+    nodes={inner sep=1.1pt, text depth=0.15em}, row sep=-0.2pt,
+    at={(1,1)}, xshift=-2pt, yshift=-11pt, anchor=north east},
+  legend cell align=left,
+]
+% "preferable" region: a guide, not data; below the grid as in the PNG
+\begin{pgfonlayer}{axis background}
+  \begin{scope}
+    \clip (rel axis cs:0,0) rectangle (rel axis cs:1,1);
+    \shade[shading=trPreferable] (rel axis cs:1,0) ellipse [x radius=0.62*\trW, y radius=0.5*\trH];
+  \end{scope}
+\end{pgfonlayer}
+\node[anchor=south east, align=right, inner sep=0pt, text=trRegionText, font=\scriptsize\itshape]
+  at (rel axis cs:0.975,0.03) {preferable: higher L2 F1,\\fewer spam false alarms};
+% whiskers (zorder 2), arrows (3), means (4), labels (5), each over all families
+\addplot[draw=none, forget plot, error bars/.cd, x dir=both, y dir=both, x explicit, y explicit, error mark=-, error bar style={oiBlue, line width=0.8pt, opacity=0.75}, error mark options={rotate=90, oiBlue, line width=0.8pt, mark size=1.8pt, opacity=0.75}] table[x=f1, y=fpr, x error=f1sd, y error=fprsd] {\trWord};
+\addplot[draw=none, forget plot, error bars/.cd, x dir=both, y dir=both, x explicit, y explicit, error mark=-, error bar style={oiGreen, line width=0.8pt, opacity=0.75}, error mark options={rotate=90, oiGreen, line width=0.8pt, mark size=1.8pt, opacity=0.75}] table[x=f1, y=fpr, x error=f1sd, y error=fprsd] {\trMini};
+\addplot[draw=none, forget plot, error bars/.cd, x dir=both, y dir=both, x explicit, y explicit, error mark=-, error bar style={oiVermillion, line width=0.8pt, opacity=0.75}, error mark options={rotate=90, oiVermillion, line width=0.8pt, mark size=1.8pt, opacity=0.75}] table[x=f1, y=fpr, x error=f1sd, y error=fprsd] {\trBert};
+\addplot[oiBlue, line width=1.5pt, shorten <=3.6pt, shorten >=3.8pt, -{Triangle[length=5.2pt, width=5pt]}, forget plot] table[x=f1, y=fpr] {\trWord};
+\addplot[oiGreen, line width=1.5pt, shorten <=3.6pt, shorten >=3.8pt, -{Triangle[length=5.2pt, width=5pt]}, forget plot] table[x=f1, y=fpr] {\trMini};
+\addplot[oiVermillion, line width=1.5pt, shorten <=3.6pt, shorten >=3.8pt, -{Triangle[length=5.2pt, width=5pt]}, forget plot] table[x=f1, y=fpr] {\trBert};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiBlue, fill=white, line width=1.4pt}, skip coords between index={1}{2}, forget plot] table[x=f1, y=fpr] {\trWord};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiBlue, fill=oiBlue, line width=1.4pt}, skip coords between index={0}{1}, forget plot] table[x=f1, y=fpr] {\trWord};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiGreen, fill=white, line width=1.4pt}, skip coords between index={1}{2}, forget plot] table[x=f1, y=fpr] {\trMini};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiGreen, fill=oiGreen, line width=1.4pt}, skip coords between index={0}{1}, forget plot] table[x=f1, y=fpr] {\trMini};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiVermillion, fill=white, line width=1.4pt}, skip coords between index={1}{2}, forget plot] table[x=f1, y=fpr] {\trBert};
+\addplot[only marks, mark=*, mark size=2.8pt, mark options={draw=oiVermillion, fill=oiVermillion, line width=1.4pt}, skip coords between index={0}{1}, forget plot] table[x=f1, y=fpr] {\trBert};
+\node[anchor=south, align=center, inner sep=0pt, text=oiBlue, font=\scriptsize\bfseries\boldmath] at (axis cs:0.9335,0.0605) {Word TF--IDF\\$K = 100$};
+\node[anchor=north, align=center, inner sep=0pt, text=oiGreen, font=\scriptsize\bfseries\boldmath] at (axis cs:0.834,0.0475) {MiniLM\\$K = 100$};
+\node[anchor=south east, align=right, inner sep=0pt, text=oiVermillion, font=\scriptsize\bfseries\boldmath] at (axis cs:0.8355,0.113) {DistilBERT\\$K = 20$};
+\addlegendimage{legend image code/.code={\draw[trKey, line width=1.3pt, fill=white] (5.2pt,0pt) circle[radius=2.6pt];}}
+\addlegendentry{clean-only (mean)}
+\addlegendimage{legend image code/.code={\draw[trKey, line width=1pt, fill=trKey] (5.2pt,0pt) circle[radius=2.6pt];}}
+\addlegendentry{augmented (mean)}
+\addlegendimage{legend image code/.code={\draw[trKey, line width=1.4pt, -{Triangle[length=4.6pt, width=4.6pt]}] (0pt,0pt) -- (12.6pt,0pt);}}
+\addlegendentry{arrow: clean-only $\rightarrow$ augmented}
+\addlegendimage{legend image code/.code={\draw[trKey, line width=0.8pt, opacity=0.75] (0pt,0pt) -- (10.4pt,0pt);}}
+\addlegendentry{whiskers: $\pm1$ SD}
+\end{axis}
+\node[anchor=south west, inner sep=1.1pt] at (trLegend.north west) {$K$ = refitted partitions};
+\end{tikzpicture}%
+}%
+\ifdim\wd0>\dimexpr\linewidth+0.5pt\relax
+  \resizebox{\linewidth}{!}{\box0}% e.g. the response letter: the paper's layout, scaled
+\else
+  \box0
+\fi
+\endgroup

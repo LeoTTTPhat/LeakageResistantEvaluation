@@ -1,0 +1,124 @@
+% tikz_domain_adaptation.tex -- figure fig:adaptation of paper.tex:
+% domain_adaptation.png redrawn with the same data, panels and encodings
+% (make_limitation_figures.py, domain_adaptation_figure).
+% Written by artifact/eswa_study/revision/tikz_limitations.py; do not edit by hand.
+% Data: results/revision_domain_adaptation_summary.csv
+%       results/revision_fewshot_curve.csv
+% Needs pgfplots (compat 1.18, groupplots) and the oi* colors of the paper preamble.
+% Width 0.94\linewidth; default color black (also inside a colored quote).
+\begin{tikzpicture}[black]
+  \definecolor{daGrid}{HTML}{E0E5E8}% #CBD3D8 at opacity 0.6, as in the PNG
+  \definecolor{daRef}{HTML}{888888}% reference lines
+  \definecolor{daRefText}{HTML}{555555}% their labels
+  % (a) F1 at threshold 0.5 by training source -> evaluation target: mean and SD
+  % over five seeds; x = group index -/+ half the bar width (bar center)
+  \pgfplotstableread[row sep=\\]{
+    x         f1       sd \\
+    -0.180000 0.128930 0.018464 \\
+    0.820000  0.977491 0.002764 \\
+    1.820000  0.792047 0.005457 \\
+    2.820000  0.897293 0.010095 \\
+  }\daWord
+  \pgfplotstableread[row sep=\\]{
+    x        f1       sd \\
+    0.180000 0.271311 0.022528 \\
+    1.180000 0.930980 0.002768 \\
+    2.180000 0.741062 0.010753 \\
+    3.180000 0.831802 0.013138 \\
+  }\daMiniLM
+  % (b) Word TF-IDF F1 at threshold 0.5 on human-authored mail against k
+  \pgfplotstableread[row sep=\\]{
+    k    target   upweighted collected \\
+    25   0.694012 0.249986   0.161186 \\
+    50   0.803971 0.409523   0.214285 \\
+    100  0.847866 0.603820   0.332385 \\
+    250  0.914120 0.830262   0.636052 \\
+    500  0.935943 0.901811   0.800394 \\
+    1000 0.953886 0.939979   0.889785 \\
+    2000 0.962357 0.956856   0.934985 \\
+    4000 0.969746 0.965059   0.959449 \\
+  }\daCurve
+  % axis boxes: 0.94\linewidth minus 75.78pt, the width of the tick labels, axis
+  % labels and panel gap in the paper's fonts (picture = 0.94\linewidth)
+  \pgfmathsetlengthmacro\daAxisWidth{(0.94\linewidth-75.78pt)/2}%
+  \begin{groupplot}[
+      group style={group size=2 by 1, horizontal sep=42pt},
+      width=\daAxisWidth, height=128pt,
+      scale only axis,
+      axis lines*=left, tick align=outside, tick pos=left,
+      major tick length=3pt, minor tick length=1.8pt,
+      every tick/.style={black, line width=0.5pt},
+      axis line style={line width=0.6pt},
+      tick label style={font=\scriptsize},
+      label style={font=\footnotesize},
+      title style={font=\footnotesize\bfseries, at={(0,1)}, anchor=south west,
+        inner xsep=0pt},
+      legend style={font=\scriptsize, draw=none, fill=none},
+      legend cell align=left,
+      grid style={draw=daGrid, line width=0.5pt},
+      ylabel={F1 at threshold 0.5},
+      yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+    ]
+    \nextgroupplot[
+      title={(a) Training source {\boldmath$\rightarrow$} evaluation target},
+      xmin=-0.546000, xmax=3.546000, ymin=0, ymax=1.2,
+      xtick={0,1,2,3},
+      xticklabels={
+        {synthetic\\$\rightarrow$ human},
+        {human\\$\rightarrow$ human},
+        {human\\$\rightarrow$ L2},
+        {human\\$\rightarrow$ L1}},
+      xticklabel style={align=center},
+      ytick={0,0.2,0.4,0.6,0.8,1.0,1.2}, ymajorgrids,
+      legend columns=2,
+      legend style={at={(0,1)}, anchor=north west, xshift=2pt, yshift=-2pt,
+        /tikz/every even column/.append style={column sep=8pt}},
+      legend image code/.code={\fill[#1] (0pt,-2.45pt) rectangle (9.8pt,2.45pt);},
+    ]
+    \addplot[ybar, bar width=0.36, fill=oiBlue, draw=white, line width=0.5pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=0.7pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\daWord};
+    \addlegendentry{Word TF--IDF}
+    \addplot[ybar, bar width=0.36, fill=oiGreen, draw=white, line width=0.5pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=0.7pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\daMiniLM};
+    \addlegendentry{MiniLM}
+
+    \nextgroupplot[
+      title={(b) Word TF--IDF: target-data exchange rate},
+      xmode=log, xmin=19.397, xmax=5155.443, ymin=0, ymax=1.05,
+      ytick={0,0.2,0.4,0.6,0.8,1.0},
+      grid=major,
+      xlabel={human-authored training messages ($k$)},
+      legend style={at={(1,0)}, anchor=south east, xshift=-2pt, yshift=2pt,
+        fill=white, draw=none, inner sep=2pt},
+    ]
+    % reference lines: full-corpus ceiling (human -> human, Word TF-IDF) and
+    % synthetic only (k = 0, as collected)
+    \addplot[daRef, line width=0.8pt, dash pattern=on 2.96pt off 1.28pt, forget plot]
+      coordinates {(19.397,0.977491) (5155.443,0.977491)};
+    \addplot[daRef, line width=0.8pt, dash pattern=on 5.12pt off 1.28pt on 0.8pt off 1.28pt,
+        forget plot]
+      coordinates {(19.397,0.128930) (5155.443,0.128930)};
+    \node[anchor=base west, inner sep=0pt, font=\scriptsize, text=daRefText]
+      at (axis cs:26,0.917491) {full-corpus ceiling};
+    \node[anchor=north west, inner sep=0pt, font=\scriptsize, text=daRefText]
+      at (axis cs:26,0.103930) {synthetic only};
+    \addplot[oiBlue, line width=1.2pt, mark=*, mark size=1.6pt,
+        mark options={solid, line width=0.8pt}]
+      table[x=k, y=target] {\daCurve};
+    \addlegendentry{target only}
+    \addplot[oiBlue, line width=1.2pt, dash pattern=on 4.44pt off 1.92pt,
+        mark=square*, mark size=1.6pt, mark options={solid, fill=white, line width=0.8pt}]
+      table[x=k, y=upweighted] {\daCurve};
+    \addlegendentry{target + synthetic (upweighted)}
+    \addplot[oiBlue, line width=1.2pt, dash pattern=on 1.2pt off 1.98pt,
+        mark=triangle*, mark size=2pt, mark options={solid, fill=white, line width=0.8pt}]
+      table[x=k, y=collected] {\daCurve};
+    \addlegendentry{target + synthetic (as collected)}
+  \end{groupplot}
+\end{tikzpicture}

@@ -1,0 +1,26 @@
+model,stream,pi_r_purity
+charplusword_lr_linked_augmented,L1 primary,0.9387755102040817
+charplusword_lr_linked_augmented,L2 generator-disjoint,0.9387755102040817
+charplusword_lr_linked_augmented,L3 human-authored,0.9387755102040817
+distilbert_clean_only,L1 primary,0.9591836734693877
+distilbert_clean_only,L2 generator-disjoint,0.9795918367346939
+distilbert_clean_only,L3 human-authored,0.9387755102040817
+distilbert_linked_augmented,L1 primary,0.9591836734693877
+distilbert_linked_augmented,L2 generator-disjoint,0.9183673469387755
+distilbert_linked_augmented,L3 human-authored,0.9591836734693877
+minilm_lr_clean_only,Contemporary (Nazario + real legitimate),0.9387755102040817
+minilm_lr_clean_only,L1 primary,0.9183673469387755
+minilm_lr_clean_only,L2 generator-disjoint,0.9795918367346939
+minilm_lr_clean_only,L3 human-authored,1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),0.8571428571428571
+minilm_lr_linked_augmented,L1 primary,0.8775510204081632
+minilm_lr_linked_augmented,L2 generator-disjoint,0.9387755102040817
+minilm_lr_linked_augmented,L3 human-authored,1.0
+word_lr_clean_only,Contemporary (Nazario + real legitimate),0.8979591836734694
+word_lr_clean_only,L1 primary,0.9183673469387755
+word_lr_clean_only,L2 generator-disjoint,0.8571428571428571
+word_lr_clean_only,L3 human-authored,0.9183673469387755
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),0.8775510204081632
+word_lr_linked_augmented,L1 primary,0.9591836734693877
+word_lr_linked_augmented,L2 generator-disjoint,0.9387755102040817
+word_lr_linked_augmented,L3 human-authored,0.9387755102040817

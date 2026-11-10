@@ -1,0 +1,44 @@
+[
+  {
+    "family": "Word TF-IDF",
+    "first_block": 20,
+    "first_block_mean": 0.009981355847621321,
+    "second_block_mean": 0.01089787587044317,
+    "first_block_sd": 0.003632158903940977,
+    "second_block_sd": 0.004315767178707458,
+    "welch_t_p": 0.3388581649766472,
+    "brown_forsythe_p": 0.20209484547735615,
+    "ks_p": 0.30065917823681476,
+    "full_sd": 0.004186969917512954,
+    "published_five_sd": 0.001025417526000444,
+    "p_five_as_tight_as_published": 0.006644717015066298
+  },
+  {
+    "family": "MiniLM",
+    "first_block": 20,
+    "first_block_mean": 0.015586884782123578,
+    "second_block_mean": 0.015635075765460856,
+    "first_block_sd": 0.005210384702211251,
+    "second_block_sd": 0.005215746255134945,
+    "welch_t_p": 0.9707453031977651,
+    "brown_forsythe_p": 0.8052500888077261,
+    "ks_p": 0.8377869859010044,
+    "full_sd": 0.00518833962164936,
+    "published_five_sd": 0.0057314376935332185,
+    "p_five_as_tight_as_published": 0.7002987279140678
+  },
+  {
+    "family": "DistilBERT",
+    "first_block": 8,
+    "first_block_mean": 0.054577514548664385,
+    "second_block_mean": 0.04666511012230643,
+    "first_block_sd": 0.02827376986697848,
+    "second_block_sd": 0.019398753031862455,
+    "welch_t_p": 0.5036957599721876,
+    "brown_forsythe_p": 0.7087624833935011,
+    "ks_p": 0.8970707311264589,
+    "full_sd": 0.022982578915812155,
+    "published_five_sd": 0.00715631028302842,
+    "p_five_as_tight_as_published": 0.016538839495573485
+  }
+]

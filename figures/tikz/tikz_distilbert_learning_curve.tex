@@ -1,0 +1,117 @@
+% tikz_distilbert_learning_curve.tex -- written by artifact/eswa_study/revision/tikz_revision.py;
+% edit and rerun the script, not this file. Supplement, \label{fig:learningcurve}.
+% DistilBERT learning curves, means over seeds 29, 42, 71, a checkpoint every tenth of an epoch; solid augmented, dotted clean; dashed line at the one-epoch stopping point.
+% Data: results/revision_distilbert_learning_curve.csv, as in make_revision_figures.figure_learning_curve().
+% Width 0.96\linewidth (as the PNG in the figure* float); no external files.
+\begin{tikzpicture}[color=black]
+\definecolor{lcGray}{HTML}{888888}% stopping-point line, matplotlib #888888
+\definecolor{lcDark}{HTML}{444444}% legend keys for the line styles, matplotlib #444444
+\pgfplotsset{revision panel/.style={
+  scale only axis,
+  axis x line*=bottom, axis y line*=left,
+  axis line style={line width=0.7pt},
+  tick align=outside, major tick length=3.5pt, minor tick length=2pt,
+  tick style={black, line width=0.8pt}, minor tick style={line width=0.6pt},
+  tick label style={font=\scriptsize},
+  label style={font=\footnotesize},
+  title style={font=\footnotesize\bfseries\boldmath, at={(0,1)},
+    anchor=south west, inner xsep=0pt},
+  legend style={font=\scriptsize, draw=none, fill=none},
+  legend cell align=left,
+  legend image code/.code={\draw[mark repeat=2, mark phase=2, ##1]
+    plot coordinates {(0pt,0pt) (7.5pt,0pt) (15pt,0pt)};},
+  scaled ticks=false,
+},
+revision area legend/.style={% matplotlib's legend key for a histogram outline
+  legend image code/.code={\draw[##1] (0pt,-2.6pt) rectangle (15pt,2.6pt);}},
+}%
+\pgfmathsetlengthmacro\lcW{(0.96\linewidth-120.9pt)/3}% axis width
+\pgfmathsetlengthmacro\lcH{max(0.88*\lcW,90pt)}% axis height
+% clean-only: epochs of training and seed means (linked = linked rewrites, gd = generator-disjoint corpus; f1/ece at maximum length 160/320)
+\pgfplotstableread[row sep=\\]{epoch linkedf1160 gdf1160 linkedf1320 gdf1320 linkedece160 gdece160\\
+0.104167 0.760837 0.80696 0.781548 0.815061 0.326706 0.168884\\
+0.208333 0.89215 0.818832 0.903442 0.835131 0.248954 0.139788\\
+0.3125 0.888981 0.818573 0.891033 0.817921 0.166826 0.101269\\
+0.416667 0.892345 0.825276 0.901223 0.829376 0.100191 0.0749441\\
+0.520833 0.902547 0.828856 0.906014 0.836737 0.073394 0.0928471\\
+0.625 0.904773 0.832251 0.90806 0.825475 0.0586478 0.0919405\\
+0.729167 0.898431 0.829523 0.901839 0.821941 0.0704052 0.0997489\\
+0.833333 0.905287 0.833313 0.907903 0.833368 0.0654856 0.121897\\
+0.9375 0.919906 0.854569 0.91853 0.839225 0.0439814 0.0879933\\
+1 0.92357 0.863222 0.925605 0.855627 0.0379742 0.0727402\\
+1.04167 0.92492 0.863583 0.924785 0.858308 0.0450142 0.0788932\\
+1.14583 0.904986 0.776645 0.91671 0.824599 0.0554282 0.170901\\
+1.25 0.904757 0.801355 0.911812 0.810774 0.0639546 0.150541\\
+1.35417 0.924883 0.855488 0.923819 0.834824 0.0375238 0.0968968\\
+1.45833 0.928012 0.829839 0.921296 0.804086 0.0413131 0.132861\\
+1.5625 0.923141 0.860424 0.924635 0.857335 0.0480066 0.114835\\
+1.66667 0.933626 0.873291 0.933638 0.865056 0.0331188 0.0826208\\
+1.77083 0.938342 0.879775 0.93661 0.86982 0.0238935 0.0666155\\
+1.875 0.936229 0.881199 0.928255 0.840226 0.0319522 0.071812\\
+1.97917 0.932786 0.863183 0.944186 0.867242 0.0457019 0.105017\\
+2 0.932601 0.853465 0.943268 0.87092 0.0457628 0.107874\\}\lcClean
+% linked-augmented: epochs of training and seed means (linked = linked rewrites, gd = generator-disjoint corpus; f1/ece at maximum length 160/320)
+\pgfplotstableread[row sep=\\]{epoch linkedf1160 gdf1160 linkedf1320 gdf1320 linkedece160 gdece160\\
+0.0989399 0.914081 0.834805 0.919437 0.843165 0.0690669 0.0979069\\
+0.19788 0.931553 0.861079 0.932473 0.862387 0.0483207 0.0823928\\
+0.29682 0.948177 0.812868 0.951028 0.829075 0.0346491 0.139604\\
+0.39576 0.951858 0.865032 0.955125 0.876494 0.0242144 0.0769376\\
+0.4947 0.95131 0.823741 0.961517 0.879672 0.0288008 0.138593\\
+0.59364 0.961294 0.863153 0.966214 0.844037 0.0152245 0.0904067\\
+0.69258 0.961727 0.843758 0.969357 0.858663 0.0207098 0.116297\\
+0.791519 0.963754 0.864552 0.956619 0.864598 0.0241695 0.100679\\
+0.890459 0.966009 0.814649 0.96909 0.863639 0.0213694 0.15342\\
+0.989399 0.964874 0.853004 0.972736 0.864161 0.0237008 0.131496\\
+1 0.96223 0.853297 0.971611 0.885958 0.027391 0.129251\\
+1.08834 0.963514 0.80901 0.964987 0.877632 0.0278099 0.173319\\
+1.18728 0.965229 0.873881 0.964159 0.879379 0.0266593 0.136343\\
+1.28622 0.95672 0.861385 0.964989 0.868821 0.038308 0.15611\\
+1.38516 0.95844 0.863451 0.970386 0.873035 0.0354241 0.151015\\
+1.4841 0.960895 0.846702 0.966576 0.862783 0.0343431 0.165619\\
+1.58304 0.965516 0.819159 0.974137 0.875813 0.0283433 0.173178\\
+1.68198 0.964658 0.839593 0.972399 0.862645 0.0271801 0.150434\\
+1.78092 0.967655 0.852728 0.972186 0.890573 0.0281351 0.137501\\
+1.87986 0.958131 0.884019 0.964466 0.881821 0.0385149 0.139708\\
+1.9788 0.97207 0.821537 0.976556 0.862913 0.0243697 0.177664\\
+2 0.969401 0.741833 0.975626 0.86672 0.0252593 0.239226\\}\lcAugmented
+\begin{groupplot}[
+  group style={group size=3 by 1, horizontal sep=42pt},
+  revision panel, width=\lcW, height=\lcH, title style={text width=\lcW, align=flush left},
+  xmin=0.00388693, xmax=2.09505, xtick={0.5,1,1.5,2}, xticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+  yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+  xlabel={Epochs of training},
+]
+\nextgroupplot[title={(a) F1, max length 160}, ylabel={F1},
+  ymin=0.730321, ymax=0.983582, ytick={0.75,0.8,0.85,0.9,0.95}]
+\addplot[oiBlue, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=linkedf1160] {\lcClean};
+\addplot[oiBlue, line width=1.3pt, line join=round] table[x=epoch, y=linkedf1160] {\lcAugmented};
+\addplot[oiVermillion, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=gdf1160] {\lcClean};
+\addplot[oiVermillion, line width=1.3pt, line join=round] table[x=epoch, y=gdf1160] {\lcAugmented};
+\draw[lcGray, line width=0.8pt, dash pattern=on 2.96pt off 1.28pt] ({axis cs:1,0} |- {rel axis cs:0,0}) -- ({axis cs:1,0} |- {rel axis cs:0,1});% one-epoch stopping point
+\nextgroupplot[title={(b) F1, max length 320}, ylabel={F1},
+  ymin=0.771798, ymax=0.986306, ytick={0.8,0.85,0.9,0.95}]
+\addplot[oiBlue, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=linkedf1320] {\lcClean};
+\addplot[oiBlue, line width=1.3pt, line join=round] table[x=epoch, y=linkedf1320] {\lcAugmented};
+\addplot[oiVermillion, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=gdf1320] {\lcClean};
+\addplot[oiVermillion, line width=1.3pt, line join=round] table[x=epoch, y=gdf1320] {\lcAugmented};
+\draw[lcGray, line width=0.8pt, dash pattern=on 2.96pt off 1.28pt] ({axis cs:1,0} |- {rel axis cs:0,0}) -- ({axis cs:1,0} |- {rel axis cs:0,1});% one-epoch stopping point
+\nextgroupplot[title={(c) ECE, max length 160}, ylabel={ECE},
+  ymin=-0.000349575, ymax=0.34228, ytick={0,0.05,0.1,0.15,0.2,0.25,0.3}]
+\addplot[oiBlue, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=linkedece160] {\lcClean};
+\addplot[oiBlue, line width=1.3pt, line join=round] table[x=epoch, y=linkedece160] {\lcAugmented};
+\addplot[oiVermillion, opacity=0.6, line width=1.3pt, line join=round, dash pattern=on 1.3pt off 2.145pt] table[x=epoch, y=gdece160] {\lcClean};
+\addplot[oiVermillion, line width=1.3pt, line join=round] table[x=epoch, y=gdece160] {\lcAugmented};
+\draw[lcGray, line width=0.8pt, dash pattern=on 2.96pt off 1.28pt] ({axis cs:1,0} |- {rel axis cs:0,0}) -- ({axis cs:1,0} |- {rel axis cs:0,1});% one-epoch stopping point
+\end{groupplot}
+\begin{axis}[revision panel, hide axis, width=1pt, height=1pt,
+  at={(current bounding box.south)}, anchor=north, yshift=-3pt,
+  xmin=0, xmax=1, ymin=0, ymax=1,
+  legend columns=4,
+  legend style={at={(0.5,0)}, anchor=north,
+    /tikz/every even column/.append style={column sep=12pt}}]
+\addlegendimage{oiBlue, line width=1.3pt}\addlegendentry{Linked}
+\addlegendimage{oiVermillion, line width=1.3pt}\addlegendentry{Gen.-disjoint}
+\addlegendimage{lcDark, line width=1.3pt}\addlegendentry{Augmented}
+\addlegendimage{lcDark, line width=1.3pt, dash pattern=on 1.3pt off 2.145pt}\addlegendentry{Clean}
+\end{axis}
+\end{tikzpicture}%

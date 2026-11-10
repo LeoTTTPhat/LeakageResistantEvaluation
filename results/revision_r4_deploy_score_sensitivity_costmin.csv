@@ -1,0 +1,169 @@
+model,stream,cells,agreement,mean_excess,median_excess,p95_excess,max_excess,rule,scope,perturbation,value
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5020408163265306,0.18197100243491723,0.0,0.6852251798366547,1.3562366362274516,always fixed_cost_min,none,none,0.0
+minilm_lr_linked_augmented,L1 primary,980,0.7010204081632653,0.035695844238994336,0.0,0.1945551350181407,0.9193424864665976,always fixed_cost_min,none,none,0.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6622448979591836,0.041692529982107665,0.0,0.2567600091534454,0.9833776276723207,always fixed_cost_min,none,none,0.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15842094126611866,0.0,0.739585013514506,1.433803058184385,always fixed_cost_min,none,none,0.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.22857142857142856,0.8712074476389429,0.5522397666700192,2.2506248458948623,2.660459900805061,always fixed_cost_min,none,none,0.0
+word_lr_linked_augmented,L1 primary,980,0.6071428571428571,0.1671181003370421,0.0,0.8260628656993568,4.648839460449876,always fixed_cost_min,none,none,0.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.23775510204081632,0.7525907362914593,0.25761802303140136,2.6863662533294375,12.509609138709951,always fixed_cost_min,none,none,0.0
+word_lr_linked_augmented,L3 human-authored,245,0.5714285714285714,0.18804349108385973,0.0,1.2642707690180073,2.194839739454132,always fixed_cost_min,none,none,0.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5224489795918368,0.17705350946218087,0.0,0.6852251798366547,1.3564266802619134,always fixed_cost_min,validation and target,temperature,0.5
+minilm_lr_linked_augmented,L1 primary,980,0.7153061224489796,0.03559803163064159,0.0,0.21189523396906193,1.0476590953158547,always fixed_cost_min,validation and target,temperature,0.5
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6622448979591836,0.04271095974062432,0.0,0.2573268643810634,1.039118236879005,always fixed_cost_min,validation and target,temperature,0.5
+minilm_lr_linked_augmented,L3 human-authored,245,0.5265306122448979,0.16188793313534394,0.0,0.7956108270313131,1.4338218370184612,always fixed_cost_min,validation and target,temperature,0.5
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.22448979591836735,0.8746907447042178,0.5534895571423784,2.2532420961733606,2.669880202020368,always fixed_cost_min,validation and target,temperature,0.5
+word_lr_linked_augmented,L1 primary,980,0.6081632653061224,0.1675889401006941,0.0,0.8260628656993568,4.648839460449876,always fixed_cost_min,validation and target,temperature,0.5
+word_lr_linked_augmented,L2 generator-disjoint,980,0.1704081632653061,0.7529221787644571,0.25451616057914084,2.6863662533294375,12.509609138709951,always fixed_cost_min,validation and target,temperature,0.5
+word_lr_linked_augmented,L3 human-authored,245,0.5877551020408164,0.18816507375640842,0.0,1.2643292850138381,2.194864341982059,always fixed_cost_min,validation and target,temperature,0.5
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.49387755102040815,0.182460208149836,0.0011226669406527723,0.6852251798366547,1.3564266802619134,always fixed_cost_min,validation and target,temperature,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.7051020408163265,0.03561474901765888,0.0,0.1945551350181407,0.9193424864665976,always fixed_cost_min,validation and target,temperature,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6683673469387755,0.04154647200569381,0.0,0.2566424460690739,0.9833776276723207,always fixed_cost_min,validation and target,temperature,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15936683389373454,0.0,0.7958784388835718,1.4338218370184612,always fixed_cost_min,validation and target,temperature,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.22857142857142856,0.8711245127489007,0.552864661906199,2.2519334710341123,2.6591141434885883,always fixed_cost_min,validation and target,temperature,2.0
+word_lr_linked_augmented,L1 primary,980,0.6091836734693877,0.16733131346975938,0.0,0.8260628656993568,4.648839460449876,always fixed_cost_min,validation and target,temperature,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.23673469387755103,0.7537232914675945,0.2621412689252558,2.6863662533294375,12.509609138709951,always fixed_cost_min,validation and target,temperature,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.5836734693877551,0.1881113825341671,0.0,1.2642868536561656,2.194839739454132,always fixed_cost_min,validation and target,temperature,2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.49795918367346936,0.18096212520814314,0.0013803960902982748,0.6876208121257757,1.3562366362274516,always fixed_cost_min,validation and target,temperature,3.0
+minilm_lr_linked_augmented,L1 primary,980,0.7071428571428572,0.035652175866006865,0.0,0.1945551350181407,0.9193424864665976,always fixed_cost_min,validation and target,temperature,3.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6724489795918367,0.04097697279497249,0.0,0.2517848168082738,0.9832030543794543,always fixed_cost_min,validation and target,temperature,3.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15752404750046534,0.0,0.7395804357677583,1.433803058184385,always fixed_cost_min,validation and target,temperature,3.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.22857142857142856,0.8708176945518208,0.5526705796462474,2.2519334710341123,2.6591141434885883,always fixed_cost_min,validation and target,temperature,3.0
+word_lr_linked_augmented,L1 primary,980,0.610204081632653,0.16705154745169076,0.0,0.8260628656993568,4.648839460449876,always fixed_cost_min,validation and target,temperature,3.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.2357142857142857,0.7510247951820958,0.25451616057914084,2.6865023502620615,12.509609138709951,always fixed_cost_min,validation and target,temperature,3.0
+word_lr_linked_augmented,L3 human-authored,245,0.5877551020408164,0.18800615875238963,0.0,1.2651610168588758,2.1966293745888934,always fixed_cost_min,validation and target,temperature,3.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.563265306122449,0.1928079534048604,0.0,0.7797345250996395,1.3562366362274516,always fixed_cost_min,validation and target,shift,-2.0
+minilm_lr_linked_augmented,L1 primary,980,0.6275510204081632,0.04785546633700822,0.0,0.2711979840763722,0.9193424864665976,always fixed_cost_min,validation and target,shift,-2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6693877551020408,0.05536702569264406,0.0,0.35301641175417553,0.9833776276723207,always fixed_cost_min,validation and target,shift,-2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.39183673469387753,0.18212633086383,0.01747004618806769,0.8024063505636919,1.433803058184385,always fixed_cost_min,validation and target,shift,-2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.3183673469387755,0.2712607886934522,0.09606919641646994,1.2242363507954532,2.021663502271881,always fixed_cost_min,validation and target,shift,-2.0
+word_lr_linked_augmented,L1 primary,980,0.4459183673469388,0.21792261872580426,0.0027432314024565807,0.8373178234179869,6.414802810259868,always fixed_cost_min,validation and target,shift,-2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.29897959183673467,0.7221595649532352,0.19283722502200473,2.7392415462153408,12.509609138709951,always fixed_cost_min,validation and target,shift,-2.0
+word_lr_linked_augmented,L3 human-authored,245,0.5224489795918368,0.18576981361464492,0.0,1.2656691916933598,2.1977978621508076,always fixed_cost_min,validation and target,shift,-2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.46122448979591835,0.1536248947105055,0.023315348013389414,0.6391800337079978,1.3562366362274516,always fixed_cost_min,validation and target,shift,-1.0
+minilm_lr_linked_augmented,L1 primary,980,0.7112244897959183,0.037310778145643236,0.0,0.21199347286518072,0.9193424864665976,always fixed_cost_min,validation and target,shift,-1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.7295918367346939,0.036007689915030214,0.0,0.244447451212232,0.9832030543794543,always fixed_cost_min,validation and target,shift,-1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.1589100710680545,0.0,0.7958653839582426,1.433803058184385,always fixed_cost_min,validation and target,shift,-1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.3020408163265306,0.3766717207474549,0.40450365644142505,1.2242363507954532,1.9922724484342824,always fixed_cost_min,validation and target,shift,-1.0
+word_lr_linked_augmented,L1 primary,980,0.6438775510204081,0.16669551120044213,0.0,0.841250163603937,4.648839460449876,always fixed_cost_min,validation and target,shift,-1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.2724489795918367,0.7493131247274829,0.22741746913227778,2.7392415462153408,12.509609138709951,always fixed_cost_min,validation and target,shift,-1.0
+word_lr_linked_augmented,L3 human-authored,245,0.5918367346938775,0.18784256166164523,0.0,1.2643519877771665,2.194839739454132,always fixed_cost_min,validation and target,shift,-1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5428571428571428,0.16757711018307306,0.0,0.7991435182745666,1.3560465921929898,always fixed_cost_min,validation and target,shift,1.0
+minilm_lr_linked_augmented,L1 primary,980,0.7244897959183674,0.03675833152286246,0.0,0.21199347286518072,0.9193424864665976,always fixed_cost_min,validation and target,shift,1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6612244897959184,0.049579747760209396,0.0,0.2836223814212375,0.9833776276723207,always fixed_cost_min,validation and target,shift,1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15862483893384244,0.0,0.7395327938131895,1.4337842793503097,always fixed_cost_min,validation and target,shift,1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.09795918367346938,0.5323392884562491,0.388606333659846,1.623389222982516,2.7663613568627503,always fixed_cost_min,validation and target,shift,1.0
+word_lr_linked_augmented,L1 primary,980,0.6306122448979592,0.166064676957006,0.0,0.7391215991734528,4.648839460449876,always fixed_cost_min,validation and target,shift,1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.24897959183673468,0.7314373204896998,0.20783924421768007,2.724389895365445,12.509609138709951,always fixed_cost_min,validation and target,shift,1.0
+word_lr_linked_augmented,L3 human-authored,245,0.636734693877551,0.18795041568502355,0.0,1.2646206727480749,2.1954608870269796,always fixed_cost_min,validation and target,shift,1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.6,0.13247820660933926,0.0,0.5577797470593979,1.4683271577341634,always fixed_cost_min,validation and target,shift,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.763265306122449,0.03406202502596152,0.0,0.21206875505478834,1.0476590953158547,always fixed_cost_min,validation and target,shift,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6704081632653062,0.05653518367172978,0.0,0.31036615559956937,1.6587381554227485,always fixed_cost_min,validation and target,shift,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5265306122448979,0.160449171574724,0.0,0.7965209027397683,1.4337842793503097,always fixed_cost_min,validation and target,shift,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.30612244897959184,0.2826626541146984,0.1285956391056886,1.16769942832593,2.3110157504577673,always fixed_cost_min,validation and target,shift,2.0
+word_lr_linked_augmented,L1 primary,980,0.7010204081632653,0.16003540744895745,0.0,0.7652430547541703,4.648839460449876,always fixed_cost_min,validation and target,shift,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.2602040816326531,0.7177734324782747,0.1884582022265221,2.6870467379925578,12.509609138709951,always fixed_cost_min,validation and target,shift,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.6653061224489796,0.1873410011323893,0.0,1.265051795237302,2.1960820345998266,always fixed_cost_min,validation and target,shift,2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5428571428571428,0.11153755145103261,0.0,0.4445183009946369,1.5971435246896566,always fixed_cost_min,validation and target,noise,0.5
+minilm_lr_linked_augmented,L1 primary,980,0.726530612244898,0.03549880367655938,0.0,0.20458686553797556,0.5759288469253965,always fixed_cost_min,validation and target,noise,0.5
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.7255102040816327,0.026608972821274286,0.0,0.15925119150168252,0.5133790638032285,always fixed_cost_min,validation and target,noise,0.5
+minilm_lr_linked_augmented,L3 human-authored,245,0.5142857142857142,0.12447518033120557,0.0,0.6911290851533165,1.3536902502763795,always fixed_cost_min,validation and target,noise,0.5
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.30612244897959184,0.4599683473167235,0.24253161543725965,1.4527520756008945,1.9485620123998704,always fixed_cost_min,validation and target,noise,0.5
+word_lr_linked_augmented,L1 primary,980,0.6653061224489796,0.11994545908142701,0.0,0.5137532346915146,2.6555458871517845,always fixed_cost_min,validation and target,noise,0.5
+word_lr_linked_augmented,L2 generator-disjoint,980,0.1377551020408163,0.8027857797140453,0.38735197203309435,2.723379799137121,10.502168220171896,always fixed_cost_min,validation and target,noise,0.5
+word_lr_linked_augmented,L3 human-authored,245,0.6163265306122448,0.14097053259743364,0.0,0.9177657168571746,1.4798293573986272,always fixed_cost_min,validation and target,noise,0.5
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.689795918367347,0.048832297898637654,0.0,0.25904282710571075,1.0033238557197164,always fixed_cost_min,validation and target,noise,1.0
+minilm_lr_linked_augmented,L1 primary,980,0.763265306122449,0.027854693808266745,0.0,0.20143201741818753,0.592516036732361,always fixed_cost_min,validation and target,noise,1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.673469387755102,0.02244099464576381,0.0,0.13962103846005336,0.39813624130013814,always fixed_cost_min,validation and target,noise,1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.7346938775510204,0.09514338892173003,0.0,0.6188573414094278,1.0806600345427766,always fixed_cost_min,validation and target,noise,1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.4489795918367347,0.15240237783565247,0.0374311250097179,0.6243465184472402,1.359641977276521,always fixed_cost_min,validation and target,noise,1.0
+word_lr_linked_augmented,L1 primary,980,0.65,0.09037114629668447,0.0,0.4448230028949017,1.6832140623546317,always fixed_cost_min,validation and target,noise,1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.20714285714285716,0.6405355574434082,0.3218628524436332,2.1575457776198506,6.57337970520221,always fixed_cost_min,validation and target,noise,1.0
+word_lr_linked_augmented,L3 human-authored,245,0.5387755102040817,0.1062662332100683,0.0,0.6068092960371672,1.0153153302747198,always fixed_cost_min,validation and target,noise,1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.8,0.017415941601817225,0.0,0.10562926127357862,0.5011173729223444,always fixed_cost_min,validation and target,noise,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.8214285714285714,0.009629685659528367,0.0,0.0643363691746449,0.22224335127483763,always fixed_cost_min,validation and target,noise,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6142857142857143,0.021967125610131807,0.0,0.13640678104836604,0.2761209852375508,always fixed_cost_min,validation and target,noise,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.7673469387755102,0.05950395861318166,0.0,0.41771386280295375,0.6377630033495778,always fixed_cost_min,validation and target,noise,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.7591836734693878,0.05001740428531103,0.0,0.3479674348673351,1.1919492693777896,always fixed_cost_min,validation and target,noise,2.0
+word_lr_linked_augmented,L1 primary,980,0.8397959183673469,0.016719962498632734,0.0,0.14646551830654717,0.36080020499658394,always fixed_cost_min,validation and target,noise,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.4204081632653061,0.10003250865996352,0.02873568600396814,0.4349671851995433,0.7125564781295917,always fixed_cost_min,validation and target,noise,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.7877551020408163,0.04923210115067515,0.0,0.3436096610346225,0.6865270962842209,always fixed_cost_min,validation and target,noise,2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.6122448979591837,0.06412216753091884,0.0,0.26493712288827614,1.0525696878344246,always fixed_cost_min,target only,temperature,0.5
+minilm_lr_linked_augmented,L1 primary,980,0.6459183673469387,0.11242083113619337,0.0,0.505033135645999,3.8140245271179287,always fixed_cost_min,target only,temperature,0.5
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.10408163265306122,0.5763379099216146,0.29542298726364313,2.6243498903394453,12.425649061787738,always fixed_cost_min,target only,temperature,0.5
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15312592947327655,0.0,0.9593915331758422,1.4439536775106192,always fixed_cost_min,target only,temperature,0.5
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.24081632653061225,0.4752054162903761,0.32848635898891243,1.3850477841641962,3.127254126151688,always fixed_cost_min,target only,temperature,0.5
+word_lr_linked_augmented,L1 primary,980,0.6663265306122449,0.07828150720271272,0.0,0.4249492855881327,1.294146614553549,always fixed_cost_min,target only,temperature,0.5
+word_lr_linked_augmented,L2 generator-disjoint,980,0.061224489795918366,1.9709524711865196,1.1421056241279535,6.3640756962666085,11.234393905082039,always fixed_cost_min,target only,temperature,0.5
+word_lr_linked_augmented,L3 human-authored,245,0.6612244897959184,0.24480353043288305,0.0,1.9089387376282247,2.5201576469871285,always fixed_cost_min,target only,temperature,0.5
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.37142857142857144,0.6108109565139549,0.17236989106579537,2.685182510479712,3.1431449885480207,always fixed_cost_min,target only,temperature,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.43673469387755104,0.32357067312725313,0.07835399712358815,1.49755097013986,2.1907128156024323,always fixed_cost_min,target only,temperature,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.7020408163265306,0.09883238013905399,0.0,0.5352125398783608,2.713674360328202,always fixed_cost_min,target only,temperature,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5877551020408164,0.12963751654856237,0.0,0.7166407391530577,1.4990239546214488,always fixed_cost_min,target only,temperature,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.20816326530612245,1.1143932263236545,0.7541660726491957,2.8976174985569725,3.087277724765798,always fixed_cost_min,target only,temperature,2.0
+word_lr_linked_augmented,L1 primary,980,0.41122448979591836,0.7331769971223556,0.079242505484862,2.1227762993178407,44.958963918330234,always fixed_cost_min,target only,temperature,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.3377551020408163,3.3674039769684683,0.21356658008803286,2.6495094201239433,905.2988401060487,always fixed_cost_min,target only,temperature,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.18775510204081633,0.1356853908149755,0.0027629079606286133,0.988721403943513,1.8503200301050629,always fixed_cost_min,target only,temperature,2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.3142857142857143,0.9706171900278365,0.24664052148490434,4.06464320497882,5.312497081660467,always fixed_cost_min,target only,temperature,3.0
+minilm_lr_linked_augmented,L1 primary,980,0.29897959183673467,0.7249625398777582,0.3418166267330177,2.6387082507345503,5.751309633302673,always fixed_cost_min,target only,temperature,3.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.5520408163265306,0.11129214570383857,0.0,0.5407238089483355,5.149653871025878,always fixed_cost_min,target only,temperature,3.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5836734693877551,0.11777405488439412,0.0,0.7243188097974448,1.5456511841268288,always fixed_cost_min,target only,temperature,3.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.13877551020408163,1.207866074000059,0.8853089275537231,3.0114451894672882,3.3953429424613635,always fixed_cost_min,target only,temperature,3.0
+word_lr_linked_augmented,L1 primary,980,0.2316326530612245,1.6408509443146122,0.670601987521869,3.859230823105792,183.13033408417218,always fixed_cost_min,target only,temperature,3.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.1663265306122449,3.0274471478419773,0.5183809196595771,3.6149534664435574,697.2596289756846,always fixed_cost_min,target only,temperature,3.0
+word_lr_linked_augmented,L3 human-authored,245,0.16326530612244897,0.0830794603587001,0.0003445305770888307,0.6280536665522575,1.4121418184986747,always fixed_cost_min,target only,temperature,3.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.14285714285714285,0.7049753019643198,0.6257521686360503,1.4483622770641842,9.823868423485527,always fixed_cost_min,target only,shift,-2.0
+minilm_lr_linked_augmented,L1 primary,980,0.30714285714285716,0.4844054849023115,0.31646365730098813,1.5221267414661537,4.612968546151441,always fixed_cost_min,target only,shift,-2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6081632653061224,0.07219291349745571,0.0,0.41745982179015073,1.0506849323526746,always fixed_cost_min,target only,shift,-2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5387755102040817,0.17013251916515368,0.0,1.2721144248522172,1.8156073221820828,always fixed_cost_min,target only,shift,-2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.044897959183673466,0.7959543100931121,0.18396226415094352,4.071040049066328,15.793571814756447,always fixed_cost_min,target only,shift,-2.0
+word_lr_linked_augmented,L1 primary,980,0.4030612244897959,0.43786021323137886,0.08859365313198908,1.4649228326173085,39.22287296630187,always fixed_cost_min,target only,shift,-2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.3693877551020408,0.4853851192198179,0.2006206572888667,0.9279334634288958,76.33852240207224,always fixed_cost_min,target only,shift,-2.0
+word_lr_linked_augmented,L3 human-authored,245,0.04081632653061224,0.2854832649394672,0.0027992335650608435,2.1468315217749483,3.1397116731027355,always fixed_cost_min,target only,shift,-2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.2857142857142857,0.47445775637488946,0.3416769363085377,1.362616390941722,4.571817807199522,always fixed_cost_min,target only,shift,-1.0
+minilm_lr_linked_augmented,L1 primary,980,0.5,0.15932678267057918,0.0,0.702248837415728,1.7899533322021255,always fixed_cost_min,target only,shift,-1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.7244897959183674,0.05755695761623679,0.0,0.33199900513858627,1.894670088217424,always fixed_cost_min,target only,shift,-1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.16935701257237715,0.0,0.9386007062923974,1.5917574527069909,always fixed_cost_min,target only,shift,-1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.08163265306122448,0.6637929131294977,0.6467618835381022,1.5635346969146182,8.251991919592829,always fixed_cost_min,target only,shift,-1.0
+word_lr_linked_augmented,L1 primary,980,0.5326530612244897,0.15290115263493526,0.0,0.6303537734720993,3.7636438097612226,always fixed_cost_min,target only,shift,-1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.49183673469387756,0.30559055808427005,0.0007250096449260557,0.5273154404626701,18.009762325889394,always fixed_cost_min,target only,shift,-1.0
+word_lr_linked_augmented,L3 human-authored,245,0.11836734693877551,0.2608238551336375,0.0034572169403628283,1.9719935256761598,2.6469908492841894,always fixed_cost_min,target only,shift,-1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.6489795918367347,0.1116938321675552,0.0,0.4090951669451398,1.6505849263808758,always fixed_cost_min,target only,shift,1.0
+minilm_lr_linked_augmented,L1 primary,980,0.6265306122448979,0.0877040984004088,0.0,0.5308691812173613,1.0581702765723495,always fixed_cost_min,target only,shift,1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.25612244897959185,0.18316275301125415,0.13038842066353518,0.6543415743637507,0.9709863498261759,always fixed_cost_min,target only,shift,1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5387755102040817,0.133460888488333,0.0,0.59385983149687,1.0899778214111362,always fixed_cost_min,target only,shift,1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.2938775510204082,0.35386965825305877,0.20281113773887127,1.2126256720419395,1.4379469574255732,always fixed_cost_min,target only,shift,1.0
+word_lr_linked_augmented,L1 primary,980,0.6020408163265306,0.30731647237717347,0.0,1.9627033406881078,2.9037934509695633,always fixed_cost_min,target only,shift,1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.02040816326530612,2.82422682628195,1.8264829009821804,8.647702856710843,24.743143543069383,always fixed_cost_min,target only,shift,1.0
+word_lr_linked_augmented,L3 human-authored,245,0.673469387755102,0.08994713105911957,0.0,0.6369617944692136,1.1147440135284485,always fixed_cost_min,target only,shift,1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5918367346938775,0.20239520524591942,0.0,1.3298436963944495,1.9209644391598468,always fixed_cost_min,target only,shift,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.5755102040816327,0.18266227441013727,0.0,0.9712282669372141,1.4963052410625286,always fixed_cost_min,target only,shift,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.02142857142857143,0.8239959437920042,0.7790218965244459,1.7089923821625579,7.368494532240314,always fixed_cost_min,target only,shift,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5591836734693878,0.09944021040605301,0.0,0.5027489829861405,0.8966357890061232,always fixed_cost_min,target only,shift,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.6163265306122448,0.6900301261353082,0.0,3.665392876138525,6.937199645495133,always fixed_cost_min,target only,shift,2.0
+word_lr_linked_augmented,L1 primary,980,0.5816326530612245,0.5571666350511562,0.0,2.501228872373319,4.403730638807292,always fixed_cost_min,target only,shift,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.0,7.142745796055883,4.704489064631721,20.585537846145403,41.98396444806081,always fixed_cost_min,target only,shift,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.8081632653061225,0.02980799865131617,0.0,0.18181672035164057,0.725861200134031,always fixed_cost_min,target only,shift,2.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5183673469387755,0.1604723952651555,0.0,0.6077417233042421,1.4835271506091114,always fixed_cost_min,target only,noise,0.5
+minilm_lr_linked_augmented,L1 primary,980,0.713265306122449,0.03421135505583201,0.0,0.1911556215019446,0.8918456491020825,always fixed_cost_min,target only,noise,0.5
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6653061224489796,0.03932748332372263,0.0,0.2396897408052415,1.014937299272757,always fixed_cost_min,target only,noise,0.5
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.15331629296487045,0.0,0.701733031213044,1.3388541457095204,always fixed_cost_min,target only,noise,0.5
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.2693877551020408,0.4904996681269611,0.2846049892016065,1.4774972434888511,2.393971794194472,always fixed_cost_min,target only,noise,0.5
+word_lr_linked_augmented,L1 primary,980,0.689795918367347,0.12638736893519645,0.0,0.6625075515270105,3.3573413862335304,always fixed_cost_min,target only,noise,0.5
+word_lr_linked_augmented,L2 generator-disjoint,980,0.23673469387755103,0.6538813261434488,0.210642560726382,2.165447411039153,9.791136392700269,always fixed_cost_min,target only,noise,0.5
+word_lr_linked_augmented,L3 human-authored,245,0.5428571428571428,0.1463634484095771,0.0,1.0183737046098325,1.7843059306186126,always fixed_cost_min,target only,noise,0.5
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5469387755102041,0.13240112440042123,0.0,0.5255265175655884,1.9458619331869973,always fixed_cost_min,target only,noise,1.0
+minilm_lr_linked_augmented,L1 primary,980,0.7193877551020408,0.03851160801863307,0.0,0.21996639497091464,0.9497996859372178,always fixed_cost_min,target only,noise,1.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.7051020408163265,0.035174257554088595,0.0,0.2295982309494567,0.8770968033267759,always fixed_cost_min,target only,noise,1.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.1447700651509141,0.0,0.6341709146223204,1.203314503812999,always fixed_cost_min,target only,noise,1.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.3836734693877551,0.1625165384665443,0.05329874000522783,0.5665926313440124,2.3129110037441407,always fixed_cost_min,target only,noise,1.0
+word_lr_linked_augmented,L1 primary,980,0.6908163265306122,0.11073013688274778,0.0,0.5576902031086185,2.468822326389148,always fixed_cost_min,target only,noise,1.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.2897959183673469,0.45073931007202633,0.1543840519425349,1.5731617861018106,5.477458044687252,always fixed_cost_min,target only,noise,1.0
+word_lr_linked_augmented,L3 human-authored,245,0.6775510204081633,0.09457580413933171,0.0,0.6862382631359961,1.1892391524373176,always fixed_cost_min,target only,noise,1.0
+minilm_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.5591836734693878,0.1146171530807048,0.0,0.6080804714298442,2.205417477309641,always fixed_cost_min,target only,noise,2.0
+minilm_lr_linked_augmented,L1 primary,980,0.7448979591836735,0.042866957789590036,0.0,0.2288503147885935,1.4063929292295079,always fixed_cost_min,target only,noise,2.0
+minilm_lr_linked_augmented,L2 generator-disjoint,980,0.6908163265306122,0.028835247671223283,0.0,0.19341183635390025,0.6414775921155338,always fixed_cost_min,target only,noise,2.0
+minilm_lr_linked_augmented,L3 human-authored,245,0.5306122448979592,0.11984672500620178,0.0,0.5685259608789012,0.910577958629029,always fixed_cost_min,target only,noise,2.0
+word_lr_linked_augmented,Contemporary (Nazario + real legitimate),245,0.7510204081632653,0.05452643269657396,0.0,0.4073220553185798,1.113668147452049,always fixed_cost_min,target only,noise,2.0
+word_lr_linked_augmented,L1 primary,980,0.7030612244897959,0.10691319260683195,0.0,0.5010401140123423,2.5522285083544967,always fixed_cost_min,target only,noise,2.0
+word_lr_linked_augmented,L2 generator-disjoint,980,0.3183673469387755,0.21643001074837345,0.05903064817017145,0.6994575140413918,2.1623697003513436,always fixed_cost_min,target only,noise,2.0
+word_lr_linked_augmented,L3 human-authored,245,0.6408163265306123,0.057446125993080285,0.0,0.35562401905391433,0.6500063731911896,always fixed_cost_min,target only,noise,2.0

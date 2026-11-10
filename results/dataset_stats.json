@@ -1,0 +1,22 @@
+{
+  "primary_rows_english": 19164,
+  "primary_groups_english": 3194,
+  "binary_rows": 12936,
+  "binary_groups": 2156,
+  "phishing_rows": 6432,
+  "valid_rows": 6504,
+  "spam_rows_hard_negative": 6228,
+  "external_rows": 3746,
+  "external_phishing": 2477,
+  "external_valid": 1269,
+  "external_duplicate_texts": 0,
+  "external_conflicting_text_labels": 0,
+  "seeds": [
+    17,
+    29,
+    42,
+    71,
+    113
+  ],
+  "bootstrap_replicates": 5000
+}

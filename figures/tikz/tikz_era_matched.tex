@@ -1,0 +1,333 @@
+% tikz_era_matched.tex -- figure fig:era (era_matched) in pgfplots.
+% Written by artifact/eswa_study/revision/tikz_ladder_era.py from the data code of
+% figure_era_matched() in make_r4_new_figures.py; regenerate, do not edit.
+% One tikzpicture, \linewidth wide:
+% laid out for that width, but never narrower than in the paper (522.00pt), and
+% scaled to the line by \resizebox (factor 1.0000 in the paper; in a narrower
+% line, such as a quote of the response letter, it shrinks as the PNG did).
+% Needs pgfplots (compat 1.18) with the fillbetween library, graphicx and the
+% colors oiBlue, oiGreen, oiVermillion of the preamble.
+% Lines: means over partitions (solid, filled: augmented; dotted, open: clean-only);
+% bands: +/-1 SD over partitions; horizontal lines in (a): recall at 0.5 on the 2000s
+% L3 human-authored phishing; n: Nazario messages per collection year.
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[color=black, font=\scriptsize]
+  \definecolor{eraGrid}{HTML}{CBD3D8}%
+  \definecolor{eraMuted}{HTML}{6B7B85}%
+  \definecolor{eraInk}{HTML}{33414A}%
+  % ---- data --------------------------------------------------------------------
+  % (a) Word TF-IDF, clean-only: recall_t0.5 by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.754389 0.012706 0.741684 0.767095 \\
+    2016 0.745897 0.016719 0.729178 0.762616 \\
+    2017 0.739299 0.021658 0.717641 0.760957 \\
+    2018 0.705777 0.030596 0.675181 0.736373 \\
+    2019 0.587381 0.028205 0.559176 0.615586 \\
+    2020 0.531034 0.036970 0.494064 0.568005 \\
+    2021 0.536170 0.028546 0.507625 0.564716 \\
+    2022 0.405399 0.017847 0.387553 0.423246 \\
+    2023 0.401312 0.018321 0.382991 0.419634 \\
+    2024 0.461657 0.025539 0.436119 0.487196 \\
+    2025 0.498311 0.025132 0.473179 0.523443 \\
+  }\eraAwc%
+  % (a) Word TF-IDF, augmented: recall_t0.5 by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.865458 0.015109 0.850349 0.880567 \\
+    2016 0.876923 0.008921 0.868002 0.885844 \\
+    2017 0.868635 0.015490 0.853145 0.884125 \\
+    2018 0.889641 0.015836 0.873805 0.905478 \\
+    2019 0.820476 0.027381 0.793095 0.847857 \\
+    2020 0.782069 0.022753 0.759316 0.804822 \\
+    2021 0.817553 0.034042 0.783512 0.851595 \\
+    2022 0.629577 0.046224 0.583354 0.675801 \\
+    2023 0.622047 0.041552 0.580495 0.663599 \\
+    2024 0.651404 0.033097 0.618307 0.684502 \\
+    2025 0.707207 0.039943 0.667264 0.747151 \\
+  }\eraAwa%
+  % (a) MiniLM, clean-only: recall_t0.5 by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.949618 0.006737 0.942881 0.956356 \\
+    2016 0.935641 0.003711 0.931930 0.939352 \\
+    2017 0.962546 0.006252 0.956294 0.968799 \\
+    2018 0.926494 0.011155 0.915339 0.937649 \\
+    2019 0.887857 0.013153 0.874705 0.901010 \\
+    2020 0.836207 0.016423 0.819783 0.852630 \\
+    2021 0.930851 0.013143 0.917708 0.943994 \\
+    2022 0.859390 0.025373 0.834017 0.884763 \\
+    2023 0.853150 0.013315 0.839835 0.866464 \\
+    2024 0.838343 0.014133 0.824210 0.852475 \\
+    2025 0.872297 0.012847 0.859450 0.885144 \\
+  }\eraAmc%
+  % (a) MiniLM, augmented: recall_t0.5 by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.963359 0.004699 0.958660 0.968058 \\
+    2016 0.958590 0.005720 0.952870 0.964310 \\
+    2017 0.962731 0.007073 0.955658 0.969803 \\
+    2018 0.954582 0.008805 0.945777 0.963387 \\
+    2019 0.960000 0.013326 0.946674 0.973326 \\
+    2020 0.891034 0.010870 0.880165 0.901904 \\
+    2021 0.914362 0.021409 0.892953 0.935771 \\
+    2022 0.928873 0.005755 0.923118 0.934628 \\
+    2023 0.879003 0.013728 0.865274 0.892731 \\
+    2024 0.865730 0.010455 0.855276 0.876185 \\
+    2025 0.875113 0.015388 0.859724 0.890501 \\
+  }\eraAma%
+  % (a) DistilBERT, clean-only: recall_t0.5 by year, mean and SD over 5 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.905344 0.041496 0.863847 0.946840 \\
+    2016 0.905128 0.041622 0.863506 0.946750 \\
+    2017 0.915129 0.049644 0.865485 0.964774 \\
+    2018 0.883665 0.071013 0.812653 0.954678 \\
+    2019 0.813333 0.078708 0.734625 0.892042 \\
+    2020 0.699310 0.088265 0.611045 0.787575 \\
+    2021 0.776596 0.114578 0.662018 0.891174 \\
+    2022 0.692958 0.102461 0.590496 0.795419 \\
+    2023 0.737008 0.105075 0.631932 0.842083 \\
+    2024 0.760674 0.087269 0.673405 0.847943 \\
+    2025 0.802703 0.089079 0.713623 0.891782 \\
+  }\eraAdc%
+  % (a) DistilBERT, augmented: recall_t0.5 by year, mean and SD over 5 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.960305 0.027996 0.932310 0.988301 \\
+    2016 0.965641 0.030587 0.935054 0.996228 \\
+    2017 0.956458 0.033557 0.922901 0.990015 \\
+    2018 0.943426 0.050974 0.892452 0.994401 \\
+    2019 0.941905 0.053812 0.888093 0.995716 \\
+    2020 0.918621 0.063844 0.854776 0.982465 \\
+    2021 0.925532 0.069353 0.856179 0.994885 \\
+    2022 0.908920 0.064081 0.844840 0.973001 \\
+    2023 0.864567 0.108084 0.756483 0.972651 \\
+    2024 0.906180 0.062008 0.844172 0.968188 \\
+    2025 0.885586 0.058481 0.827105 0.944066 \\
+  }\eraAda%
+  % (b) Word TF-IDF, clean-only: recall_tcost by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd        lo       hi \\
+    2015 0.213359 0.128404  0.084954 0.341763 \\
+    2016 0.195897 0.109095  0.086802 0.304992 \\
+    2017 0.167159 0.099966  0.067193 0.267124 \\
+    2018 0.133665 0.097233  0.036432 0.230898 \\
+    2019 0.081667 0.083846 -0.002179 0.165513 \\
+    2020 0.075517 0.064287  0.011230 0.139804 \\
+    2021 0.073404 0.088328 -0.014924 0.161732 \\
+    2022 0.061268 0.067529 -0.006262 0.128797 \\
+    2023 0.044488 0.045504 -0.001016 0.089992 \\
+    2024 0.056742 0.051704  0.005038 0.108445 \\
+    2025 0.064865 0.065467 -0.000602 0.130332 \\
+  }\eraBwc%
+  % (b) Word TF-IDF, augmented: recall_tcost by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd        lo       hi \\
+    2015 0.368511 0.188135  0.180377 0.556646 \\
+    2016 0.332179 0.199057  0.133122 0.531237 \\
+    2017 0.302399 0.199418  0.102980 0.501817 \\
+    2018 0.314741 0.198750  0.115991 0.513491 \\
+    2019 0.233333 0.195290  0.038043 0.428623 \\
+    2020 0.210345 0.177183  0.033162 0.387528 \\
+    2021 0.253723 0.194338  0.059385 0.448062 \\
+    2022 0.181221 0.158643  0.022577 0.339864 \\
+    2023 0.115092 0.159767 -0.044675 0.274859 \\
+    2024 0.146348 0.161862 -0.015514 0.308211 \\
+    2025 0.157995 0.159697 -0.001702 0.317693 \\
+  }\eraBwa%
+  % (b) MiniLM, clean-only: recall_tcost by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.696565 0.133903 0.562662 0.830468 \\
+    2016 0.616282 0.158716 0.457566 0.774998 \\
+    2017 0.614391 0.179766 0.434625 0.794158 \\
+    2018 0.545817 0.184471 0.361346 0.730288 \\
+    2019 0.446429 0.181932 0.264497 0.628360 \\
+    2020 0.401379 0.170649 0.230730 0.572029 \\
+    2021 0.417553 0.209859 0.207694 0.627412 \\
+    2022 0.395305 0.177148 0.218157 0.572453 \\
+    2023 0.386483 0.171522 0.214961 0.558005 \\
+    2024 0.392275 0.155659 0.236617 0.547934 \\
+    2025 0.403941 0.195139 0.208803 0.599080 \\
+  }\eraBmc%
+  % (b) MiniLM, augmented: recall_tcost by year, mean and SD over 20 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.784924 0.116425 0.668499 0.901348 \\
+    2016 0.715513 0.143646 0.571867 0.859159 \\
+    2017 0.713653 0.145722 0.567931 0.859375 \\
+    2018 0.634661 0.162442 0.472219 0.797103 \\
+    2019 0.590476 0.168004 0.422472 0.758480 \\
+    2020 0.531034 0.151212 0.379823 0.682246 \\
+    2021 0.512234 0.192553 0.319681 0.704787 \\
+    2022 0.554225 0.194162 0.360063 0.748388 \\
+    2023 0.489764 0.167669 0.322095 0.657433 \\
+    2024 0.486798 0.162937 0.323861 0.649735 \\
+    2025 0.460811 0.185923 0.274888 0.646734 \\
+  }\eraBma%
+  % (b) DistilBERT, clean-only: recall_tcost by year, mean and SD over 5 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.151145 0.120474 0.030671 0.271619 \\
+    2016 0.168718 0.116510 0.052208 0.285228 \\
+    2017 0.182288 0.123481 0.058807 0.305769 \\
+    2018 0.127490 0.089398 0.038092 0.216888 \\
+    2019 0.088571 0.066377 0.022195 0.154948 \\
+    2020 0.052414 0.039195 0.013219 0.091609 \\
+    2021 0.063830 0.049328 0.014502 0.113158 \\
+    2022 0.046009 0.034082 0.011927 0.080091 \\
+    2023 0.043045 0.036397 0.006648 0.079442 \\
+    2024 0.038764 0.018885 0.019879 0.057649 \\
+    2025 0.059009 0.035661 0.023348 0.094670 \\
+  }\eraBdc%
+  % (b) DistilBERT, augmented: recall_tcost by year, mean and SD over 5 partitions; lo/hi = mean -/+ SD
+  \pgfplotstableread[row sep=\\]{
+    year     mean       sd       lo       hi \\
+    2015 0.727481 0.111330 0.616151 0.838811 \\
+    2016 0.763077 0.089443 0.673634 0.852520 \\
+    2017 0.783764 0.064052 0.719712 0.847815 \\
+    2018 0.676494 0.119169 0.557325 0.795663 \\
+    2019 0.636190 0.130306 0.505885 0.766496 \\
+    2020 0.535172 0.168409 0.366764 0.703581 \\
+    2021 0.538298 0.171306 0.366992 0.709604 \\
+    2022 0.558685 0.169307 0.389378 0.727993 \\
+    2023 0.450394 0.132975 0.317418 0.583369 \\
+    2024 0.479213 0.168932 0.310281 0.648146 \\
+    2025 0.476126 0.162190 0.313936 0.638316 \\
+  }\eraBda%
+  % ---- geometry ------------------------------------------------------------------
+  \pgfmathsetlengthmacro\eraW{max(\linewidth,522.00pt)}%
+  \pgfmathsetlengthmacro\eraL{43pt}%  (a): y label and tick labels left of the axis
+  \pgfmathsetlengthmacro\eraG{20.5pt}% between the panels
+  \pgfmathsetlengthmacro\eraAW{(\eraW-\eraL-\eraG)/2}%
+  \pgfmathsetlengthmacro\eraH{0.59*\eraAW}%
+  \def\eraKeyY{2.2pt}%
+  \tikzset{era dots/.style={dash pattern=on 1.35pt off 2.23pt}}%
+  \tikzset{era box/.style={anchor=north, align=center, fill=white, rounded corners=1.2pt,
+    inner xsep=1.6pt, inner ysep=1.2pt, text=eraMuted, font=\scriptsize}}%
+  \pgfplotsset{
+    era axis/.style={
+      set layers, scale only axis, anchor=south west, clip=true, clip mode=individual,
+      width=\eraAW, height=\eraH,
+      axis x line*=bottom, axis y line*=left,
+      xmin=2014.5, xmax=2025.5, ymin=0, ymax=1.21,
+      xtick={2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025}, ytick={0,0.2,0.4,0.6,0.8,1},
+      axis line style={black, line width=0.7pt},
+      tick style={black, line width=0.8pt}, tick align=outside,
+      major tick length=3.5pt, major x tick style={/pgfplots/major tick length=2pt},
+      ymajorgrids, major grid style={eraGrid, draw opacity=0.6, line width=0.5pt},
+      tick label style={font=\scriptsize, black},
+      x tick label style={align=center},
+      label style={font=\footnotesize, black},
+      xlabel={Collection year (Nazario phishing corpus)},
+      xticklabels={{2015\\[1.6pt]\textcolor{eraMuted}{\llap{$n$\hspace{6.5pt}}262}}, {2016\\[1.6pt]\textcolor{eraMuted}{390}}, {2017\\[1.6pt]\textcolor{eraMuted}{271}}, {2018\\[1.6pt]\textcolor{eraMuted}{251}},
+        {2019\\[1.6pt]\textcolor{eraMuted}{210}}, {2020\\[1.6pt]\textcolor{eraMuted}{145}}, {2021\\[1.6pt]\textcolor{eraMuted}{94}}, {2022\\[1.6pt]\textcolor{eraMuted}{213}},
+        {2023\\[1.6pt]\textcolor{eraMuted}{381}}, {2024\\[1.6pt]\textcolor{eraMuted}{356}}, {2025\\[1.6pt]\textcolor{eraMuted}{444}}},
+    },
+    era clean/.style={line width=1.35pt, era dots, mark=*, mark size=1.5pt,
+      mark options={solid, line width=0.9pt, fill=white}},
+    era aug/.style={line width=1.35pt, mark=*, mark size=1.5pt,
+      mark options={line width=0.9pt}},
+    era ref clean/.style={line width=0.9pt, draw opacity=0.85,
+      dash pattern=on 0.9pt off 1.49pt, forget plot},
+    era ref augmented/.style={line width=0.9pt, draw opacity=0.85, forget plot},
+  }%
+  % ---- (a) threshold 0.5 -----------------------------------------------------------
+  \begin{axis}[era axis, name=eraA, at={(0,0)},
+      yticklabels={0.0,0.2,0.4,0.6,0.8,1.0},
+      ylabel={Recall on era-matched\\real phishing}, ylabel style={align=center}]
+    \begin{pgfonlayer}{axis background}
+      \draw[eraMuted, line width=0.9pt, dash pattern=on 3.33pt off 1.44pt]
+        (axis cs:2022.5,0) -- (axis cs:2022.5,1.21);
+    \end{pgfonlayer}
+    \addplot[draw=none, name path=eraAwclo, forget plot] table[x=year, y=lo] {\eraAwc};
+    \addplot[draw=none, name path=eraAwchi, forget plot] table[x=year, y=hi] {\eraAwc};
+    \addplot[fill=oiBlue, fill opacity=0.09, draw=none, forget plot] fill between[of=eraAwclo and eraAwchi];
+    \addplot[draw=none, name path=eraAwalo, forget plot] table[x=year, y=lo] {\eraAwa};
+    \addplot[draw=none, name path=eraAwahi, forget plot] table[x=year, y=hi] {\eraAwa};
+    \addplot[fill=oiBlue, fill opacity=0.16, draw=none, forget plot] fill between[of=eraAwalo and eraAwahi];
+    \addplot[draw=none, name path=eraAmclo, forget plot] table[x=year, y=lo] {\eraAmc};
+    \addplot[draw=none, name path=eraAmchi, forget plot] table[x=year, y=hi] {\eraAmc};
+    \addplot[fill=oiGreen, fill opacity=0.09, draw=none, forget plot] fill between[of=eraAmclo and eraAmchi];
+    \addplot[draw=none, name path=eraAmalo, forget plot] table[x=year, y=lo] {\eraAma};
+    \addplot[draw=none, name path=eraAmahi, forget plot] table[x=year, y=hi] {\eraAma};
+    \addplot[fill=oiGreen, fill opacity=0.16, draw=none, forget plot] fill between[of=eraAmalo and eraAmahi];
+    \addplot[draw=none, name path=eraAdclo, forget plot] table[x=year, y=lo] {\eraAdc};
+    \addplot[draw=none, name path=eraAdchi, forget plot] table[x=year, y=hi] {\eraAdc};
+    \addplot[fill=oiVermillion, fill opacity=0.09, draw=none, forget plot] fill between[of=eraAdclo and eraAdchi];
+    \addplot[draw=none, name path=eraAdalo, forget plot] table[x=year, y=lo] {\eraAda};
+    \addplot[draw=none, name path=eraAdahi, forget plot] table[x=year, y=hi] {\eraAda};
+    \addplot[fill=oiVermillion, fill opacity=0.16, draw=none, forget plot] fill between[of=eraAdalo and eraAdahi];
+    \addplot[oiBlue, era ref clean] coordinates {(2014.5,0.033266) (2025.5,0.033266)}; % Word TF-IDF, clean-only: L3 recall at 0.5
+    \addplot[oiBlue, era ref augmented] coordinates {(2014.5,0.064836) (2025.5,0.064836)}; % Word TF-IDF, augmented: L3 recall at 0.5
+    \addplot[oiGreen, era ref clean] coordinates {(2014.5,0.123505) (2025.5,0.123505)}; % MiniLM, clean-only: L3 recall at 0.5
+    \addplot[oiGreen, era ref augmented] coordinates {(2014.5,0.160257) (2025.5,0.160257)}; % MiniLM, augmented: L3 recall at 0.5
+    \addplot[oiVermillion, era ref clean] coordinates {(2014.5,0.137961) (2025.5,0.137961)}; % DistilBERT, clean-only: L3 recall at 0.5
+    \addplot[oiVermillion, era ref augmented] coordinates {(2014.5,0.205330) (2025.5,0.205330)}; % DistilBERT, augmented: L3 recall at 0.5
+    \addplot[oiBlue, era clean] table[x=year, y=mean] {\eraAwc};
+    \addplot[oiBlue, era aug] table[x=year, y=mean] {\eraAwa};
+    \addplot[oiGreen, era clean] table[x=year, y=mean] {\eraAmc};
+    \addplot[oiGreen, era aug] table[x=year, y=mean] {\eraAma};
+    \addplot[oiVermillion, era clean] table[x=year, y=mean] {\eraAdc};
+    \addplot[oiVermillion, era aug] table[x=year, y=mean] {\eraAda};
+    \node[era box] at (axis cs:2022.5,1.19) {public release of\\instruction-tuned chat models};
+    \node[anchor=south west, align=left, text=eraInk, inner sep=0pt] (eraNote)
+      at (axis cs:2014.85,0.365330) {2000s L3 human phishing\\(recall at 0.5, one line per model)};
+    \draw[eraMuted, line width=0.6pt, shorten <=1.5pt] (eraNote) -- (axis cs:2015.6,0.205330);
+  \end{axis}
+  % ---- (b) cost-minimizing threshold -------------------------------------------------
+  \begin{axis}[era axis, name=eraB, at={(\eraAW+\eraG,0)}, yticklabels={}]
+    \begin{pgfonlayer}{axis background}
+      \draw[eraMuted, line width=0.9pt, dash pattern=on 3.33pt off 1.44pt]
+        (axis cs:2022.5,0) -- (axis cs:2022.5,1.21);
+    \end{pgfonlayer}
+    \addplot[draw=none, name path=eraBwclo, forget plot] table[x=year, y=lo] {\eraBwc};
+    \addplot[draw=none, name path=eraBwchi, forget plot] table[x=year, y=hi] {\eraBwc};
+    \addplot[fill=oiBlue, fill opacity=0.09, draw=none, forget plot] fill between[of=eraBwclo and eraBwchi];
+    \addplot[draw=none, name path=eraBwalo, forget plot] table[x=year, y=lo] {\eraBwa};
+    \addplot[draw=none, name path=eraBwahi, forget plot] table[x=year, y=hi] {\eraBwa};
+    \addplot[fill=oiBlue, fill opacity=0.16, draw=none, forget plot] fill between[of=eraBwalo and eraBwahi];
+    \addplot[draw=none, name path=eraBmclo, forget plot] table[x=year, y=lo] {\eraBmc};
+    \addplot[draw=none, name path=eraBmchi, forget plot] table[x=year, y=hi] {\eraBmc};
+    \addplot[fill=oiGreen, fill opacity=0.09, draw=none, forget plot] fill between[of=eraBmclo and eraBmchi];
+    \addplot[draw=none, name path=eraBmalo, forget plot] table[x=year, y=lo] {\eraBma};
+    \addplot[draw=none, name path=eraBmahi, forget plot] table[x=year, y=hi] {\eraBma};
+    \addplot[fill=oiGreen, fill opacity=0.16, draw=none, forget plot] fill between[of=eraBmalo and eraBmahi];
+    \addplot[draw=none, name path=eraBdclo, forget plot] table[x=year, y=lo] {\eraBdc};
+    \addplot[draw=none, name path=eraBdchi, forget plot] table[x=year, y=hi] {\eraBdc};
+    \addplot[fill=oiVermillion, fill opacity=0.09, draw=none, forget plot] fill between[of=eraBdclo and eraBdchi];
+    \addplot[draw=none, name path=eraBdalo, forget plot] table[x=year, y=lo] {\eraBda};
+    \addplot[draw=none, name path=eraBdahi, forget plot] table[x=year, y=hi] {\eraBda};
+    \addplot[fill=oiVermillion, fill opacity=0.16, draw=none, forget plot] fill between[of=eraBdalo and eraBdahi];
+    \addplot[oiBlue, era clean] table[x=year, y=mean] {\eraBwc};
+    \addplot[oiBlue, era aug] table[x=year, y=mean] {\eraBwa};
+    \addplot[oiGreen, era clean] table[x=year, y=mean] {\eraBmc};
+    \addplot[oiGreen, era aug] table[x=year, y=mean] {\eraBma};
+    \addplot[oiVermillion, era clean] table[x=year, y=mean] {\eraBdc};
+    \addplot[oiVermillion, era aug] table[x=year, y=mean] {\eraBda};
+    \node[era box] at (axis cs:2022.5,1.19) {public release of\\instruction-tuned chat models};
+  \end{axis}
+  % ---- titles ----------------------------------------------------------------------
+  \path (eraA.north) ++(0,16pt) coordinate (eraTitle);
+  \node[anchor=base west, inner sep=0pt, font=\footnotesize\bfseries]
+    at (eraA.outer north west |- eraTitle) {(a) Threshold 0.5};
+  \node[anchor=base west, inner sep=0pt, font=\footnotesize\bfseries]
+    at (eraB.north west |- eraTitle) {(b) Cost-minimizing threshold};
+  \node[anchor=base west, inner sep=0pt, text=eraMuted]
+    at ([yshift=4.5pt]eraB.north west)
+    {validation threshold minimizing expected cost at $\pi = 1\%$, $r = 10$};
+  % ---- legend ----------------------------------------------------------------------
+  \matrix[anchor=north, column sep=26pt, row sep=3.2pt, inner sep=0pt,
+      ampersand replacement=\&,
+      era key/.style={anchor=base west, inner sep=0pt, text=black}]
+    at ([yshift=-6pt]current bounding box.south) {
+      \draw[oiBlue, line width=1.6pt] (-19pt,\eraKeyY) -- (-5pt,\eraKeyY); \node[era key] {Word TF--IDF (20 partitions)};
+      \& \draw[oiGreen, line width=1.6pt] (-19pt,\eraKeyY) -- (-5pt,\eraKeyY); \node[era key] {MiniLM (20 partitions)};
+      \& \draw[oiVermillion, line width=1.6pt] (-19pt,\eraKeyY) -- (-5pt,\eraKeyY); \node[era key] {DistilBERT (5 partitions)}; \\
+      \draw[eraInk, line width=1.35pt] (-19pt,\eraKeyY) -- (-5pt,\eraKeyY); \draw[eraInk, line width=0.9pt, fill=eraInk] (-12pt,\eraKeyY) circle (1.5pt); \node[era key] {Augmented};
+      \& \draw[eraInk, line width=1.35pt, era dots] (-19pt,\eraKeyY) -- (-5pt,\eraKeyY); \draw[eraInk, line width=0.9pt, fill=white] (-12pt,\eraKeyY) circle (1.5pt); \node[era key] {Clean-only};
+      \& \fill[eraInk, fill opacity=0.15] (-19pt,\eraKeyY-2.6pt) rectangle (-5pt,\eraKeyY+2.6pt); \node[era key] {$\pm 1$ SD over partitions}; \\
+  };
+\end{tikzpicture}%
+}%

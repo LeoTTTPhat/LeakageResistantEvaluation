@@ -1,0 +1,124 @@
+{
+  "seed": 42,
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "processor": "Apple M3 Ultra",
+  "cpu_count": 32,
+  "torch": "2.7.1",
+  "device": "mps",
+  "load_before": "14:41  up 3 days,  1:02, 1 user, load averages: 109.60 121.89 127.36",
+  "note": "shared machine; other users' jobs were running; medians reported",
+  "medians": [
+    {
+      "family": "Char+word TF-IDF",
+      "condition": "augmented",
+      "stage": "fit",
+      "seconds": 15.366867707984056,
+      "per_second": 589.1896886244342
+    },
+    {
+      "family": "Char+word TF-IDF",
+      "condition": "augmented",
+      "stage": "infer_L2",
+      "seconds": 4.285146375012118,
+      "per_second": 874.1825067736237
+    },
+    {
+      "family": "DistilBERT",
+      "condition": "augmented",
+      "stage": "fit",
+      "seconds": 148.1346281459846,
+      "per_second": 61.15786489190625
+    },
+    {
+      "family": "DistilBERT",
+      "condition": "augmented",
+      "stage": "infer_L2",
+      "seconds": 14.303387292020489,
+      "per_second": 261.8960057167579
+    },
+    {
+      "family": "DistilBERT",
+      "condition": "clean",
+      "stage": "fit",
+      "seconds": 18.159369812492514,
+      "per_second": 83.15431302487623
+    },
+    {
+      "family": "DistilBERT",
+      "condition": "clean",
+      "stage": "infer_L2",
+      "seconds": 15.538738999981433,
+      "per_second": 241.07490318258618
+    },
+    {
+      "family": "MiniLM",
+      "condition": "augmented",
+      "stage": "encode_L2",
+      "seconds": 13.504804250027519,
+      "per_second": 277.3827691721164
+    },
+    {
+      "family": "MiniLM",
+      "condition": "augmented",
+      "stage": "encode_training_set",
+      "seconds": 29.22055645805085,
+      "per_second": 309.8503621242792
+    },
+    {
+      "family": "MiniLM",
+      "condition": "augmented",
+      "stage": "fit_classifier",
+      "seconds": 0.277846333978232,
+      "per_second": 32586.357611287898
+    },
+    {
+      "family": "MiniLM",
+      "condition": "augmented",
+      "stage": "infer_L2_classifier",
+      "seconds": 0.013639208977110684,
+      "per_second": 274649.3587924737
+    },
+    {
+      "family": "MiniLM",
+      "condition": "clean",
+      "stage": "fit_classifier",
+      "seconds": 0.03582037502201274,
+      "per_second": 42126.86213007743
+    },
+    {
+      "family": "MiniLM",
+      "condition": "clean",
+      "stage": "infer_L2_classifier",
+      "seconds": 0.012079207983333617,
+      "per_second": 310119.670525466
+    },
+    {
+      "family": "Word TF-IDF",
+      "condition": "augmented",
+      "stage": "fit",
+      "seconds": 3.8012275839573704,
+      "per_second": 2381.8621221763547
+    },
+    {
+      "family": "Word TF-IDF",
+      "condition": "augmented",
+      "stage": "infer_L2",
+      "seconds": 0.6869135000160895,
+      "per_second": 5453.379501075838
+    },
+    {
+      "family": "Word TF-IDF",
+      "condition": "clean",
+      "stage": "fit",
+      "seconds": 0.3940911670215428,
+      "per_second": 3829.063237840881
+    },
+    {
+      "family": "Word TF-IDF",
+      "condition": "clean",
+      "stage": "infer_L2",
+      "seconds": 0.63021354196826,
+      "per_second": 5944.016988750558
+    }
+  ]
+}

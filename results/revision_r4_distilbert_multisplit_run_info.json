@@ -1,0 +1,34 @@
+{
+  "model": "distilbert-base-uncased",
+  "existing_seeds": [
+    29,
+    42,
+    71,
+    17,
+    113,
+    211,
+    307,
+    419
+  ],
+  "new_seeds_completed": [
+    523,
+    631,
+    743,
+    857,
+    971,
+    1087,
+    1201,
+    1319,
+    1433,
+    1553,
+    1667,
+    1789
+  ],
+  "total_splits": 20,
+  "epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 2e-05,
+  "max_sequence_length": 160,
+  "device": "mps",
+  "wall_clock_seconds": 4036.5462968349457
+}

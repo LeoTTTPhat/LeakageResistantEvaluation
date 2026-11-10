@@ -1,0 +1,131 @@
+% tikz_leakage_and_masking.tex -- figure fig:stress of supplement.tex:
+% leakage_and_masking.png redrawn with the same data, panels and encodings
+% (make_figures.py, stress_figure).
+% Written by artifact/eswa_study/revision/tikz_limitations.py; do not edit by hand.
+% Data: results/rigor_leakage_summary.csv
+%       results/rigor_cue_mask_summary.csv
+% Needs pgfplots (compat 1.18, groupplots), TikZ arrows.meta and the oi* colors of the
+% paper preamble. Width 0.94\linewidth; default color black (also inside a colored
+% quote).
+\begin{tikzpicture}[black]
+  \definecolor{lmGrid}{HTML}{CBD3D8}%
+  \definecolor{lmSourceGroup}{HTML}{8CBFD9}% source-group bars (light blue)
+  \definecolor{lmTitle}{HTML}{5A6B75}% inset: heading
+  \definecolor{lmSourceInk}{HTML}{2F7DB0}% inset: source-group share
+  \definecolor{lmRowInk}{HTML}{B5760A}% inset: row-wise share
+  \definecolor{lmSub}{HTML}{7C8A93}% inset: subtitle
+  \definecolor{lmArrow}{HTML}{8A99A2}% inset: arrow
+  \definecolor{lmCard}{HTML}{F5F8FA}% inset: fill
+  \definecolor{lmCardEdge}{HTML}{D3DCE2}% inset: edge
+  % bars: F1 mean and SD over the five reference partitions; x = bar center
+  % source_group (Source-group)
+  \pgfplotstableread[row sep=\\]{
+    x         f1       sd \\
+    -0.170000 0.976986 0.008808 \\
+    0.830000  0.958781 0.009482 \\
+  }\lmSourceGroupBars
+  % row_stratified (Row-wise)
+  \pgfplotstableread[row sep=\\]{
+    x        f1       sd \\
+    0.170000 0.986103 0.002037 \\
+    1.170000 0.962980 0.004706 \\
+  }\lmRowWiseBars
+  % original (Original)
+  \pgfplotstableread[row sep=\\]{
+    x         f1       sd \\
+    -0.170000 0.977239 0.008069 \\
+    0.830000  0.945018 0.004786 \\
+  }\lmOriginalBars
+  % top20_positive_unigrams_masked (Top-20 masked)
+  \pgfplotstableread[row sep=\\]{
+    x        f1       sd \\
+    0.170000 0.960338 0.005199 \\
+    1.170000 0.879165 0.011517 \\
+  }\lmMaskedBars
+  % axis boxes: 0.94\linewidth minus 82.18pt, the width of the tick labels, axis
+  % labels and panel gap in the paper's fonts (picture = 0.94\linewidth)
+  \pgfmathsetlengthmacro\lmAxisWidth{(0.94\linewidth-82.18pt)/2}%
+  \begin{groupplot}[
+      group style={group size=2 by 1, horizontal sep=45pt},
+      width=\lmAxisWidth, height=140pt,
+      scale only axis,
+      axis lines*=left, tick align=outside, tick pos=left,
+      major tick length=3pt, minor tick length=1.8pt,
+      every tick/.style={black, line width=0.5pt},
+      axis line style={line width=0.6pt},
+      tick label style={font=\scriptsize},
+      label style={font=\footnotesize},
+      title style={font=\footnotesize\bfseries, at={(0,1)}, anchor=south west,
+        inner xsep=0pt},
+      legend style={font=\scriptsize, draw=none, fill=none},
+      legend cell align=left,
+      grid style={draw=lmGrid, line width=0.6pt, dash pattern=on 0.6pt off 0.99pt},
+      xmin=-0.424000, xmax=1.424000, xtick={0,1}, xtick style={black},
+      ymajorgrids, ylabel={F1},
+      yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+      legend image code/.code={\fill[#1] (0pt,-2.6pt) rectangle (14pt,2.6pt);},
+      /tikz/lm value/.style={anchor=south, inner sep=0pt, font=\scriptsize},
+    ]
+    \nextgroupplot[
+      title={(a) Split leakage},
+      ymin=0.94, ymax=0.995, ytick={0.94,0.95,0.96,0.97,0.98,0.99},
+      xticklabels={
+        {Word TF--IDF},
+        {MiniLM}},
+    ]
+    \addplot[ybar, bar width=0.34, fill=lmSourceGroup, draw=white, line width=0.7pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=1.5pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\lmSourceGroupBars};
+    \addplot[ybar, bar width=0.34, fill=oiOrange, draw=white, line width=0.7pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=1.5pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\lmRowWiseBars};
+    \node[lm value] at (axis cs:-0.170000,0.987394) {0.977};
+    \node[lm value] at (axis cs:0.830000,0.969863) {0.959};
+    \node[lm value] at (axis cs:0.170000,0.989741) {0.986};
+    \node[lm value] at (axis cs:1.170000,0.969286) {0.963};
+    \coordinate (lmInset) at (axis description cs:0.758,0.792);% center of the inset
+
+    \nextgroupplot[
+      title={(b) Lexical-cue masking},
+      ymin=0.84, ymax=1.005, ytick={0.84,0.86,0.88,0.90,0.92,0.94,0.96,0.98,1.00},
+      xticklabels={
+        {Linked rewrites},
+        {Generator-disjoint}},
+      legend style={at={(1,1)}, anchor=north east, xshift=-2pt, yshift=-2pt},
+    ]
+    \addplot[ybar, bar width=0.34, fill=oiGreen, draw=white, line width=0.7pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=1.5pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\lmOriginalBars};
+    \addlegendentry{Original}
+    \addplot[ybar, bar width=0.34, fill=oiVermillion, draw=white, line width=0.7pt,
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={black, solid, line width=1.5pt},
+        error bars/error mark options={black, solid, line width=1.0pt, mark size=2.0pt, rotate=90}]
+      table[x=x, y=f1, y error=sd] {\lmMaskedBars};
+    \addlegendentry{Top-20 masked}
+    \node[lm value] at (axis cs:-0.170000,0.989309) {0.977};
+    \node[lm value] at (axis cs:0.830000,0.953804) {0.945};
+    \node[lm value] at (axis cs:0.170000,0.969537) {0.960};
+    \node[lm value] at (axis cs:1.170000,0.894683) {0.879};
+  \end{groupplot}
+  % inset of panel (a): share of test rows whose source group also occurs in
+  % training. A one-column matrix (outside the axis, so cell coordinates are
+  % canvas points): its card is drawn before the cells, i.e. under the text and
+  % over the bars and the grid, as in the PNG.
+  \matrix[draw=lmCardEdge, fill=lmCard, line width=0.6pt, rounded corners=3pt,
+      inner xsep=5pt, inner ysep=3pt, row sep=1.6pt,
+      nodes={inner sep=0pt, anchor=center}] at (lmInset) {
+    \node[font=\scriptsize\bfseries, text=lmTitle] {TEST-GROUP OVERLAP}; \\
+    \node[font=\large\bfseries, text=lmSourceInk] at (-25pt,0) {0.0\%};
+    \draw[lmArrow, line width=1.3pt, -{Triangle[length=3.4pt, width=3.8pt]}]
+      (-10pt,0) -- (5.5pt,0);
+    \node[font=\large\bfseries, text=lmRowInk] at (25pt,0) {99.7\%}; \\
+    \node[font=\scriptsize, text=lmSub] {source-group\hspace{0.7em}vs\hspace{0.7em}row-wise}; \\
+  };
+\end{tikzpicture}

@@ -1,0 +1,75 @@
+{
+  "phishfuzzer_metadata": {
+    "Source": {
+      "Synthetic Entity-Seed Expansion 2026": 19164
+    },
+    "Created by": {
+      "LLM": 19164
+    },
+    "Year": {
+      "2026": 19164
+    }
+  },
+  "corpora": {
+    "PhishFuzzer phishing": {
+      "n": 6432,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.8274253731343284,
+      "median_characters": 1569.0
+    },
+    "PhishFuzzer valid": {
+      "n": 6504,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.8859163591635917,
+      "median_characters": 1882.0
+    },
+    "PhishFuzzer spam (canonical)": {
+      "n": 1038,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.7552986512524085,
+      "median_characters": 1439.0
+    },
+    "L2 all": {
+      "n": 3746,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.6174586225306994,
+      "median_characters": 1477.0
+    },
+    "L2 phishing": {
+      "n": 2477,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.8336697618086395,
+      "median_characters": 1478.0
+    },
+    "L2 legitimate": {
+      "n": 1269,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.1954294720252167,
+      "median_characters": 1474.0
+    },
+    "L3 human phishing": {
+      "n": 6454,
+      "share_opening_with_subject_block": 0.0003098853424233034,
+      "share_with_url_token": 0.10474124573907655,
+      "median_characters": 738.0
+    },
+    "L3 human legitimate": {
+      "n": 10961,
+      "share_opening_with_subject_block": 9.123255177447313e-05,
+      "share_with_url_token": 0.2995164674755953,
+      "median_characters": 968.0
+    },
+    "Nazario (training layout)": {
+      "n": 3017,
+      "share_opening_with_subject_block": 1.0,
+      "share_with_url_token": 0.2900232018561485,
+      "median_characters": 536.0
+    },
+    "Nazario (body only)": {
+      "n": 3017,
+      "share_opening_with_subject_block": 0.0,
+      "share_with_url_token": 0.2890288365926417,
+      "median_characters": 451.0
+    }
+  }
+}

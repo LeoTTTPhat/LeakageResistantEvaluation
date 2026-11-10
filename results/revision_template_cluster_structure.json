@@ -1,0 +1,23 @@
+[
+  {
+    "threshold": 0.95,
+    "source_groups": 2156,
+    "template_clusters": 2111,
+    "largest_cluster": 19,
+    "groups_in_multi_group_clusters": 66
+  },
+  {
+    "threshold": 0.9,
+    "source_groups": 2156,
+    "template_clusters": 1838,
+    "largest_cluster": 66,
+    "groups_in_multi_group_clusters": 382
+  },
+  {
+    "threshold": 0.85,
+    "source_groups": 2156,
+    "template_clusters": 1611,
+    "largest_cluster": 89,
+    "groups_in_multi_group_clusters": 631
+  }
+]

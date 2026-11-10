@@ -1,0 +1,7 @@
+property,status,evidence
+Different generation pipeline from the training corpus,measured,grouped-CV origin classifier separates the two corpora at ROC-AUC 1.000
+Not derived from the training corpus,measured,augmentation contrast in the least-similar quartile +0.064 vs +0.003 in the most-similar quartile
+Rows independent at source level,not verifiable; audited and rejected,"1348 single-linkage components at cosine 0.90, design effect 107.73, effective sample size 35 of 3,746 rows"
+Source intents disjoint from the training corpus,not verifiable,"no source-group, campaign or prompt identifier is published; similarity is an upper bound on overlap, not a proof of disjointness"
+Generator model and version,not verifiable,described by the publisher as OpenAI-generated with no model or version string; no per-row metadata
+Prompt provenance / campaign structure,not verifiable,absent from the release; latent structure is estimated by clustering rather than read from identifiers

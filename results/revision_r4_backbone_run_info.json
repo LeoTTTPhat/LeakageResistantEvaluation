@@ -1,0 +1,18 @@
+{
+  "model": "FacebookAI/roberta-base",
+  "seeds": [
+    29,
+    42,
+    71
+  ],
+  "max_lengths": [
+    160,
+    320
+  ],
+  "epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 2e-05,
+  "checkpoints_per_epoch": 10,
+  "device": "mps",
+  "wall_clock_seconds": 10082.845972061157
+}

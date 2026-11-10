@@ -1,0 +1,77 @@
+{
+  "vocabulary": {
+    "frequent_human_ngrams_absent_from_synthetic": 458,
+    "human_phishing_with_an_absent_frequent_ngram": 0.8813139138518749,
+    "examples_absent": [
+      "www",
+      "http www",
+      "2004",
+      "viagra",
+      "mailings",
+      "said",
+      "stocks",
+      "remove in",
+      "oo",
+      "men",
+      "thing",
+      "cheap",
+      "tell",
+      "web site",
+      "lowest",
+      "yes",
+      "go here",
+      "meds",
+      "sexual",
+      "here http",
+      "sponsored",
+      "bad",
+      "right now",
+      "graphics",
+      "going to",
+      "cialis",
+      "sponsored by",
+      "advertising",
+      "looking statements",
+      "to order"
+    ],
+    "oov_rate_human_phishing": 0.2425389897785845,
+    "oov_rate_human_fn": 0.24959908347365128,
+    "oov_rate_human_tp": 0.1408500507577542,
+    "oov_rate_l2_phishing": 0.012440613910601197,
+    "oov_rate_nazario": 0.1081242463645011,
+    "recall_human_with_absent_ngram": 0.06223628691983123,
+    "recall_human_without_absent_ngram": 0.08485639686684072
+  },
+  "coverage_and_detection": {
+    "share_human_phishing_inside_synthetic_manifold": 0.12565850635264952,
+    "word_recall_inside": 0.2342786683107275,
+    "word_recall_outside": 0.0405812511075669,
+    "minilm_recall_inside": 0.33785450061652283,
+    "minilm_recall_outside": 0.1371610845295056
+  },
+  "component_structure": {
+    "0.95": {
+      "components": 15848,
+      "largest": 137,
+      "rows_in_multi_member": 2204
+    },
+    "0.9": {
+      "components": 15094,
+      "largest": 159,
+      "rows_in_multi_member": 3270
+    },
+    "0.85": {
+      "components": 14355,
+      "largest": 176,
+      "rows_in_multi_member": 4318
+    },
+    "0.8": {
+      "components": 13436,
+      "largest": 182,
+      "rows_in_multi_member": 5491
+    }
+  },
+  "synthetic_training_median_chars": 1707.0,
+  "human_phishing_median_chars": 738.0,
+  "seconds": 742.7980620861053
+}

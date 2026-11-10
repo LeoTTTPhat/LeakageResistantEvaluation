@@ -1,0 +1,38 @@
+{
+  "wall_clock_seconds": 199.99012899398804,
+  "primary_seed": 42,
+  "embedding_cache": {
+    "cache_hit": true,
+    "cache_path": "cache/minilm-32682fdfa3e2746a.npy",
+    "rows": 22910,
+    "seconds": 0.13575912499800324
+  },
+  "environment": {
+    "python": "3.11.4",
+    "platform": "macOS-26.5.1-arm64-arm-64bit",
+    "packages": {
+      "numpy": "1.26.4",
+      "pandas": "2.2.2",
+      "pyarrow": "24.0.0",
+      "scipy": "1.14.1",
+      "scikit-learn": "1.5.2",
+      "sentence-transformers": "5.5.0",
+      "transformers": "4.57.6",
+      "torch": "2.7.1",
+      "huggingface-hub": "0.36.2"
+    }
+  },
+  "models": [
+    "Word LR, clean-only",
+    "Word LR, linked-augmented",
+    "Char+word LR, linked-augmented",
+    "MiniLM LR, clean-only",
+    "MiniLM LR, linked-augmented"
+  ],
+  "conditions": [
+    "clean",
+    "linked_rewrites",
+    "external_openai",
+    "spam_hard_negative"
+  ]
+}

@@ -1,0 +1,12 @@
+topic,top_terms,share,n,recall_augmented_word_0.5
+0,"click, free, email, mail, receive, time, list, credit, removed, just, home, make",0.3352959405020143,2164,0.02033271719038817
+4,"http, com, www, http www, html, info, php, net, id, message, visit, want",0.19910133250697243,1285,0.034241245136186774
+8,"viagra, prescription, online, save, cialis, medications, drugs, generic, meds, medication, stop, prices",0.18391695072823055,1187,0.007582139848357203
+6,"account, bank, transaction, mr, money, funds, million, claim, sum, security, contact, fund",0.07654167957855594,494,0.6417004048582996
+2,"adobe, software, xp, professional, windows, photoshop, pro, adobe photoshop, mx, xp professional, macromedia, windows xp",0.05856832971800434,378,0.0026455026455026454
+1,"statements, company, securities, stock, looking statements, investment, news, act, forward, forward looking, stocks, price",0.05500464828013635,355,0.0028169014084507044
+9,"url, email, sf, sf net, email sponsored, net email, sponsored, email url, list email, sightings, spamassassin sightings, sightings mailing",0.04214440656956926,272,0.011029411764705883
+5,"logo, stationery, business, thinking breathing, business start, start revamping, make stand, breathing new, breath fresh, prices hot, stationery web, away future",0.020452432599938022,132,0.0
+3,"computron, computron com, www computron, ali duty, duty free, ali, duty, contact, message, intel, com, remove",0.014099783080260303,91,0.0
+7,"submit website, website, submit, search, search engines, engines, online sales, website search, visitors, website online, online, submitting website",0.013634955066625348,88,0.0
+-1,(no topic weight),0.0012395413696932136,8,0.0

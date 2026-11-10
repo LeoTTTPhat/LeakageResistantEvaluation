@@ -1,0 +1,545 @@
+% tikz_multisplit_inference.tex -- Figure 3 (fig:multisplit), drawn with pgfplots.
+% Written by artifact/eswa_study/revision/tikz_inference.py from
+% results/revision_r4_inference.csv and results/revision_r4_stabilization.csv
+% (the data and layout of figure_multisplit() in make_r4_revised_figures.py);
+% do not edit by hand. Width 0.96\linewidth (figure* float); on a line narrower
+% than the paper's the same layout is scaled to the line. Needs pgfplots
+% (compat=1.18) with the fillbetween library and the preamble's oi* colors.
+\begingroup\leavevmode
+\pgfmathsetlengthmacro{\msFrame}{max(0.96\linewidth,501.12pt)}% layout width
+\setbox0=\hbox{\color{black}%
+\begin{tikzpicture}[font=\scriptsize]
+% grays of make_r4_revised_figures.py, local to this picture
+\definecolor{msInk}{HTML}{1B1B1B}%     mean lines and marks
+\definecolor{msZero}{HTML}{8A99A2}%    zero / reference lines, leader lines
+\definecolor{msRule}{HTML}{B8C2C8}%    dashed divider in (b)
+\definecolor{msNoteA}{HTML}{3D4A52}%   key text in (a)
+\definecolor{msNote}{HTML}{56636B}%    notes and legend keys
+\definecolor{msBand}{HTML}{E4E9EC}%    +/-10% band in (c)
+\definecolor{msCurve}{HTML}{2F3B42}%   curve in (d)
+\definecolor{msGrid}{HTML}{CBD3D8}%    grid (drawn at 55% opacity)
+\pgfmathsetlengthmacro{\msW}{(\msFrame-114.75pt)/2}% width of each axis box
+\pgfmathsetlengthmacro{\msHtop}{0.69902*\msW}% heights of the axis boxes
+\pgfmathsetlengthmacro{\msHbottom}{0.62412*\msW}
+\pgfmathsetlengthmacro{\msX}{\msW+66pt}% left edge of (b) and (d)
+\pgfmathsetlengthmacro{\msY}{\msHbottom+47pt}% bottom edge of (a) and (b)
+\pgfplotsset{
+  msPanel/.style={
+    scale only axis, width=\msW,
+    axis x line*=bottom, axis y line*=left,
+    axis line style={line width=0.7pt},
+    tick align=outside, major tick length=3pt,
+    every tick/.append style={line width=0.7pt, black},
+    minor tick length=0pt,
+    tick label style={font=\scriptsize},
+    label style={font=\footnotesize},
+    every axis title/.style={at={(0,1)}, anchor=south west, inner sep=0pt,
+      yshift=4.5pt, font=\footnotesize\bfseries},
+    major grid style={line width=0.5pt, draw=msGrid, opacity=0.55},
+    legend style={draw=none, fill=none, font=\scriptsize, inner sep=0pt,
+      nodes={inner sep=1.1pt, text depth=0.15em}, row sep=-0.6pt, column sep=1.6pt,
+      at={(1,1)}, xshift=-1.3pt, yshift=-1.3pt, anchor=north east},
+    legend cell align=left,
+  },
+  msBars/.style={% plain error bars: no end-mark node per bar (same output, faster)
+    error bars/draw error bar/.code 2 args={\draw ##1 -- ##2;}},
+  msLogK/.style={% used with xmode=log, which pgfplots wants in the axis options
+    xmin=2.7, xmax=112, xtick={3,5,10,20,50,100},
+    xticklabels={3,5,10,20,50,100}, xminorticks=false, xmajorgrids, ymajorgrids,
+    xlabel={Partitions used, $K$},
+  },
+}
+% ---- (a) effect on each partition: sorted gain (point) and its 95%
+%      within-partition grouped-bootstrap interval (bar), every partition;
+%      up/down = interval ends relative to the gain (pgfplots error bars)
+% Word TF-IDF: K = 100 partitions, mean gain 0.010715
+\pgfplotstableread[row sep=\\]{
+  x gain low high up down seed\\
+  -0.38 0.002248534 -0.004898853 0.009439067 0.007190532 0.007147387 2043\\
+  -0.3723232 0.002853817 -0.004286457 0.01041139 0.007557572 0.007140275 2025\\
+  -0.3646465 0.00315687 -0.0006703126 0.007537379 0.004380509 0.003827183 971\\
+  -0.3569697 0.004475745 -0.0004377037 0.01029146 0.005815717 0.004913449 2032\\
+  -0.3492929 0.00450314 -0.002203112 0.01181267 0.00730953 0.006706251 2001\\
+  -0.3416162 0.004513513 -0.001760471 0.01304286 0.008529346 0.006273984 1433\\
+  -0.3339394 0.004780173 -0.001988745 0.01275543 0.007975255 0.006768918 2061\\
+  -0.3262626 0.004818153 -0.002464375 0.01273619 0.007918037 0.007282528 2038\\
+  -0.3185859 0.005183948 -0.001293499 0.01331746 0.008133512 0.006477447 2053\\
+  -0.3109091 0.00537603 -0.001118149 0.012817 0.007440972 0.006494179 2022\\
+  -0.3032323 0.005384205 9.819449e-05 0.01210497 0.006720764 0.005286011 2041\\
+  -0.2955556 0.005641896 0.0008763415 0.01162218 0.005980283 0.004765555 2072\\
+  -0.2878788 0.005681463 3.984629e-05 0.01167104 0.005989581 0.005641617 2068\\
+  -0.280202 0.005919086 -0.00270505 0.01650354 0.01058445 0.008624136 2028\\
+  -0.2725253 0.005924961 -0.002110474 0.01373573 0.007810771 0.008035436 2059\\
+  -0.2648485 0.006486898 0.001903422 0.01182656 0.005339661 0.004583476 2040\\
+  -0.2571717 0.007097794 -0.002263287 0.01782281 0.01072501 0.009361081 2048\\
+  -0.2494949 0.007160537 0.001321396 0.01508743 0.007926892 0.00583914 2034\\
+  -0.2418182 0.007219157 0.001956596 0.01326055 0.006041394 0.005262561 29\\
+  -0.2341414 0.007286498 -0.002202946 0.0179834 0.0106969 0.009489444 2007\\
+  -0.2264646 0.007724427 8.997403e-05 0.01632241 0.008597982 0.007634453 2067\\
+  -0.2187879 0.00775718 -0.0004673417 0.01788808 0.0101309 0.008224521 2075\\
+  -0.2111111 0.007797687 0.0008845339 0.01585602 0.008058334 0.006913153 2003\\
+  -0.2034343 0.007979798 0.0008195243 0.01767813 0.009698329 0.007160274 2005\\
+  -0.1957576 0.008037145 -0.00226564 0.01896262 0.01092547 0.01030279 2044\\
+  -0.1880808 0.008147534 0.0002613004 0.01662352 0.00847599 0.007886233 419\\
+  -0.180404 0.008200088 -0.0005950546 0.0182614 0.01006131 0.008795142 17\\
+  -0.1727273 0.008226383 0.001099285 0.01755871 0.009332323 0.007127098 2026\\
+  -0.1650505 0.008271679 0.00239793 0.01589712 0.007625439 0.00587375 2004\\
+  -0.1573737 0.008361912 0.002470776 0.0169051 0.008543187 0.005891136 2069\\
+  -0.149697 0.008368556 0.002010338 0.01626814 0.007899586 0.006358218 42\\
+  -0.1420202 0.0083832 0.00202181 0.01607822 0.007695022 0.00636139 1553\\
+  -0.1343434 0.008504299 0.0006208428 0.01826568 0.009761377 0.007883456 1319\\
+  -0.1266667 0.00853504 0.0007063436 0.01882829 0.01029325 0.007828696 2020\\
+  -0.1189899 0.008703407 0.0004271956 0.01845547 0.009752065 0.008276212 631\\
+  -0.1113131 0.008926195 0.002726851 0.01615957 0.007233371 0.006199344 2035\\
+  -0.1036364 0.008969478 0.0007019617 0.01809692 0.009127445 0.008267516 1789\\
+  -0.0959596 0.008981942 0.002420864 0.01713109 0.008149144 0.006561078 2046\\
+  -0.08828283 0.009116201 0.0001302882 0.01955401 0.01043781 0.008985913 2047\\
+  -0.08060606 0.009181613 0.002121701 0.01751699 0.008335373 0.007059912 2079\\
+  -0.07292929 0.009253118 0.003167347 0.01670907 0.007455954 0.006085772 2037\\
+  -0.06525253 0.009435225 0.0009455058 0.02044307 0.01100784 0.008489719 1667\\
+  -0.05757576 0.009478002 0.002785198 0.0172167 0.007738699 0.006692804 113\\
+  -0.04989899 0.009687022 0.003060589 0.01796004 0.00827302 0.006626433 2080\\
+  -0.04222222 0.009699611 0.0007828603 0.01978239 0.01008278 0.008916751 2011\\
+  -0.03454545 0.009746667 0.001356303 0.01914813 0.00940146 0.008390363 71\\
+  -0.02686869 0.009836168 0.001533483 0.01975558 0.00991941 0.008302685 2045\\
+  -0.01919192 0.009903996 0.001346487 0.0202066 0.0103026 0.00855751 2049\\
+  -0.01151515 0.01008638 0.004312193 0.01662889 0.006542508 0.00577419 2063\\
+  -0.003838384 0.01020221 0.0006710429 0.02162631 0.0114241 0.009531167 2033\\
+  0.003838384 0.01024738 0.001223993 0.02130481 0.01105743 0.009023384 2015\\
+  0.01151515 0.01027477 0.003577982 0.01782116 0.00754639 0.006696788 2039\\
+  0.01919192 0.0102901 0.0006957058 0.02176209 0.01147199 0.009594393 2052\\
+  0.02686869 0.01041435 -0.0002886525 0.02238109 0.01196674 0.010703 2031\\
+  0.03454545 0.01083428 0.004384726 0.01800986 0.007175587 0.006449551 2029\\
+  0.04222222 0.01084842 0.002024677 0.02089315 0.01004473 0.008823747 743\\
+  0.04989899 0.01097005 0.003887251 0.01946021 0.008490165 0.007082797 523\\
+  0.05757576 0.01108819 0.001698003 0.02288908 0.0118009 0.009390185 2057\\
+  0.06525253 0.01110246 0.002801427 0.02067127 0.009568815 0.008301029 2076\\
+  0.07292929 0.01110756 0.004976717 0.01891064 0.007803083 0.006130844 2071\\
+  0.08060606 0.01136431 0.00189373 0.02213797 0.01077366 0.009470579 2036\\
+  0.08828283 0.01166009 0.003982796 0.02161924 0.009959152 0.007677296 2070\\
+  0.0959596 0.01194375 0.003988103 0.02190112 0.009957369 0.007955648 2017\\
+  0.1036364 0.01197324 0.003641396 0.02189435 0.00992111 0.008331844 2021\\
+  0.1113131 0.01221726 0.004306136 0.02149024 0.009272985 0.007911121 2027\\
+  0.1189899 0.01224123 0.004042857 0.02154143 0.009300202 0.00819837 2054\\
+  0.1266667 0.01235248 0.002692878 0.02419389 0.01184141 0.009659598 2060\\
+  0.1343434 0.01239597 0.004871521 0.02162602 0.009230052 0.00752445 2010\\
+  0.1420202 0.01267011 0.003993259 0.02272528 0.01005516 0.008676854 2024\\
+  0.149697 0.01272428 0.005105297 0.0224329 0.009708612 0.007618987 2065\\
+  0.1573737 0.01299182 0.00430551 0.02382844 0.01083662 0.008686311 2013\\
+  0.1650505 0.0130309 0.003101424 0.02504043 0.01200953 0.009929477 2077\\
+  0.1727273 0.01305246 0.002959118 0.02485979 0.01180734 0.01009334 1201\\
+  0.180404 0.01342516 0.005642181 0.0229484 0.009523236 0.007782982 2009\\
+  0.1880808 0.01344384 0.004518853 0.0239866 0.01054276 0.008924989 307\\
+  0.1957576 0.013458 0.004737573 0.02355179 0.01009379 0.008720426 857\\
+  0.2034343 0.01346485 0.005315815 0.02294639 0.009481536 0.00814904 2018\\
+  0.2111111 0.01368693 0.004487481 0.02371805 0.01003112 0.009199445 2019\\
+  0.2187879 0.01410739 0.004400522 0.02565198 0.01154458 0.00970687 2073\\
+  0.2264646 0.01430769 0.004855409 0.02482707 0.01051938 0.009452285 2058\\
+  0.2341414 0.01462032 0.004805085 0.02645524 0.01183492 0.009815231 2023\\
+  0.2418182 0.01497168 0.004701063 0.02694654 0.01197486 0.01027062 2030\\
+  0.2494949 0.01517877 0.005163305 0.02703986 0.01186109 0.01001547 2050\\
+  0.2571717 0.01520679 0.006649801 0.02542064 0.01021385 0.008556987 2064\\
+  0.2648485 0.01535332 0.005468465 0.02719426 0.01184094 0.009884851 2056\\
+  0.2725253 0.01539723 0.005555226 0.02716873 0.01177151 0.009842 2008\\
+  0.280202 0.01541464 0.006882794 0.02577304 0.0103584 0.008531849 2012\\
+  0.2878788 0.01542573 0.006179376 0.02703516 0.01160943 0.009246357 2066\\
+  0.2955556 0.01551016 0.006750398 0.02663113 0.01112097 0.008759761 2042\\
+  0.3032323 0.0156863 0.006494797 0.02696372 0.01127742 0.009191505 2016\\
+  0.3109091 0.01609901 0.006327242 0.02827797 0.01217897 0.009771765 2074\\
+  0.3185859 0.01612115 0.006661423 0.02744735 0.01132621 0.009459722 2062\\
+  0.3262626 0.01668298 0.007323655 0.02787911 0.01119613 0.009359322 2014\\
+  0.3339394 0.01692331 0.005969542 0.0295412 0.01261789 0.01095376 211\\
+  0.3416162 0.01710754 0.007070616 0.0291842 0.01207665 0.01003693 2006\\
+  0.3492929 0.01726426 0.007742059 0.02892129 0.01165703 0.009522202 2055\\
+  0.3569697 0.01810505 0.00834785 0.0295039 0.01139885 0.009757196 1087\\
+  0.3646465 0.01832677 0.008228184 0.03080727 0.01248049 0.01009859 2078\\
+  0.3723232 0.02084823 0.007562319 0.03651338 0.01566515 0.01328591 2051\\
+  0.38 0.02631006 0.01239902 0.0437184 0.01740834 0.01391105 2002\\
+}\msAWord
+% MiniLM: K = 100 partitions, mean gain 0.015625
+\pgfplotstableread[row sep=\\]{
+  x gain low high up down seed\\
+  0.62 0.004423892 -0.006210401 0.01496572 0.01054183 0.01063429 1789\\
+  0.6276768 0.005386657 -0.002545626 0.01370041 0.008313758 0.007932282 17\\
+  0.6353535 0.005607694 -0.002061138 0.0141351 0.008527403 0.007668832 2072\\
+  0.6430303 0.006399971 -0.00356265 0.01637162 0.009971648 0.009962621 2048\\
+  0.6507071 0.006534374 -0.00148226 0.01466874 0.008134361 0.008016634 2066\\
+  0.6583838 0.008309039 -0.0009806463 0.01845554 0.0101465 0.009289685 2065\\
+  0.6660606 0.008578899 0.0009842577 0.01706217 0.008483275 0.007594642 2004\\
+  0.6737374 0.008603524 0.0008831674 0.01672601 0.008122482 0.007720356 2032\\
+  0.6814141 0.008643163 -0.001379145 0.02012236 0.01147919 0.01002231 2007\\
+  0.6890909 0.008822716 0.0005047915 0.01739614 0.008573424 0.008317924 2068\\
+  0.6967677 0.00919248 0.0004821294 0.01875954 0.009567057 0.00871035 2012\\
+  0.7044444 0.01014703 0.0009111318 0.01931888 0.009171844 0.009235901 2059\\
+  0.7121212 0.01046422 0.002381392 0.01953958 0.009075366 0.008082824 2027\\
+  0.719798 0.01061045 0.001103246 0.02141271 0.01080226 0.0095072 2008\\
+  0.7274747 0.01097117 -0.0003875742 0.02223629 0.01126512 0.01135875 971\\
+  0.7351515 0.01101285 0.001801552 0.02082195 0.009809095 0.009211298 2037\\
+  0.7428283 0.01108344 0.001198861 0.02112443 0.01004099 0.009884577 2064\\
+  0.7505051 0.01112272 0.0006702425 0.02282006 0.01169734 0.01045248 2014\\
+  0.7581818 0.01115507 0.002211053 0.02107275 0.009917682 0.008944013 1319\\
+  0.7658586 0.01124094 0.001812611 0.02129077 0.01004983 0.009428332 2077\\
+  0.7735354 0.01131933 -3.636176e-05 0.02243411 0.01111478 0.01135569 2074\\
+  0.7812121 0.0113683 0.002920613 0.0202854 0.008917106 0.008447683 2022\\
+  0.7888889 0.01143862 0.003256824 0.02016222 0.008723599 0.008181801 2016\\
+  0.7965657 0.01159006 0.001706212 0.02239498 0.01080492 0.009883848 2028\\
+  0.8042424 0.01205541 0.002227739 0.02333198 0.01127657 0.009827667 2053\\
+  0.8119192 0.01209186 0.002711296 0.02213913 0.01004726 0.009380567 2035\\
+  0.819596 0.01218859 0.001028717 0.02457551 0.01238692 0.01115987 2075\\
+  0.8272727 0.01225043 0.002711561 0.02409173 0.0118413 0.009538872 307\\
+  0.8349495 0.01226582 0.004354101 0.02066735 0.008401526 0.007911724 2021\\
+  0.8426263 0.01233712 0.003860871 0.02094486 0.008607742 0.008476245 2054\\
+  0.850303 0.01234907 0.00312947 0.02182497 0.009475899 0.009219597 2010\\
+  0.8579798 0.0123761 0.004136282 0.02160943 0.009233333 0.008239815 2071\\
+  0.8656566 0.0124151 0.000417317 0.02553329 0.01311819 0.01199778 2057\\
+  0.8733333 0.01245041 0.001855955 0.02370777 0.01125737 0.01059445 1667\\
+  0.8810101 0.01298727 0.00228706 0.02474065 0.01175339 0.01070021 2060\\
+  0.8886869 0.01340746 0.00503471 0.02367255 0.01026509 0.008372745 2033\\
+  0.8963636 0.01343385 0.003933228 0.0240123 0.01057845 0.009500622 2015\\
+  0.9040404 0.01356862 0.00400533 0.02418655 0.01061793 0.00956329 2080\\
+  0.9117172 0.01390325 0.004809521 0.02297886 0.009075615 0.009093727 2043\\
+  0.9193939 0.01405543 0.006056706 0.02235499 0.008299556 0.007998726 2076\\
+  0.9270707 0.01423142 0.004245466 0.02513358 0.01090216 0.009985955 29\\
+  0.9347475 0.01423897 0.006965263 0.02225918 0.008020209 0.007273709 2034\\
+  0.9424242 0.01436699 0.005182411 0.02480592 0.01043893 0.00918458 2001\\
+  0.950101 0.01458047 0.002358492 0.02715425 0.01257378 0.01222198 523\\
+  0.9577778 0.0147045 0.004893894 0.02717738 0.01247288 0.009810604 2030\\
+  0.9654545 0.01476504 0.006605424 0.02380533 0.009040286 0.008159618 2049\\
+  0.9731313 0.01484815 0.004332827 0.02673712 0.01188898 0.01051532 2047\\
+  0.9808081 0.01490303 0.006033191 0.02469869 0.009795652 0.008869843 2039\\
+  0.9884848 0.01515442 0.007607373 0.02412517 0.008970747 0.007547049 2046\\
+  0.9961616 0.01520681 0.006233376 0.02477835 0.009571541 0.008973438 2018\\
+  1.003838 0.01523077 0.005074653 0.02606752 0.01083675 0.01015612 2052\\
+  1.011515 0.01525281 0.006215731 0.02512029 0.009867481 0.00903708 2009\\
+  1.019192 0.01526705 0.003159484 0.02908331 0.01381626 0.01210756 419\\
+  1.026869 0.01545981 0.004498254 0.02742697 0.01196716 0.01096155 2031\\
+  1.034545 0.015617 0.005690351 0.02580215 0.01018515 0.009926649 1433\\
+  1.042222 0.01566289 0.007085124 0.02539397 0.00973108 0.008577768 2063\\
+  1.049899 0.01576308 0.007709155 0.02480143 0.009038352 0.008053925 2003\\
+  1.057576 0.01577752 0.005889142 0.02611892 0.0103414 0.009888379 1201\\
+  1.065253 0.01613724 0.004753761 0.0286715 0.01253425 0.01138348 2036\\
+  1.072929 0.01624427 0.00553495 0.02868251 0.01243823 0.01070932 2024\\
+  1.080606 0.01643838 0.005553425 0.02839409 0.01195571 0.01088495 2040\\
+  1.088283 0.01654979 0.007398948 0.02762572 0.01107592 0.009150846 211\\
+  1.09596 0.01698327 0.009234194 0.02531391 0.008330647 0.007749071 2061\\
+  1.103636 0.01699091 0.006744773 0.02818097 0.01119006 0.01024613 2019\\
+  1.111313 0.01738095 0.008846192 0.02643138 0.009050429 0.008534763 2070\\
+  1.11899 0.01742859 0.006586983 0.02873381 0.01130522 0.0108416 2005\\
+  1.126667 0.01747857 0.008958015 0.02681957 0.009341003 0.008520554 2025\\
+  1.134343 0.0178386 0.008130698 0.03015173 0.01231313 0.009707902 42\\
+  1.14202 0.01854116 0.007096121 0.03152846 0.0129873 0.01144504 2044\\
+  1.149697 0.01862308 0.006816248 0.03149038 0.0128673 0.01180683 2067\\
+  1.157374 0.01879423 0.01077543 0.02793549 0.009141259 0.008018798 113\\
+  1.165051 0.01889951 0.008636421 0.02989054 0.01099103 0.01026309 2013\\
+  1.172727 0.01894296 0.008064163 0.03124429 0.01230133 0.0108788 2045\\
+  1.180404 0.01899357 0.007442113 0.03099428 0.01200072 0.01155145 71\\
+  1.188081 0.01929204 0.009962194 0.02898028 0.009688238 0.00932985 2017\\
+  1.195758 0.01934622 0.01022328 0.02960608 0.01025986 0.009122942 743\\
+  1.203434 0.01937731 0.009472145 0.03069684 0.01131953 0.009905166 2073\\
+  1.211111 0.01947233 0.008795606 0.03112745 0.01165512 0.01067672 631\\
+  1.218788 0.0195846 0.008934314 0.03138438 0.01179978 0.01065028 2020\\
+  1.226465 0.01962288 0.01113779 0.02870151 0.009078631 0.008485091 2079\\
+  1.234141 0.01972052 0.009074664 0.03166545 0.01194493 0.01064585 2069\\
+  1.241818 0.01994554 0.01114715 0.02940861 0.009463069 0.008798394 2029\\
+  1.249495 0.02020734 0.007819308 0.03429009 0.01408275 0.01238803 2078\\
+  1.257172 0.02075753 0.01143061 0.03063311 0.009875584 0.009326924 2026\\
+  1.264848 0.02099239 0.01033674 0.03339107 0.01239868 0.01065565 2002\\
+  1.272525 0.02147526 0.009733246 0.03462036 0.01314511 0.01174201 2041\\
+  1.280202 0.02155337 0.01019811 0.03371667 0.0121633 0.01135526 2011\\
+  1.287879 0.02181926 0.01049791 0.03473987 0.01292061 0.01132135 2058\\
+  1.295556 0.02185657 0.01035882 0.03596083 0.01410427 0.01149775 857\\
+  1.303232 0.02195237 0.01117285 0.03399703 0.01204465 0.01077952 1553\\
+  1.310909 0.02244357 0.01277344 0.0332031 0.01075952 0.009670132 2042\\
+  1.318586 0.0236925 0.014529 0.03436209 0.01066958 0.009163505 2055\\
+  1.326263 0.02482293 0.01339865 0.03834214 0.01351921 0.01142428 1087\\
+  1.333939 0.02484442 0.01420279 0.03717161 0.01232719 0.01064163 2006\\
+  1.341616 0.02500164 0.01197021 0.0395312 0.01452956 0.01303143 2051\\
+  1.349293 0.02530989 0.01243529 0.03898852 0.01367863 0.0128746 2050\\
+  1.35697 0.02545645 0.01388492 0.03839383 0.01293738 0.01157152 2038\\
+  1.364646 0.02618753 0.01201719 0.04173816 0.01555062 0.01417035 2056\\
+  1.372323 0.02770509 0.01561235 0.04172544 0.01402035 0.01209274 2062\\
+  1.38 0.02864602 0.01636177 0.04258791 0.0139419 0.01228424 2023\\
+}\msAMini
+% DistilBERT: K = 20 partitions, mean gain 0.049830
+\pgfplotstableread[row sep=\\]{
+  x gain low high up down seed\\
+  1.62 0.01952988 -0.007574705 0.04654561 0.02701573 0.02710459 1201\\
+  1.66 0.02186814 0.003350267 0.04018249 0.01831435 0.01851788 631\\
+  1.7 0.02808057 0.007715044 0.04994596 0.02186538 0.02036553 1087\\
+  1.74 0.03287963 0.01350258 0.0535977 0.02071807 0.01937705 42\\
+  1.78 0.03437211 0.01416532 0.05661296 0.02224085 0.02020679 211\\
+  1.82 0.03595817 0.01309879 0.0605944 0.02463623 0.02285938 1789\\
+  1.86 0.03837475 0.01597177 0.06255252 0.02417777 0.02240298 1319\\
+  1.9 0.03875912 0.01962514 0.06037391 0.0216148 0.01913398 71\\
+  1.94 0.04094574 0.02705774 0.05691407 0.01596834 0.013888 17\\
+  1.98 0.04434099 0.02626976 0.06591511 0.02157412 0.01807123 29\\
+  2.02 0.04781642 0.02812399 0.06900711 0.02119068 0.01969243 1433\\
+  2.06 0.05070974 0.03068528 0.07303249 0.02232275 0.02002446 971\\
+  2.1 0.05172425 0.03199383 0.07302187 0.02129763 0.01973042 857\\
+  2.14 0.05223311 0.03346303 0.07436191 0.0221288 0.01877008 113\\
+  2.18 0.05736923 0.03307 0.08409289 0.02672366 0.02429922 1667\\
+  2.22 0.05813749 0.03965766 0.08070974 0.02257225 0.01847983 743\\
+  2.26 0.06215284 0.04587789 0.08113777 0.01898493 0.01627495 1553\\
+  2.3 0.0785452 0.05438553 0.1050524 0.0265072 0.02415968 419\\
+  2.34 0.08825984 0.06486857 0.1144815 0.02622169 0.02339127 523\\
+  2.38 0.1145442 0.08836348 0.1432114 0.02866722 0.02618074 307\\
+}\msABert
+\begin{axis}[msPanel, name=msA, at={(0pt,\msY)}, anchor=south west,
+  height=\msHtop, xmin=-0.55, xmax=2.55, ymin=-0.01511401, ymax=0.1507507,
+  xtick={0,1,2}, xticklabels={{\textcolor{oiBlue}{Word TF--IDF}\\\textcolor{oiBlue}{$K = 100$}},{\textcolor{oiGreen}{MiniLM}\\\textcolor{oiGreen}{$K = 100$}},{\textcolor{oiVermillion}{DistilBERT}\\\textcolor{oiVermillion}{$K = 20$}}},
+  xticklabel style={align=center, font=\scriptsize\bfseries\boldmath},
+  x tick style={draw=none}, xtick align=inside,
+  ytick={0,0.025,0.05,0.075,0.1,0.125,0.15}, scaled y ticks=false,
+  yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=3},
+  ymajorgrids,
+  ylabel={$\Delta$ linked-rewrite F1 (aug.\ $-$ clean)},
+  title={(a) Effect on each partition},
+]
+\draw[msZero, line width=0.8pt] (axis cs:-0.55,0) -- (axis cs:2.55,0);
+\addplot[draw=none, mark=none, forget plot, msBars, error bars/.cd, y dir=both, y explicit, error mark=none, error bar style={line width=0.45pt, draw=oiBlue, opacity=0.38}] table[x=x, y=gain, y error plus=up, y error minus=down] {\msAWord};
+\addplot[draw=none, mark=none, forget plot, msBars, error bars/.cd, y dir=both, y explicit, error mark=none, error bar style={line width=0.45pt, draw=oiGreen, opacity=0.38}] table[x=x, y=gain, y error plus=up, y error minus=down] {\msAMini};
+\addplot[draw=none, mark=none, forget plot, msBars, error bars/.cd, y dir=both, y explicit, error mark=none, error bar style={line width=0.85pt, draw=oiVermillion, opacity=0.55}] table[x=x, y=gain, y error plus=up, y error minus=down] {\msABert};
+\addplot[only marks, mark=*, mark size=0.766pt, color=oiBlue, mark options={line width=0.2pt}, forget plot] table[x=x, y=gain] {\msAWord};
+\addplot[only marks, mark=*, mark size=0.766pt, color=oiGreen, mark options={line width=0.2pt}, forget plot] table[x=x, y=gain] {\msAMini};
+\addplot[only marks, mark=*, mark size=1.400pt, color=oiVermillion, mark options={line width=0.2pt}, forget plot] table[x=x, y=gain] {\msABert};
+\draw[msInk, line width=1.1pt, preaction={draw=white, line width=2.4pt}] (axis cs:-0.43,0.01071457) -- (axis cs:0.43,0.01071457);
+\draw[msInk, line width=1.1pt, preaction={draw=white, line width=2.4pt}] (axis cs:0.57,0.01562544) -- (axis cs:1.43,0.01562544);
+\draw[msInk, line width=1.1pt, preaction={draw=white, line width=2.4pt}] (axis cs:1.57,0.04983007) -- (axis cs:2.43,0.04983007);
+\node[anchor=north west, align=left, inner sep=0pt, text=msNoteA] at (rel axis cs:0.02,0.98)
+  {points: partitions, sorted by effect\\
+   bars: 95\% grouped-bootstrap interval within\\
+   the partition (324 test groups per partition)\\
+   black line: mean over partitions};
+\end{axis}
+% ---- (b) 95% intervals by scope; rows top to bottom, y = -(row + family offset)
+\pgfplotstableread[row sep=\\]{
+  row y low high mean up down\\
+  0 0.24 0.009582413 0.01196954 0.01071457 0.001254967 0.001132159\\
+  1 -0.76 0.009883786 0.01154536 0.01071457 0.0008307857 0.0008307857\\
+  2 -1.76 0.006776335 0.01465281 0.01071457 0.003938237 0.003938237\\
+  3 -2.76 0.002365279 0.01906386 0.01071457 0.008349293 0.008349293\\
+  4 -3.76 0.002853817 0.02084823 0.01071457 0.01013366 0.007860755\\
+}\msBWord
+\pgfplotstableread[row sep=\\]{
+  row y low high mean up down\\
+  0 0 0.01418678 0.01709924 0.01562544 0.001473805 0.001438659\\
+  1 -1 0.01459596 0.01665492 0.01562544 0.001029479 0.001029479\\
+  2 -2 0.01074532 0.02050556 0.01562544 0.004880119 0.004880119\\
+  3 -3 0.0052793 0.02597157 0.01562544 0.01034614 0.01034614\\
+  4 -4 0.005386657 0.02770509 0.01562544 0.01207965 0.01023878\\
+}\msBMini
+\pgfplotstableread[row sep=\\]{
+  row y low high mean up down\\
+  0 -0.24 0.03922635 0.06121705 0.04983007 0.01138698 0.01060372\\
+  1 -1.24 0.03907389 0.06058625 0.04983007 0.01075618 0.01075618\\
+  2 -2.24 0.02508096 0.07457918 0.04983007 0.02474911 0.02474911\\
+  3 -3.24 0.0005390719 0.09912107 0.04983007 0.049291 0.049291\\
+  4 -4.24 0.01952988 0.1145442 0.04983007 0.06471415 0.03030019\\
+}\msBBert
+\begin{axis}[msPanel, name=msB, at={(\msX,\msY)}, anchor=south west,
+  height=\msHtop, xmin=-0.005161186, xmax=0.1202445, ymin=-4.98, ymax=0.62,
+  xtick={0,0.02,0.04,0.06,0.08,0.1,0.12}, scaled x ticks=false,
+  xticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2},
+  ytick={0,-1,-2,-3,-4}, yticklabels={{Hierarchical\\bootstrap},{Split-level\\paired $t$},{Corrected $t$\\(Nadeau--Bengio)},{Prediction\\interval ($t$)},{Prediction\\(order stat.)\textsuperscript{\dag}}},
+  yticklabel style={align=right}, y tick style={draw=none}, ytick align=inside,
+  xmajorgrids,
+  xlabel={$\Delta$ linked-rewrite F1 (aug.\ $-$ clean)},
+  title={(b) 95\% intervals by scope},
+]
+\draw[msZero, line width=0.8pt] (axis cs:0,-4.98) -- (axis cs:0,0.62);
+\draw[msRule, line width=0.7pt, dash pattern=on 2.59pt off 1.12pt] (axis cs:-0.005161186,-2.5) -- (axis cs:0.1202445,-2.5);
+\addplot[only marks, mark=|, mark size=2.75pt, mark options={msInk, line width=1.1pt}, forget plot, msBars, error bars/.cd, x dir=both, x explicit, error mark=none, error bar style={line width=2pt, draw=oiBlue}] table[x=mean, y=y, x error plus=up, x error minus=down] {\msBWord};
+\addplot[only marks, mark=|, mark size=2.75pt, mark options={msInk, line width=1.1pt}, forget plot, msBars, error bars/.cd, x dir=both, x explicit, error mark=none, error bar style={line width=2pt, draw=oiGreen}] table[x=mean, y=y, x error plus=up, x error minus=down] {\msBMini};
+\addplot[only marks, mark=|, mark size=2.75pt, mark options={msInk, line width=1.1pt}, forget plot, msBars, error bars/.cd, x dir=both, x explicit, error mark=none, error bar style={line width=2pt, draw=oiVermillion}] table[x=mean, y=y, x error plus=up, x error minus=down] {\msBBert};
+\node[anchor=south east, inner sep=0pt, text=msNote, font=\scriptsize\itshape]
+  at ({rel axis cs:0.985,0} |- {axis cs:0,-2.43}) {$\uparrow$ mean effect};
+\node[anchor=north east, inner sep=0pt, text=msNote, font=\scriptsize\itshape]
+  at ({rel axis cs:0.985,0} |- {axis cs:0,-2.57}) {$\downarrow$ one further partition};
+\node[anchor=south east, inner sep=0pt, text=msNote]
+  at ({rel axis cs:0.985,0} |- {axis cs:0,-4.92}) {\textsuperscript{\dag}nominal coverage 0.960 at $K = 100$, 0.905 at $K = 20$};
+\addlegendimage{legend image code/.code={\draw[oiBlue, line width=2pt] (0pt,0pt) -- (9.1pt,0pt);}}\addlegendentry{Word TF--IDF}
+\addlegendimage{legend image code/.code={\draw[oiGreen, line width=2pt] (0pt,0pt) -- (9.1pt,0pt);}}\addlegendentry{MiniLM}
+\addlegendimage{legend image code/.code={\draw[oiVermillion, line width=2pt] (0pt,0pt) -- (9.1pt,0pt);}}\addlegendentry{DistilBERT}
+\addlegendimage{legend image code/.code={\draw[msInk, line width=1.1pt] (4.55pt,-2.75pt) -- (4.55pt,2.75pt);}}\addlegendentry{mean effect}
+\end{axis}
+% ---- (c) SD of the gains from K partitions / SD over all partitions:
+%      median and 5th-95th percentile over random orderings (closed at
+%      K = all partitions, where every ordering gives 1), and the run order
+% Word TF-IDF: SD over all 100 partitions = 0.00418697
+\pgfplotstableread[row sep=\\]{
+  k p05 median p95\\
+  3 0.2199143 0.8425544 1.718268\\
+  5 0.444408 0.9056076 1.621975\\
+  8 0.5563676 0.940441 1.519385\\
+  10 0.6094338 0.9415554 1.461208\\
+  15 0.6967696 0.957778 1.359046\\
+  20 0.7451377 0.9608692 1.278799\\
+  30 0.7940842 0.9793883 1.211743\\
+  40 0.8334567 0.9948028 1.167094\\
+  50 0.8532091 0.9982314 1.126469\\
+  60 0.8805744 1.009252 1.098599\\
+  70 0.8886349 1.007204 1.077558\\
+  80 0.9160722 1.010259 1.054685\\
+  90 0.9348394 1.006909 1.032578\\
+  100 1 1 1\\
+}\msCWord
+\pgfplotstableread[row sep=\\]{
+  k ratio\\
+  3 0.1482493\\
+  5 0.2449068\\
+  8 0.7916328\\
+  10 0.7106146\\
+  15 0.9203756\\
+  20 0.867491\\
+  30 1.13058\\
+  40 1.048443\\
+  50 1.034266\\
+  60 0.9980549\\
+  70 0.9927343\\
+  80 1.019847\\
+  90 1.010338\\
+  100 1\\
+}\msRWord
+% MiniLM: SD over all 100 partitions = 0.00518834
+\pgfplotstableread[row sep=\\]{
+  k p05 median p95\\
+  3 0.2486197 0.8558012 1.712559\\
+  5 0.4038054 0.943087 1.518193\\
+  8 0.5814194 0.9735205 1.381288\\
+  10 0.6201994 0.9800969 1.333166\\
+  15 0.7100928 0.9921194 1.250843\\
+  20 0.7568356 0.9913592 1.213968\\
+  30 0.8080477 0.9960814 1.161842\\
+  40 0.8568093 0.9978504 1.128571\\
+  50 0.8866829 0.9979827 1.101881\\
+  60 0.9096532 1.001835 1.088214\\
+  70 0.9229274 1.000002 1.062575\\
+  80 0.9392587 1.002377 1.050452\\
+  90 0.9595856 1.002113 1.031867\\
+  100 1 1 1\\
+}\msCMini
+\pgfplotstableread[row sep=\\]{
+  k ratio\\
+  3 1.234871\\
+  5 1.104677\\
+  8 0.8662077\\
+  10 0.8139023\\
+  15 0.9085073\\
+  20 1.004249\\
+  30 0.9910151\\
+  40 0.9404046\\
+  50 0.9623056\\
+  60 0.9416037\\
+  70 0.9545886\\
+  80 0.9844411\\
+  90 1.009938\\
+  100 1\\
+}\msRMini
+% DistilBERT: SD over all 20 partitions = 0.0229826
+\pgfplotstableread[row sep=\\]{
+  k p05 median p95\\
+  3 0.2123906 0.7115689 1.936739\\
+  5 0.3791774 0.8913691 1.601273\\
+  8 0.4892309 0.9352486 1.375984\\
+  10 0.5398674 0.9810794 1.28984\\
+  15 0.7004077 1.043488 1.136392\\
+  20 1 1 1\\
+}\msCBert
+\pgfplotstableread[row sep=\\]{
+  k ratio\\
+  3 0.249377\\
+  5 0.3113798\\
+  8 1.230226\\
+  10 1.280948\\
+  15 1.133182\\
+  20 1\\
+}\msRBert
+\begin{axis}[xmode=log, msPanel, msLogK, name=msC, at={(0pt,0pt)}, anchor=south west, set layers,
+  height=\msHbottom, ymin=0, ymax=2.05, ytick={0,0.5,1,1.5,2},
+  yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+  ylabel={SD($K$)\,/\,SD(all partitions)},
+  title={(c) Stabilization of the between-partition SD},
+]
+\begin{pgfonlayer}{axis background}% the +/-10% band lies below the grid, as in the PNG
+  \fill[msBand] (axis cs:2.7,0.9) rectangle (axis cs:112,1.1);
+\end{pgfonlayer}
+\draw[msZero, line width=0.8pt] (axis cs:2.7,1) -- (axis cs:112,1);
+\addplot[name path=msCWordlo, draw=none, forget plot] table[x=k, y=p05] {\msCWord};
+\addplot[name path=msCWordhi, draw=none, forget plot] table[x=k, y=p95] {\msCWord};
+\addplot[fill=oiBlue, fill opacity=0.09, draw=none, forget plot] fill between[of=msCWordhi and msCWordlo];
+\addplot[oiBlue, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p05] {\msCWord};
+\addplot[oiBlue, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p95] {\msCWord};
+\addplot[name path=msCMinilo, draw=none, forget plot] table[x=k, y=p05] {\msCMini};
+\addplot[name path=msCMinihi, draw=none, forget plot] table[x=k, y=p95] {\msCMini};
+\addplot[fill=oiGreen, fill opacity=0.09, draw=none, forget plot] fill between[of=msCMinihi and msCMinilo];
+\addplot[oiGreen, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p05] {\msCMini};
+\addplot[oiGreen, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p95] {\msCMini};
+\addplot[name path=msCBertlo, draw=none, forget plot] table[x=k, y=p05] {\msCBert};
+\addplot[name path=msCBerthi, draw=none, forget plot] table[x=k, y=p95] {\msCBert};
+\addplot[fill=oiVermillion, fill opacity=0.09, draw=none, forget plot] fill between[of=msCBerthi and msCBertlo];
+\addplot[oiVermillion, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p05] {\msCBert};
+\addplot[oiVermillion, line width=0.6pt, opacity=0.55, forget plot] table[x=k, y=p95] {\msCBert};
+\addplot[oiBlue, line width=1.4pt, forget plot] table[x=k, y=median] {\msCWord};
+\addplot[oiGreen, line width=1.4pt, forget plot] table[x=k, y=median] {\msCMini};
+\addplot[oiVermillion, line width=1.4pt, forget plot] table[x=k, y=median] {\msCBert};
+\addplot[oiBlue, line width=1.1pt, dash pattern=on 1.1pt off 1.815pt, mark=*, mark size=1.15pt, mark options={solid, line width=1pt}, forget plot] table[x=k, y=ratio] {\msRWord};
+\addplot[oiGreen, line width=1.1pt, dash pattern=on 1.1pt off 1.815pt, mark=*, mark size=1.15pt, mark options={solid, line width=1pt}, forget plot] table[x=k, y=ratio] {\msRMini};
+\addplot[oiVermillion, line width=1.1pt, dash pattern=on 1.1pt off 1.815pt, mark=*, mark size=1.15pt, mark options={solid, line width=1pt}, forget plot] table[x=k, y=ratio] {\msRBert};
+\node[anchor=north east, inner sep=0pt, text=msNote] at (axis cs:105,0.885) {$\pm$10\%};
+\addlegendimage{legend image code/.code={\draw[msNote, line width=1.4pt] (0pt,0pt) -- (11.7pt,0pt);}}
+\addlegendentry{median, 2,000 random orders}
+\addlegendimage{legend image code/.code={\fill[msNote, fill opacity=0.16, draw=none] (0pt,-2.6pt) rectangle (11.7pt,2.6pt);}}
+\addlegendentry{5th--95th percentile}
+\addlegendimage{legend image code/.code={\draw[msNote, line width=1.1pt, dash pattern=on 1.1pt off 1.815pt]
+  (0pt,0pt) -- (11.7pt,0pt); \fill[msNote] (5.85pt,0pt) circle[radius=1.65pt];}}
+\addlegendentry{order as run}
+\end{axis}
+% ---- (d) corrected resampled-t half-width / its floor (same for every family)
+\pgfplotstableread[row sep=\\]{
+  k ratio\\
+  3 3.507264\\
+  5 1.968731\\
+  8 1.517544\\
+  10 1.397344\\
+  15 1.252719\\
+  20 1.185727\\
+  30 1.121583\\
+  40 1.090431\\
+  50 1.072002\\
+  60 1.059819\\
+  70 1.051164\\
+  80 1.044698\\
+  90 1.039684\\
+  100 1.035681\\
+}\msD
+\begin{axis}[xmode=log, msPanel, msLogK, name=msD, at={(\msX,0pt)}, anchor=south west,
+  height=\msHbottom, ymin=0.75, ymax=3.75, ytick={1,1.5,2,2.5,3,3.5},
+  yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+  ylabel={Corrected-$t$ half-width\,/\,floor},
+  title={(d) Half-width relative to its floor},
+]
+\draw[msZero, line width=0.8pt] (axis cs:2.7,1) -- (axis cs:112,1);
+\addplot[msCurve, line width=1.4pt, mark=*, mark size=1.5pt, mark options={line width=1pt}, forget plot]
+  table[x=k, y=ratio] {\msD};
+\node[anchor=south west, inner sep=0pt, text=msCurve] at (axis cs:3.21,3.557264) {3.51};
+\node[anchor=south west, inner sep=0pt, text=msCurve] at (axis cs:5.35,2.018731) {1.97};
+\node[anchor=south west, inner sep=0pt, text=msCurve] at (axis cs:10.7,1.447344) {1.40};
+\node[anchor=south west, inner sep=0pt, text=msCurve] at (axis cs:53.5,1.122002) {1.07};
+\coordinate (msDfloor) at (axis cs:3,0.875);
+\node[anchor=south, align=center, inner sep=0pt, text=oiVermillion] (msDnote20) at (axis cs:20,2.135727) {DistilBERT\\$K = 20$: 1.19};
+\draw[msZero, line width=0.6pt, shorten <=1pt, shorten >=4pt] (msDnote20.south) -- (axis cs:20,1.185727);
+\node[anchor=south east, align=right, inner sep=0pt, text=msCurve] (msDnote100) at (axis cs:100,1.985681) {lightweight\\$K = 100$: 1.04};
+\draw[msZero, line width=0.6pt, shorten <=1pt, shorten >=4pt] (msDnote100.south east) -- (axis cs:100,1.035681);
+\node[anchor=north east, inner sep=0pt, text=msNote, font=\scriptsize\itshape]
+  at (rel axis cs:0.98,0.97) {same for all three families};
+\end{axis}
+\node[anchor=west, inner sep=0pt, text=msNote] at (msDfloor)
+  {floor: $1.96\times\mathrm{SD}\times\sqrt{n_{\mathrm{test}}/n_{\mathrm{train}}}$, $n_{\mathrm{test}}/n_{\mathrm{train}} = 0.215$};
+\end{tikzpicture}%
+}%
+\ifdim\wd0>\dimexpr0.96\linewidth+0.5pt\relax
+  \resizebox{0.96\linewidth}{!}{\box0}% e.g. the response letter: the paper's layout, scaled
+\else
+  \box0
+\fi
+\endgroup

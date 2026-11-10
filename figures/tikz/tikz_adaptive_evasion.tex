@@ -1,0 +1,179 @@
+% tikz_adaptive_evasion.tex -- figure fig:adaptive of paper.tex: adaptive_evasion.png
+% redrawn with the same data, panels and encodings (make_limitation_figures.py,
+% adaptive_figure).
+% Written by artifact/eswa_study/revision/tikz_limitations.py; do not edit by hand.
+% Data: results/revision_adaptive_by_seed.csv
+%       results/revision_adaptive_transfer.csv
+% Needs pgfplots (compat 1.18, groupplots) and the oi* colors of the paper preamble.
+% Width 0.94\linewidth; default color black (also inside a colored quote).
+\begin{tikzpicture}[black]
+  \definecolor{aeGrid}{HTML}{E0E5E8}% #CBD3D8 at opacity 0.6, as in the PNG
+  \definecolor{aeBox}{HTML}{1B1B1B}% boxed cells
+  \definecolor{aeNote}{HTML}{3D4A52}% note under panel (b)
+  % (a) evasion rate (share of initially flagged phishing driven below 0.5) by
+  % edit budget: mean and SD over the partitions
+  \pgfplotstableread[row sep=\\]{
+    budget wordclean wordclean_sd wordaug  wordaug_sd charwordaug charwordaug_sd \\
+    5      0.025400  0.021205     0.022787 0.010389   0.020519    0.006854 \\
+    10     0.064823  0.004096     0.045543 0.007710   0.063685    0.016697 \\
+    20     0.273601  0.049802     0.168754 0.023863   0.321477    0.044347 \\
+    30     0.643825  0.035883     0.530753 0.061222   0.747321    0.021539 \\
+    40     0.842926  0.036104     0.801857 0.026601   0.911258    0.023883 \\
+  }\aeCurve
+  % axis boxes: 0.94\linewidth minus 149.49pt, the width of the tick labels, axis
+  % labels and panel gap and colorbar in the paper's fonts (picture = 0.94\linewidth)
+  \pgfmathsetlengthmacro\aeInner{0.94\linewidth-149.49pt}%
+  \pgfmathsetlengthmacro\aeWidthA{0.47*\aeInner}% width ratio 0.94 : 1.06, as in the PNG
+  \pgfmathsetlengthmacro\aeWidthB{0.53*\aeInner}%
+  \begin{groupplot}[
+      group style={group size=2 by 1, horizontal sep=64pt},
+      height=132pt,
+      scale only axis,
+      axis lines*=left, tick align=outside, tick pos=left,
+      major tick length=3pt, minor tick length=1.8pt,
+      every tick/.style={black, line width=0.5pt},
+      axis line style={line width=0.6pt},
+      tick label style={font=\scriptsize},
+      label style={font=\footnotesize},
+      title style={font=\footnotesize\bfseries, at={(0,1)}, anchor=south west,
+        inner xsep=0pt},
+      legend style={font=\scriptsize, draw=none, fill=none},
+      legend cell align=left,
+      grid style={draw=aeGrid, line width=0.5pt},
+    ]
+    \nextgroupplot[
+      width=\aeWidthA,
+      title={(a) Evasion rate vs.\ edit budget},
+      xmin=3.250000, xmax=41.750000, ymin=0, ymax=1.05,
+      xtick={5,10,20,30,40}, ytick={0,0.2,0.4,0.6,0.8,1.0},
+      yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+      grid=major,
+      xlabel={share of content words changed (\%)},
+      ylabel={evasion rate},
+      legend style={at={(0,1)}, anchor=north west, xshift=1pt, yshift=-10.5pt,
+        row sep=-0.6pt},
+      legend image code/.code={%
+        \draw[#1, mark=none] (0pt,0pt) -- (13.0pt,0pt);
+        \draw[#1, mark=none, solid, line width=0.7pt] (6.5pt,-3.0pt) -- (6.5pt,3.0pt);
+        \draw[#1, mark=none, solid, line width=0.8pt]
+          (4.5pt,-3.0pt) -- (8.5pt,-3.0pt)
+          (4.5pt,3.0pt) -- (8.5pt,3.0pt);
+        \draw[#1] plot coordinates {(6.5pt,0pt)};},
+    ]
+    \node[anchor=north west, inner sep=0pt, font=\scriptsize]
+      at ([xshift=4.5pt, yshift=-3pt]rel axis cs:0,1) {mean $\pm$ SD over 3 partitions, 150 messages each};
+    \addplot[oiBlue, line width=1.2pt, dash pattern=on 1.2pt off 1.98pt,
+        mark=*, mark size=1.6pt, mark options={solid, fill=white, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=0.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.0pt, rotate=90}]
+      table[x=budget, y=wordclean, y error=wordclean_sd] {\aeCurve};
+    \addlegendentry{Word, clean}
+    \addplot[oiBlue, line width=1.2pt, solid,
+        mark=square*, mark size=1.6pt, mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=0.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.0pt, rotate=90}]
+      table[x=budget, y=wordaug, y error=wordaug_sd] {\aeCurve};
+    \addlegendentry{Word, augmented}
+    \addplot[oiVermillion, line width=1.2pt, dash pattern=on 4.44pt off 1.92pt,
+        mark=triangle*, mark size=2.0pt, mark options={solid, line width=0.8pt},
+        error bars/y dir=both, error bars/y explicit,
+        error bars/error bar style={solid, line width=0.7pt},
+        error bars/error mark options={solid, line width=0.8pt, mark size=2.0pt, rotate=90}]
+      table[x=budget, y=charwordaug, y error=charwordaug_sd] {\aeCurve};
+    \addlegendentry{Char+word, augmented}
+    \nextgroupplot[
+      width=\aeWidthB,
+      title={(b) Recall on adversarial messages},
+      xmin=-0.5, xmax=4.5, ymin=-0.5, ymax=2.5, y dir=reverse,
+      enlargelimits=false, axis on top, clip=false,
+      xtick={0,1,2,3,4}, xticklabels={
+        {Word\\clean},
+        {Word\\aug.},
+        {Char+word\\aug.},
+        {MiniLM\\clean},
+        {MiniLM\\aug.}},
+      ytick={0,1,2}, yticklabels={
+        {Word\\clean},
+        {Word\\aug.},
+        {Char+word\\aug.}},
+      xticklabel style={align=center}, yticklabel style={align=right},
+      major tick length=0pt,
+      xlabel={scored by}, ylabel={attacked},
+      point meta min=0, point meta max=1,
+      % viridis_r sampled at 33 points (only the colorbar uses it)
+      colormap={aeViridisR}{
+        rgb255=(253,231,37) rgb255=(234,229,26) rgb255=(213,226,26) rgb255=(192,223,37) rgb255=(170,220,50)
+        rgb255=(149,216,64) rgb255=(129,211,77) rgb255=(110,206,88) rgb255=(92,200,99) rgb255=(76,194,108)
+        rgb255=(61,188,116) rgb255=(49,181,123) rgb255=(39,173,129) rgb255=(33,166,133) rgb255=(31,159,136)
+        rgb255=(31,151,139) rgb255=(33,144,141) rgb255=(35,136,142) rgb255=(38,129,142) rgb255=(41,121,142)
+        rgb255=(44,113,142) rgb255=(48,106,142) rgb255=(51,98,141) rgb255=(55,90,140) rgb255=(59,81,139)
+        rgb255=(63,72,137) rgb255=(66,63,133) rgb255=(69,53,129) rgb255=(71,44,122) rgb255=(72,33,115)
+        rgb255=(72,23,105) rgb255=(70,11,94) rgb255=(68,1,84)},
+      colorbar,
+      colorbar style={at={(parent axis.north east)}, anchor=north west, xshift=6pt, width=7pt,
+        ytick={0,0.2,0.4,0.6,0.8,1.0},
+        yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=1},
+        major tick length=2.5pt, tick align=outside,
+        axis line style={line width=0.4pt},
+        axis lines*=box, tick pos=right, yticklabel pos=right, ylabel near ticks,
+        ylabel={recall at threshold 0.5}, ylabel style={font=\footnotesize}},
+    ]
+    % cells: recall at threshold 0.5 of the column detector on the messages
+    % crafted against the row detector, mean over the partitions; colors are
+    % matplotlib's viridis_r at these values (vmin 0, vmax 1)
+    \filldraw[color={rgb,255:red,157;green,217;blue,59}, line width=0.25pt] % 0.146667
+      (axis cs:-0.5,-0.5) rectangle (axis cs:0.5,0.5);
+    \filldraw[color={rgb,255:red,72;green,24;blue,106}, line width=0.25pt] % 0.935556
+      (axis cs:0.5,-0.5) rectangle (axis cs:1.5,0.5);
+    \filldraw[color={rgb,255:red,72;green,31;blue,112}, line width=0.25pt] % 0.915556
+      (axis cs:1.5,-0.5) rectangle (axis cs:2.5,0.5);
+    \filldraw[color={rgb,255:red,70;green,52;blue,128}, line width=0.25pt] % 0.848889
+      (axis cs:2.5,-0.5) rectangle (axis cs:3.5,0.5);
+    \filldraw[color={rgb,255:red,72;green,20;blue,103}, line width=0.25pt] % 0.948889
+      (axis cs:3.5,-0.5) rectangle (axis cs:4.5,0.5);
+    \filldraw[color={rgb,255:red,31;green,162;blue,135}, line width=0.25pt] % 0.422222
+      (axis cs:-0.5,0.5) rectangle (axis cs:0.5,1.5);
+    \filldraw[color={rgb,255:red,129;green,211;blue,77}, line width=0.25pt] % 0.191111
+      (axis cs:0.5,0.5) rectangle (axis cs:1.5,1.5);
+    \filldraw[color={rgb,255:red,36;green,134;blue,142}, line width=0.25pt] % 0.540000
+      (axis cs:1.5,0.5) rectangle (axis cs:2.5,1.5);
+    \filldraw[color={rgb,255:red,69;green,56;blue,130}, line width=0.25pt] % 0.837778
+      (axis cs:2.5,0.5) rectangle (axis cs:3.5,1.5);
+    \filldraw[color={rgb,255:red,72;green,31;blue,112}, line width=0.25pt] % 0.917778
+      (axis cs:3.5,0.5) rectangle (axis cs:4.5,1.5);
+    \filldraw[color={rgb,255:red,69;green,53;blue,129}, line width=0.25pt] % 0.846667
+      (axis cs:-0.5,1.5) rectangle (axis cs:0.5,2.5);
+    \filldraw[color={rgb,255:red,72;green,22;blue,104}, line width=0.25pt] % 0.942222
+      (axis cs:0.5,1.5) rectangle (axis cs:1.5,2.5);
+    \filldraw[color={rgb,255:red,200;green,224;blue,32}, line width=0.25pt] % 0.082222
+      (axis cs:1.5,1.5) rectangle (axis cs:2.5,2.5);
+    \filldraw[color={rgb,255:red,70;green,51;blue,127}, line width=0.25pt] % 0.853333
+      (axis cs:2.5,1.5) rectangle (axis cs:3.5,2.5);
+    \filldraw[color={rgb,255:red,72;green,26;blue,108}, line width=0.25pt] % 0.931111
+      (axis cs:3.5,1.5) rectangle (axis cs:4.5,2.5);
+    % boxed: scored by the detector the messages were crafted against
+    \draw[aeBox, line width=1.3pt] (axis cs:-0.5,-0.5) rectangle (axis cs:0.5,0.5);
+    \draw[aeBox, line width=1.3pt] (axis cs:0.5,0.5) rectangle (axis cs:1.5,1.5);
+    \draw[aeBox, line width=1.3pt] (axis cs:1.5,1.5) rectangle (axis cs:2.5,2.5);
+    \node[font=\scriptsize, text=black] at (axis cs:0,0) {0.15};
+    \node[font=\scriptsize, text=white] at (axis cs:1,0) {0.94};
+    \node[font=\scriptsize, text=white] at (axis cs:2,0) {0.92};
+    \node[font=\scriptsize, text=white] at (axis cs:3,0) {0.85};
+    \node[font=\scriptsize, text=white] at (axis cs:4,0) {0.95};
+    \node[font=\scriptsize, text=black] at (axis cs:0,1) {0.42};
+    \node[font=\scriptsize, text=black] at (axis cs:1,1) {0.19};
+    \node[font=\scriptsize, text=black] at (axis cs:2,1) {0.54};
+    \node[font=\scriptsize, text=white] at (axis cs:3,1) {0.84};
+    \node[font=\scriptsize, text=white] at (axis cs:4,1) {0.92};
+    \node[font=\scriptsize, text=white] at (axis cs:0,2) {0.85};
+    \node[font=\scriptsize, text=white] at (axis cs:1,2) {0.94};
+    \node[font=\scriptsize, text=black] at (axis cs:2,2) {0.08};
+    \node[font=\scriptsize, text=white] at (axis cs:3,2) {0.85};
+    \node[font=\scriptsize, text=white] at (axis cs:4,2) {0.93};
+  \end{groupplot}
+  \node[anchor=north, inner sep=0pt, font=\scriptsize, text=aeNote]
+    at ([yshift=-2pt]group c2r1.south |- group c2r1.outer south)
+    {boxed: scored by the detector the messages were crafted against};
+\end{tikzpicture}

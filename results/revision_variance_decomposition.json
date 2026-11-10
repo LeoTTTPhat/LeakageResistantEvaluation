@@ -1,0 +1,61 @@
+{
+  "bootstrap_replicates": 5000,
+  "families": [
+    {
+      "family": "Word TF-IDF",
+      "splits": 5,
+      "between_split_variance": 1.0514811026288712e-06,
+      "mean_within_split_bootstrap_variance": 1.615548883424999e-05,
+      "between_split_sd": 0.001025417526000444,
+      "mean_within_split_bootstrap_sd": 0.003957211495835492,
+      "hierarchical_sd": 0.00185195779965135,
+      "per_split_delta": {
+        "17": 0.00820008774140557,
+        "29": 0.0072191569483700535,
+        "42": 0.008368556317835174,
+        "71": 0.009746666510118795,
+        "113": 0.009478002219892367
+      }
+    },
+    {
+      "family": "MiniLM",
+      "splits": 5,
+      "between_split_variance": 3.2849378034853384e-05,
+      "mean_within_split_bootstrap_variance": 2.6238386480760225e-05,
+      "between_split_sd": 0.0057314376935332185,
+      "mean_within_split_bootstrap_sd": 0.00507260418057109,
+      "hierarchical_sd": 0.003230388209318577,
+      "per_split_delta": {
+        "17": 0.0053866568863818465,
+        "29": 0.014231421397089994,
+        "42": 0.017838600411054117,
+        "71": 0.018993565403138235,
+        "113": 0.0187942284716478
+      }
+    },
+    {
+      "family": "DistilBERT",
+      "splits": 3,
+      "between_split_variance": 3.2848097434248727e-05,
+      "mean_within_split_bootstrap_variance": 0.00010522433812591676,
+      "between_split_sd": 0.005731325975221504,
+      "mean_within_split_bootstrap_sd": 0.010257670593108704,
+      "hierarchical_sd": 0.006576106891365643,
+      "per_split_delta": {
+        "29": 0.044340992101894905,
+        "42": 0.03287962807371303,
+        "71": 0.03875911621291339
+      }
+    }
+  ],
+  "hierarchical_p_two_sided": {
+    "Word TF-IDF": 0.0,
+    "MiniLM": 0.0,
+    "DistilBERT": 0.0
+  },
+  "holm_adjusted": {
+    "Word TF-IDF": 0.0,
+    "MiniLM": 0.0,
+    "DistilBERT": 0.0
+  }
+}
